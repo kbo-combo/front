@@ -13,7 +13,8 @@
       "@components/*": ["components/*"],
       "@constant/*": ["constant/*"],
       "@pages/*": ["pages/*"],
-      "@style/*": ["style/*"]
+      "@style/*": ["style/*"],
+      "@apis/*": ["apis/*"]
     },
 
     /* Bundler mode */
