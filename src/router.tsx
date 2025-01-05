@@ -1,8 +1,8 @@
 import {createBrowserRouter} from 'react-router-dom';
-import {URL_PATH} from "./constant";
-import Home from "./pages/@common/home";
-import RootTemplate from "./pages/@common/root";
-import Login from "./pages/@common/auth";
+import {URL_PATH} from "constant";
+import Home from "@pages/@common/home";
+import RootTemplate from "@pages/@common/root";
+import Login from "@pages/@common/auth";
 
 const router = createBrowserRouter([
   {

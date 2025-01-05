@@ -1,10 +1,9 @@
 import {ContentBox, Wrapper, Text, PrimaryText, LoginBox, KakaoLogin} from "./Login.style.tsx";
-import KakaoLoginLargePng from 'assets/kakao_login_large_narrow.png';
-import KakaoLoginLargeWebp from 'assets/kakao_login_large_narrow.webp';
+import KakaoLoginLargePng from '@assets/kakao_login_large_narrow.png';
+import KakaoLoginLargeWebp from '@assets/kakao_login_large_narrow.webp';
 import {Link} from "react-router-dom";
 
 const Login = () => {
-
   return (
       <Wrapper>
         <ContentBox>

@@ -1,9 +1,9 @@
-import {GlobalStyle} from "./style/Global.style.ts";
+import {GlobalStyle} from '@style/Global.style';
 import {ThemeProvider} from "styled-components";
-import theme from "./style/theme.style.ts";
+import theme from "@style/theme.style";
 import {RouterProvider} from "react-router-dom";
 import router from "./router.tsx";
-import SvgSpriteMap from "./components/@common/icons/SvgSpriteMap.tsx";
+import SvgSpriteMap from "@components/@common/icons/SvgSpriteMap";
 
 function App() {
 
@@ -11,8 +11,8 @@ function App() {
       <>
         <GlobalStyle/>
         <ThemeProvider theme={theme}>
-          <SvgSpriteMap />
-          <RouterProvider router={router} />
+          <SvgSpriteMap/>
+          <RouterProvider router={router}/>
         </ThemeProvider>
       </>
   )
