@@ -1,12 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
+import {createBrowserRouter} from 'react-router-dom';
 import {URL_PATH} from "./constant";
 import Home from "./pages/@common/home";
-import NavBar from "./components/@common/navbar/NavBar.tsx";
+import RootTemplate from "./pages/@common/root";
 
 const router = createBrowserRouter([
   {
     path: URL_PATH.main,
-    element: <NavBar/>,
+    element: <RootTemplate/>,
     children: [
       {
         index: true,
