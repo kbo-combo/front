@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "local-dev": "vite --mode local-dev",
-    "dev-server": "vite --mode development",
-    "build-dev": "vite build --mode development",
-    "build-local": "vite build --mode local-dev",
+    "local-dev": "NODE_ENV=local vite --mode local-dev",
+    "dev-server": "NODE_ENV=development  vite --mode development",
+    "build-dev": "NODE_ENV=development  vite build --mode development",
+    "build-local": "NODE_ENV=local vite build --mode local-dev",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
