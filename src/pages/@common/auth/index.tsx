@@ -1,5 +1,7 @@
-import {ContentBox, Wrapper, Text, PrimaryText, LoginBox, GoToMain} from "./Login.style.tsx";
-import {URL_PATH} from "../../../constant";
+import {ContentBox, Wrapper, Text, PrimaryText, LoginBox, KakaoLogin} from "./Login.style.tsx";
+import KakaoLoginLargePng from 'assets/kakao_login_large_narrow.png';
+import KakaoLoginLargeWebp from 'assets/kakao_login_large_narrow.webp';
+import {Link} from "react-router-dom";
 
 const Login = () => {
 
@@ -11,9 +13,13 @@ const Login = () => {
             <PrimaryText>어쩌구저쩌구</PrimaryText>
           </Text>
         </ContentBox>
-
         <LoginBox>
-          <GoToMain to={URL_PATH.main}>메인으로 돌아가기</GoToMain>
+          <Link to="/hello" aria-label="카카오로 로그인하기">
+            <picture>
+              <source srcSet={KakaoLoginLargeWebp} type="image/webp"/>
+              <KakaoLogin src={KakaoLoginLargePng} alt="카카오 로그인"/>
+            </picture>
+          </Link>
         </LoginBox>
       </Wrapper>
   );

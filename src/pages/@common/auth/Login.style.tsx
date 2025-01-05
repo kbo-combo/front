@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Wrapper = styled.main`
@@ -43,23 +42,13 @@ export const LoginBox = styled.section`
   bottom: 24px;
 
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center; 
 
   width: 100%;
   min-width: ${(props) => props.theme.width.mobile};
   max-width: ${(props) => props.theme.width.pad};
-`;
-
-export const GoToMain = styled(Link)`
-  width: 140px;
-  height: 52.5px;
-
-  font: 700 1.6rem/5.25rem 'NanumSquareRound';
-  text-align: center;
-
-  background: ${({ theme }) => theme.color.grayLight};
-  border-radius: 8px;
+  gap: 16px; 
 `;
 
 export const KakaoLogin = styled.img`
