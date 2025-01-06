@@ -4,12 +4,12 @@ import {
   ProfileImage,
   ProfileWrapper,
   Wrapper
-} from "@components/mypage/mypage.style.tsx";
+} from "@components/member/member.style.tsx";
 import ContentHeader from "@components/@common/contentHeader";
 import {FiEdit3} from "react-icons/fi";
 
 
-const MyPage = () => {
+const MemberPage = () => {
 
   return <Wrapper>
     <ContentHeader title={"마이페이지"}/>
@@ -24,4 +24,4 @@ const MyPage = () => {
 
 }
 
-export default MyPage
+export default MemberPage

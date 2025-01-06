@@ -3,7 +3,7 @@ import {URL_PATH} from "constant";
 import Home from "@pages/@common/home";
 import RootTemplate from "@pages/@common/root";
 import Login from "@pages/@common/auth";
-import MyPage from "@components/mypage";
+import MemberPage from "components/member";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: URL_PATH.myPage,
-        element: <MyPage/>,
+        element: <MemberPage/>,
       },
     ],
   },
