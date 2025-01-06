@@ -4,7 +4,14 @@ import { reset } from './reset.style';
 export const GlobalStyle = createGlobalStyle`
   ${reset}
 
-
+  @font-face {
+    font-family: "jua";
+    font-display: swap;
+    src: url("/fonts/jua.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  
   * {
     font-family: "NanumSquareRound", "Noto Sans KR", sans-serif;
   }
