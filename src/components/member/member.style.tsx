@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 export const Wrapper = styled.main`
@@ -54,4 +55,12 @@ export const EditButton = styled.button`
     background: ${({ theme: { color } }) => color.hover};
   }
 
+`;
+
+export const MemberEditLink = styled(Link)`
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    transform: scale(1.2); 
+  }
 `;

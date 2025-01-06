@@ -1,5 +1,6 @@
 import {
   EditButton,
+  MemberEditLink,
   Nickname,
   ProfileImage,
   ProfileWrapper,
@@ -7,7 +8,6 @@ import {
 } from "@components/member/member.style.tsx";
 import ContentHeader from "@components/@common/contentHeader";
 import {FiEdit3} from "react-icons/fi";
-import {Link} from "react-router-dom";
 import {URL_PATH} from "@/constant";
 
 
@@ -18,14 +18,15 @@ const MemberPage = () => {
     <ProfileWrapper>
       <ProfileImage src="/santa-sunnam.png" alt="프로필 이미지"/>
       <Nickname>산타 선남 이름을 좀 길게 해보자</Nickname>
-      <Link to={`${URL_PATH.member}/modify`}>
+      <MemberEditLink to={`${URL_PATH.member}/edit`}>
       <EditButton>
         <FiEdit3 size={16} color='white'/>
       </EditButton>
-      </Link>
+      </MemberEditLink>
     </ProfileWrapper>
   </Wrapper>
 
 }
 
 export default MemberPage
+
