@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <Login/>,
       },
       {
-        path: URL_PATH.myPage,
+        path: URL_PATH.member,
         element: <MemberPage/>,
       },
     ],

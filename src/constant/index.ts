@@ -1,5 +1,5 @@
 export const URL_PATH = {
   main: '/',
   login: '/login',
-  myPage: '/myPage'
+  member: '/member'
 } as const;
