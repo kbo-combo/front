@@ -4,12 +4,13 @@ import theme from "@style/theme.style";
 import {RouterProvider} from "react-router-dom";
 import router from "./router.tsx";
 import SvgSpriteMap from "@components/@common/icons/SvgSpriteMap";
-import {Helmet} from "react-helmet-async";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 function App() {
 
   return (
       <>
+        <HelmetProvider>
         <GlobalStyle/>
         <Helmet>
           {process.env.NODE_ENV !== 'production' && (
@@ -20,6 +21,7 @@ function App() {
           <SvgSpriteMap/>
           <RouterProvider router={router}/>
         </ThemeProvider>
+        </HelmetProvider>
       </>
   )
 }
