@@ -12,6 +12,7 @@ export const Wrapper = styled.main`
   height: 100%;
 
   background: ${({ theme: { color } }) => color.background};
+  color: ${({ theme: { color } }) => color.primary};
 `;
 
 export const Nickname = styled.span`
@@ -64,3 +65,4 @@ export const MemberEditLink = styled(Link)`
     transform: scale(1.2); 
   }
 `;
+
