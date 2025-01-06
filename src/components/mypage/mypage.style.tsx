@@ -14,7 +14,7 @@ export const Wrapper = styled.main`
 `;
 
 export const Nickname = styled.span`
-  font: bold 2.4rem / 3.2rem "NanumSquareRound";
+  font: bold 2.8rem / 3.2rem "jua";
   color: ${({ theme: { color } }) => color.sub};
   padding: 8px 16px;
 
