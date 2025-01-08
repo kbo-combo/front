@@ -11,6 +11,7 @@ export const EditPageWrapper = styled.div`
 
 
 export const NicknameInputContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -30,6 +31,16 @@ export const NicknameInput = styled.input`
   font: bold 1.6rem / 1.2rem "NanumSquareRound";
   border: 1px solid ${({ theme: { color } }) => color.gray};
   border-radius: 4px;
+`;
+
+export const NicknameLengthIndicator = styled.span`
+  position: absolute;
+  top: 70%;
+  right: 5%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: ${({ theme: { color } }) => color.gray};
+  pointer-events: none;
 `;
 
 export const ButtonGroup = styled.div`

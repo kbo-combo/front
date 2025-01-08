@@ -1,7 +1,7 @@
 import {
   ButtonGroup,
   EditPageWrapper,
-  NicknameInput, NicknameInputContainer, NickNameLabel,
+  NicknameInput, NicknameInputContainer, NickNameLabel, NicknameLengthIndicator,
   SaveButton
 } from "@components/member/member-edit.style.ts";
 import {useState} from "react";
@@ -9,9 +9,20 @@ import {useNavigate} from "react-router-dom";
 import ContentHeader from "@components/@common/contentHeader";
 import {URL_PATH} from "@/constant";
 
+
+const MAX_NICKNAME_LENGTH = 16;
+
 const MemberEditPage = () => {
   const [nickname, setNickname] = useState("산타 선남");
   const navigate = useNavigate();
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length <= MAX_NICKNAME_LENGTH) {
+      setNickname(value);
+    }
+  };
+
 
   const handleSave = () => {
     navigate(URL_PATH.member);
@@ -26,8 +37,11 @@ const MemberEditPage = () => {
               id="nickname"
               type="text"
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={handleNicknameChange}
           />
+          <NicknameLengthIndicator>
+            {nickname.length} / {MAX_NICKNAME_LENGTH}
+          </NicknameLengthIndicator>
         </NicknameInputContainer>
         <ButtonGroup>
           <SaveButton onClick={handleSave}>저장</SaveButton>
