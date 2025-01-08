@@ -28,7 +28,7 @@ export const NickNameLabel = styled.label`
 export const NicknameInput = styled.input`
   width: 100%;
   padding: 10px;
-  font: bold 1.6rem / 1.2rem "NanumSquareRound";
+  font: bold 1.6rem / 1.2rem "jua";
   border: 1px solid ${({ theme: { color } }) => color.gray};
   border-radius: 4px;
 `;
@@ -46,15 +46,18 @@ export const NicknameLengthIndicator = styled.span`
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
+  justify-content: center;
 `;
 
 export const SaveButton = styled.button`
-  padding: 10px 20px;
-  font-size: 1.6rem;
+  padding: 2.5rem 20rem;
+  position: fixed;
+  bottom: 10rem;
+  font: 1.6rem "jua";
   color: white;
   background: ${({ theme: { color } }) => color.primary};
   border: none;
-  border-radius: 4px;
+  border-radius: 2rem;
   cursor: pointer;
 
   &:hover {

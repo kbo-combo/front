@@ -33,6 +33,7 @@ export const ProfileImage = styled.img`
 
 export const ProfileWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-top: 16px;
   gap: 12px; 

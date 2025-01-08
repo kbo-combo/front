@@ -44,7 +44,7 @@ const MemberEditPage = () => {
           </NicknameLengthIndicator>
         </NicknameInputContainer>
         <ButtonGroup>
-          <SaveButton onClick={handleSave}>저장</SaveButton>
+          <SaveButton onClick={handleSave}>수정하기</SaveButton>
         </ButtonGroup>
       </EditPageWrapper>
   );
