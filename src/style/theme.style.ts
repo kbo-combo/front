@@ -13,6 +13,7 @@ const color = {
 } as const;
 
 const font = {
+  text: 'normal 600 1rem/1.4rem "jua"',
   emphasize: '',
   subTitle: 'normal 600 2rem/2.4rem "NanumSquareRound"',
   title: 'normal 700 3.2rem/4rem "NanumSquareRound"',

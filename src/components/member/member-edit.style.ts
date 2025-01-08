@@ -33,12 +33,12 @@ export const NicknameInput = styled.input`
   border-radius: 4px;
 `;
 
-export const NicknameLengthIndicator = styled.span`
+export const NicknameLengthIndicator = styled.text`
   position: absolute;
   top: 70%;
   right: 5%;
+  font: ${({ theme }) => theme.font.text};
   transform: translateY(-50%);
-  font-size: 1.2rem;
   color: ${({ theme: { color } }) => color.gray};
   pointer-events: none;
 `;
