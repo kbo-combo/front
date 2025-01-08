@@ -10,17 +10,26 @@ export const EditPageWrapper = styled.div`
 `;
 
 
-export const NicknameInput = styled.input`
+export const NicknameInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 80%;
   max-width: 360px;
+  margin-top: 20px;
+`;
+
+export const NickNameLabel = styled.label`
+  font: 1.4rem "jua";
+  color: ${({ theme: { color } }) => color.primary};
+  margin-bottom: 8px;
+`;
+
+export const NicknameInput = styled.input`
+  width: 100%;
   padding: 10px;
-  margin-top: 150px;
-  font: bold 2.7rem / 3.2rem "NanumSquareRound";
-  
-  font-size: 1.6rem;
+  font: bold 1.6rem / 1.2rem "NanumSquareRound";
   border: 1px solid ${({ theme: { color } }) => color.gray};
   border-radius: 4px;
-  margin-bottom: 20px;
 `;
 
 export const ButtonGroup = styled.div`

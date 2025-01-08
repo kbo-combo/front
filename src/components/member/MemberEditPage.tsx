@@ -1,7 +1,7 @@
 import {
   ButtonGroup,
   EditPageWrapper,
-  NicknameInput,
+  NicknameInput, NicknameInputContainer, NickNameLabel,
   SaveButton
 } from "@components/member/member-edit.style.ts";
 import {useState} from "react";
@@ -20,12 +20,15 @@ const MemberEditPage = () => {
   return (
       <EditPageWrapper>
         <ContentHeader title={"내 정보 수정"}/>
-        <NicknameInput
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="닉네임을 입력하세요"
-        />
+        <NicknameInputContainer>
+          <NickNameLabel htmlFor="nickname">닉네임</NickNameLabel>
+          <NicknameInput
+              id="nickname"
+              type="text"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+          />
+        </NicknameInputContainer>
         <ButtonGroup>
           <SaveButton onClick={handleSave}>저장</SaveButton>
         </ButtonGroup>
