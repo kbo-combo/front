@@ -24,8 +24,9 @@ export const Center = styled.div`
 `;
 
 export const Text = styled.p<{ $isActive?: boolean }>`
-  font-size: 1rem;
+  font: ${({ theme }) => theme.font.text};
   font-weight: 700;
+  font-size: 1.4rem;
   line-height: 1.5rem;
   color: ${({ $isActive, theme: { color } }) =>
     $isActive ? color.fontPrimaryForBackground : color.subLight};
