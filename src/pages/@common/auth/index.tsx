@@ -1,12 +1,15 @@
-import {ContentBox, Wrapper, Text, PrimaryText, LoginBox, KakaoLogin} from "./Login.style.tsx";
+import {ContentBox, KakaoLogin, LoginBox, PrimaryText, Text, Wrapper} from "./Login.style.tsx";
 import KakaoLoginLargePng from '@assets/kakao_login_large_narrow.png';
 import KakaoLoginLargeWebp from '@assets/kakao_login_large_narrow.webp';
-import {Link} from "react-router-dom";
-import AuthAPI from "@apis/auth";
+import useLogin from "@/hooks/useLogin.ts";
 
 const Login = () => {
 
-  const { KAKAO_AUTH_URL } = AuthAPI;
+  const { login} = useLogin();
+
+  const handleKakaoLogin = () => {
+    login({ socialProvider: 'kakao' });
+  };
 
   return (
       <Wrapper>
@@ -17,12 +20,10 @@ const Login = () => {
           </Text>
         </ContentBox>
         <LoginBox>
-          <Link to={KAKAO_AUTH_URL} aria-label="카카오로 로그인하기">
             <picture>
               <source srcSet={KakaoLoginLargeWebp} type="image/webp"/>
-              <KakaoLogin src={KakaoLoginLargePng} alt="카카오 로그인"/>
+              <KakaoLogin onClick={handleKakaoLogin} src={KakaoLoginLargePng} alt="카카오 로그인"/>
             </picture>
-          </Link>
         </LoginBox>
       </Wrapper>
   );
