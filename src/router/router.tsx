@@ -7,11 +7,13 @@
   import MemberEditPage from "@components/member/MemberEditPage.tsx";
   import CallbackPage from "@components/member/CallbackPage.tsx";
   import AuthRoute from "@/router/AuthRoute.tsx";
+  import NotFoundPage from "@pages/@common/error/NotFound.tsx";
 
   const router = createBrowserRouter([
     {
       path: URL_PATH.main,
       element: <RootTemplate/>,
+      errorElement: <NotFoundPage />,
       children: [
         {
           index: true,
