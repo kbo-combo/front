@@ -1,6 +1,7 @@
 import {useParams, useSearchParams} from "react-router-dom";
 import {useLogin} from "@/hooks/login.ts";
 import {useEffect} from "react";
+import Loading from "@pages/@common/common/Loading.tsx";
 
 const LoginCallback = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ const LoginCallback = () => {
     }
   }, [code, socialProvider, login]);
 
-  return <div>로그인 처리 중...</div>;
+  return <Loading/>
 };
 
 export default LoginCallback;
