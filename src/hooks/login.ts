@@ -2,11 +2,12 @@ import {useMutation} from '@tanstack/react-query';
 import {
   getLoginPage,
   getLoginResult,
-  LoginRequest,
+  LoginRequest, LoginResponse,
 } from "@apis/auth.ts";
 import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
+import {setSession} from "@/utils/storage.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -37,7 +38,8 @@ export const useLogin = (socialProvider: string, code: string) => {
   const {mutateAsync : mutation} = useMutation({
     mutationFn: (loginRequest: LoginRequest) =>
         getLoginResult(socialProvider, loginRequest),
-    onSuccess: () => {
+    onSuccess: (response: LoginResponse) => {
+      setSession(response.socialId)
       navigate(URL_PATH.main);
     },
     onError: () => {
