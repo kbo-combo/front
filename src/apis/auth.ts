@@ -13,3 +13,28 @@ export const getLoginPage = async (
   );
   return response.data;
 };
+
+
+export const getLoginResult = async (
+    socialProvider: string,
+    loginRequest: LoginRequest
+): Promise<LoginResponse> => {
+  const response = await client.get<LoginResponse>(
+      `/oauth/${socialProvider}/login`,
+      {
+        params: loginRequest,
+      }
+  );
+  return response.data;
+};
+
+export interface LoginRequest {
+  code: string;
+  redirectUri: string;
+}
+
+
+export interface LoginResponse {
+  socialId: number
+}
+

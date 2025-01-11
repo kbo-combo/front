@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { getLoginPage, LoginPageRequest } from "@apis/auth.ts";
+import {getLoginPage, LoginPageRequest} from "@apis/auth.ts";
 import { URL_PATH } from "@/constant";
 
 const useAuthLoginPage = () => {
