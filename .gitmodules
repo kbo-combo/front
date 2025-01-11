@@ -1,3 +1,5 @@
 [submodule "front-submodule"]
 	path = front-submodule
 	url = https://github.com/kbo-combo/front-submodule
+  branch = main
+
