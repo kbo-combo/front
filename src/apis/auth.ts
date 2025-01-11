@@ -1,11 +1,11 @@
 import {client} from "@apis/apiClient.ts";
 
-export interface LoginRequest {
+export interface LoginPageRequest {
   socialProvider: string;
 }
 
 export const getLoginPage = async (
-    loginRequest: LoginRequest,
+    loginRequest: LoginPageRequest,
     redirectUri: string
 ): Promise<{ redirectUri: string }> => {
   const response = await client.get<{ redirectUri: string }>(

@@ -1,13 +1,13 @@
 import {ContentBox, KakaoLogin, LoginBox, PrimaryText, Text, Wrapper} from "./Login.style.tsx";
 import KakaoLoginLargePng from '@assets/kakao_login_large_narrow.png';
 import KakaoLoginLargeWebp from '@assets/kakao_login_large_narrow.webp';
-import useLogin from "@/hooks/useLogin.ts";
+import useAuthLoginPage from "@/hooks/useAuthLoginPage.ts";
 
 const Login = () => {
 
-  const { login} = useLogin();
+  const { login} = useAuthLoginPage();
 
-  const handleKakaoLogin = () => {
+  const handleKakaoLoginPage = () => {
     login({ socialProvider: 'kakao' });
   };
 
@@ -22,7 +22,7 @@ const Login = () => {
         <LoginBox>
             <picture>
               <source srcSet={KakaoLoginLargeWebp} type="image/webp"/>
-              <KakaoLogin onClick={handleKakaoLogin} src={KakaoLoginLargePng} alt="카카오 로그인"/>
+              <KakaoLogin onClick={handleKakaoLoginPage} src={KakaoLoginLargePng} alt="카카오 로그인"/>
             </picture>
         </LoginBox>
       </Wrapper>

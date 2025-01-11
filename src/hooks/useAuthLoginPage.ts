@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import { getLoginPage, LoginRequest } from "@apis/auth.ts";
+import { getLoginPage, LoginPageRequest } from "@apis/auth.ts";
 import { URL_PATH } from "@/constant";
 
-const useLogin = () => {
+const useAuthLoginPage = () => {
   const redirectUri = `${window.location.origin}${URL_PATH.login}`;
 
   const loginMutation = useMutation({
-    mutationFn: ({ request }: { request: LoginRequest }) =>
+    mutationFn: ({ request }: { request: LoginPageRequest }) =>
         getLoginPage(request, redirectUri),
     onSuccess: (data: { redirectUri: string }) => {
       // 서버에서 반환된 redirectUri로 브라우저 리디렉션
@@ -17,11 +17,11 @@ const useLogin = () => {
     },
   });
 
-  const login = (request: LoginRequest) => {
+  const login = (request: LoginPageRequest) => {
     loginMutation.mutate({ request });
   };
 
   return { login };
 };
 
-export default useLogin;
+export default useAuthLoginPage;
