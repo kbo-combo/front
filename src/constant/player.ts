@@ -1,15 +1,18 @@
-export const Team = {
-  NC: "NC",
-  KIA: "KIA",
-  DOOSAN: "DOOSAN",
-  LG: "LG",
-  SSG: "SSG",
-  SAMSUNG: "SAMSUNG",
-  LOTTE: "LOTTE",
-  KIWOOM: "KIWOOM",
-  HANWHA: "HANWHA",
-  KT: "KT"
-} as const; // `as const`를 사용하여 값이 불변 리터럴 타입으로 취급되도록 설정
+export const Team = [
+  { id: 1, name: "NC" },
+  { id: 2, name: "KIA" },
+  { id: 3, name: "DOOSAN" },
+  { id: 4, name: "LG" },
+  { id: 5, name: "SSG" },
+  { id: 6, name: "SAMSUNG" },
+  { id: 7, name: "LOTTE" },
+  { id: 8, name: "KIWOOM" },
+  { id: 9, name: "HANWHA" },
+  { id: 10, name: "KT" },
+] as const;
+
+export type TeamType = typeof Team[number];
+
 
 export type Team = typeof Team[keyof typeof Team];
 
