@@ -11,9 +11,6 @@ const LoginCallback = () => {
   useEffect(() => {
     if (code && socialProvider) {
       login()
-
-    } else {
-      console.error("필수 파라미터가 누락되었습니다.");
     }
   }, [code, socialProvider, login]);
 
