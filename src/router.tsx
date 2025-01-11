@@ -5,6 +5,7 @@
   import Login from "@pages/@common/auth";
   import MemberPage from "components/member";
   import MemberEditPage from "@components/member/MemberEditPage.tsx";
+  import CallbackPage from "@components/member/CallbackPage.tsx";
 
   const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@
         {
           path: URL_PATH.login,
           element: <Login/>,
+        },
+        {
+          path: `${URL_PATH.login}/:socialProvider`,
+          element: <CallbackPage/>,
         },
         {
           path: URL_PATH.member,

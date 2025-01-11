@@ -1,20 +1,23 @@
-import { useSearchParams } from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {useLogin} from "@/hooks/login.ts";
 import {useEffect} from "react";
 
-const LoginPage = () => {
+const LoginCallback = () => {
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
-  const socialProvider = searchParams.get("socialProvider");
-  const { login } = useLogin(socialProvider || "", code || "");
+  const { socialProvider } = useParams();
+  const { login } = useLogin(socialProvider ?? "", code ?? "");
 
   useEffect(() => {
     if (code && socialProvider) {
-      login(); // 로그인 요청 트리거
+      login()
+
     } else {
       console.error("필수 파라미터가 누락되었습니다.");
     }
   }, [code, socialProvider, login]);
+
+  return <div>로그인 처리 중...</div>;
 };
 
-export default LoginPage;
+export default LoginCallback;
