@@ -22,6 +22,14 @@ jobs:
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Debug submodule status
+        run: |
+          echo "### Submodule Status ###"
+          git submodule status
+          echo "### Submodule Directory Listing ###"
+          ls -la
+          echo "### Submodule Specific Directory ###"
+          ls -la front-submodule
 
       - name: Update submodules to latest
         run: git submodule update --remote
