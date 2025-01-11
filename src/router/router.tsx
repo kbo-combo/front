@@ -6,6 +6,7 @@
   import MemberPage from "components/member";
   import MemberEditPage from "@components/member/MemberEditPage.tsx";
   import CallbackPage from "@components/member/CallbackPage.tsx";
+  import AuthRoute from "@/router/AuthRoute.tsx";
 
   const router = createBrowserRouter([
     {
@@ -18,22 +19,23 @@
         },
         {
           path: URL_PATH.login,
-          element: <Login/>,
+          element: <AuthRoute isPrivate={false} element={<Login />}/>,
         },
         {
           path: `${URL_PATH.login}/:socialProvider`,
-          element: <CallbackPage/>,
+          element: <AuthRoute isPrivate={false} element={<CallbackPage />} />,
         },
         {
           path: URL_PATH.member,
-          element: <MemberPage/>,
+          element: <AuthRoute isPrivate={true} element={<MemberPage />} />,
         },
         {
           path: `${URL_PATH.member}/edit`,
-          element: <MemberEditPage/>,
+          element: <AuthRoute isPrivate={true} element={<MemberEditPage />} />,
         }
       ],
     },
   ]);
+
 
   export default router;
