@@ -7,7 +7,7 @@ import {
 import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
-import {setSession} from "@/utils/storage.ts";
+import {getSession, setSession} from "@/utils/storage.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -58,6 +58,10 @@ export const useLogin = (socialProvider: string, code: string) => {
   return { login };
 };
 
+export const useCheckLogin = () => {
+  const session = getSession();
+  return { isLoggedIn: session !== null };
+};
 
 function getRedirectUri(socialProvider: string) {
   return `${window.location.origin}${URL_PATH.login}/${socialProvider}`;

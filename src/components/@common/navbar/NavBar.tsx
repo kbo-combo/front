@@ -2,16 +2,26 @@ import {Link} from 'react-router-dom';
 import {Button, Wrapper} from "./Navbar.style.ts";
 import {URL_PATH} from "../../../constant";
 import NavItem from "./NavItem.tsx";
+import {useCheckLogin} from "@/hooks/login.ts";
 
 const NavBar = () => {
+
+  const {isLoggedIn} = useCheckLogin();
+
   return (
       <Wrapper>
         <Button as={Link} to={URL_PATH.main}>
           <NavItem isActive={true} iconId="home-line" label="메인"/>
         </Button>
-        <Button as={Link} to={URL_PATH.login}>
-          <NavItem isActive={true} iconId="account-circle-line" label="로그인"/>
-        </Button>
+        {isLoggedIn ? (
+            <Button as={Link} to={URL_PATH.member}>
+              <NavItem isActive={true} iconId="account-circle-line" label="내정보"/>
+            </Button>
+        ) : (
+            <Button as={Link} to={URL_PATH.login}>
+              <NavItem isActive={true} iconId="account-circle-line" label="로그인"/>
+            </Button>
+        )}
       </Wrapper>
   );
 };
