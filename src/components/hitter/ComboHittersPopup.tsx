@@ -5,7 +5,7 @@ import {
   PlayerListWrapper,
   PlayerName,
   PlayerInfo,
-  Wrapper,
+  Wrapper, SearchInput,
 } from "./ComboHittersPopup.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
 import {HittingHandType, PlayerDetailPosition, Team} from "@constant/player.ts";
@@ -28,6 +28,7 @@ const ComboHittersPopup = () => {
 
   const [selectedTeamType, setSelectedTeamType] = useState<string | null>(null);
   const [selectedHandType, setSelectedHandType] = useState<string | null>(null);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   const teamOptions = useMemo(() => {
     return Team.filter(
@@ -40,9 +41,10 @@ const ComboHittersPopup = () => {
     return hitters.filter((hitter) => {
       const matchesTeam = selectedTeamType ? hitter.team === selectedTeamType : true;
       const matchesHand = selectedHandType ? hitter.hittingHandType === selectedHandType : true;
-      return matchesTeam && matchesHand;
+      const matchesSearch = hitter.name.includes(searchKeyword); // 검색어 필터 추가
+      return matchesTeam && matchesHand && matchesSearch;
     });
-  }, [hitters, selectedTeamType, selectedHandType]);
+  }, [hitters, selectedTeamType, selectedHandType, searchKeyword]);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -51,6 +53,12 @@ const ComboHittersPopup = () => {
 
   return (
       <Wrapper>
+        <SearchInput
+            type="text"
+            placeholder="선수 이름 검색"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+        />
         <ComboHittersFilter
             title="타격 타입"
             options={Object.entries(HittingHandType).map(([key, value]) => ({ key, value }))}
