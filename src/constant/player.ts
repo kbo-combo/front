@@ -19,7 +19,7 @@ export const HittingHandType = {
   LEFT: "좌타",
   RIGHT: "우타",
   SWITCH: "양타"
-}
+} as const
 
 export type HittingHandType = typeof HittingHandType[keyof typeof HittingHandType];
 
@@ -29,7 +29,7 @@ export const PlayerDetailPosition = {
   CATCHER: "포수",
   IN_FIELDER: "내야수",
   OUT_FIELDER: "외야수"
-}
+} as const
 
 export type PlayerDetailPosition = typeof PlayerDetailPosition[keyof typeof PlayerDetailPosition];
 

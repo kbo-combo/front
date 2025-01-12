@@ -4,11 +4,11 @@ import {
   PlayerImage,
   PlayerListWrapper,
   PlayerName,
-  PlayerPosition,
+  PlayerInfo,
   Wrapper,
 } from "./ComboHittersPopup.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
-import {HittingHandType, Team} from "@constant/player.ts";
+import {HittingHandType, PlayerDetailPosition, Team} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
 
@@ -71,7 +71,10 @@ const ComboHittersPopup = () => {
                     alt={hitter.name}
                 />
                 <PlayerName>{hitter.name}</PlayerName>
-                <PlayerPosition>{hitter.detailPosition}</PlayerPosition>
+                <PlayerInfo>  {HittingHandType[hitter.hittingHandType as keyof typeof HittingHandType] +
+                    " " +
+                    PlayerDetailPosition[hitter.detailPosition as keyof typeof PlayerDetailPosition]}
+                </PlayerInfo>
               </PlayerCard>
           ))}
         </PlayerListWrapper>

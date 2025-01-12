@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "@style/theme.style.ts";
 
 export const Wrapper = styled.main`
   position: relative;
@@ -37,22 +38,21 @@ export const PlayerCard = styled.div`
 
 export const PlayerName = styled.span`
   margin-top: 1rem;
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: ${({ theme: { color } }) => color.primaryText};
+  font: ${theme.font.text};
+  font-size: 1.6rem;
+  color: ${theme.color.sub}
 `;
 
 export const PlayerImage = styled.img`
-  width: 7rem;
-  height: 7rem;
+  width: 6rem;
+  height: 8rem;
   border-radius: 50%;
-  border: 0.1rem solid ${({ theme: { color } }) => color.primary};
   object-fit: cover;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const PlayerPosition = styled.span`
+export const PlayerInfo  = styled.span`
   margin-top: 1rem;
   font-size: 1.2rem;
-  color: ${({ theme: { color } }) => color.secondaryText};
+  color: ${theme.color.subLight}
 `;
