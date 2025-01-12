@@ -1,14 +1,14 @@
 export const Team = [
-  { id: 1, name: "NC" },
-  { id: 2, name: "KIA" },
-  { id: 3, name: "DOOSAN" },
-  { id: 4, name: "LG" },
-  { id: 5, name: "SSG" },
-  { id: 6, name: "SAMSUNG" },
-  { id: 7, name: "LOTTE" },
-  { id: 8, name: "KIWOOM" },
-  { id: 9, name: "HANWHA" },
-  { id: 10, name: "KT" },
+  { id: 1, name: "NC", displayName: "NC" },
+  { id: 2, name: "KIA", displayName: "기아"},
+  { id: 3, name: "DOOSAN", displayName: "두산"},
+  { id: 4, name: "LG", displayName: "NC"},
+  { id: 5, name: "SSG", displayName : "SSG"},
+  { id: 6, name: "SAMSUNG", displayName: "삼성"},
+  { id: 7, name: "LOTTE", displayName: "롯데"},
+  { id: 8, name: "KIWOOM", displayName: "키움"},
+  { id: 9, name: "HANWHA", displayName: "한화"},
+  { id: 10, name: "KT", displayName: "KT"},
 ] as const;
 
 export type Team = (typeof Team)[number];

@@ -26,14 +26,18 @@ const ComboHittersPopup = () => {
 
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
-  const [selectedHandType, setSelectedHandType] = useState<HittingHandType | null>(null);
+  const [selectedTeamType, setSelectedTeamType] = useState<string | null>(null);
+  const [selectedHandType, setSelectedHandType] = useState<string | null>(null);
+
 
   const filteredHitters = useMemo(() => {
     if (!hitters) return [];
-    return selectedHandType
-        ? hitters.filter((hitter) => hitter.hittingHandType === selectedHandType)
-        : hitters;
-  }, [hitters, selectedHandType]);
+    return hitters.filter((hitter) => {
+      const matchesTeam = selectedTeamType ? hitter.team === selectedTeamType : true;
+      const matchesHand = selectedHandType ? hitter.hittingHandType === selectedHandType : true;
+      return matchesTeam && matchesHand;
+    });
+  }, [hitters, selectedTeamType, selectedHandType]);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -44,9 +48,15 @@ const ComboHittersPopup = () => {
       <Wrapper>
         <ComboHittersFilter
             title="타격 타입"
-            options={HittingHandType}
+            options={Object.entries(HittingHandType).map(([key, value]) => ({ key, value }))}
             selectedOption={selectedHandType}
             onSelectOption={setSelectedHandType}
+        />
+        <ComboHittersFilter
+              title="소속팀"
+              options={Team.map((team) => ({ key: team.name, value: team.displayName }))}
+              selectedOption={selectedTeamType}
+            onSelectOption={setSelectedTeamType}
         />
         <PlayerListWrapper>
           {filteredHitters.map((hitter) => (

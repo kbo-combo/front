@@ -4,9 +4,14 @@ import {
   FilterWrapper
 } from "@components/hitter/ComboHittersFilter.style.ts";
 
+type FilterOption = {
+  key: string;
+  value: string;
+};
+
 type ComboHittersFilterProps = {
   title: string;
-  options: Record<string, string>;
+  options: FilterOption[];
   selectedOption: string | null;
   onSelectOption: (option: string | null) => void;
 };
@@ -20,7 +25,7 @@ const ComboHittersFilter = ({
   return (
       <FilterWrapper>
         <FilterTitle>{title}</FilterTitle>
-        {Object.entries(options).map(([key, value]) => (
+        {options.map(({ key, value }) => (
             <FilterButton
                 key={key}
                 isSelected={selectedOption === key}
