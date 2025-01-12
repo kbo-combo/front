@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import ComboHittersPopup from "@components/hitter/ComboHittersPopup.tsx";
 import { useState } from "react";
-import {useNavBar} from "@components/@common/navbar/NavBarContext.tsx";
+import {useNavBar} from "@/hooks/useNavBar.ts";
 
 const ComboHitterButton = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

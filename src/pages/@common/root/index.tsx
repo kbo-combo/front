@@ -1,18 +1,17 @@
 import {PageArea, Wrapper} from "./RootTemplate.style.ts";
 import {Outlet} from "react-router-dom";
 import NavBar from "@components/@common/navbar/NavBar.tsx";
-import {useNavBarVisibility} from "@components/@common/navbar/NavBarContext.tsx";
+import {useNavBarVisibility} from "@/hooks/useNavBar.ts";
 
 
 const RootTemplate = () => {
 
-  const navBarOpen = useNavBarVisibility();
 
   return (
       <Wrapper>
         <PageArea>
           <Outlet />
-          {navBarOpen && <NavBar />}
+          {useNavBarVisibility() && <NavBar />}
         </PageArea>
       </Wrapper>
   );

@@ -6,7 +6,7 @@ import SvgSpriteMap from "@components/@common/icons/SvgSpriteMap";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import router from "@/router/router.tsx";
-import {NavBarProvider} from "@components/@common/navbar/NavBarContext.tsx";
+import {NavBarProvider} from "@components/@common/navbar/NavBarContextProvider.tsx";
 
 const queryClient = new QueryClient();
 
