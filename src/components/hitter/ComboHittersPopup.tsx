@@ -23,10 +23,10 @@ const ComboHittersPopup = () => {
     };
   }, [randomIndex]);
 
-  const [selectedHandType, setSelectedHandType] = useState<HittingHandType | null>(null);
 
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
+  const [selectedHandType, setSelectedHandType] = useState<HittingHandType | null>(null);
 
   const filteredHitters = useMemo(() => {
     if (!hitters) return [];
@@ -38,9 +38,7 @@ const ComboHittersPopup = () => {
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
-  const ensureAbsoluteUrl = (url: string) => {
-    return url.startsWith("http") ? url : `https://${url}`;
-  };
+  const ensureAbsoluteUrl = getUrl();
 
   return (
       <Wrapper>
@@ -67,3 +65,10 @@ const ComboHittersPopup = () => {
 };
 
 export default ComboHittersPopup;
+
+function getUrl() {
+  const ensureAbsoluteUrl = (url: string) => {
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
+  return ensureAbsoluteUrl;
+}
