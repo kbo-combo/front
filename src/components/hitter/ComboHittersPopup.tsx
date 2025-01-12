@@ -29,6 +29,11 @@ const ComboHittersPopup = () => {
   const [selectedTeamType, setSelectedTeamType] = useState<string | null>(null);
   const [selectedHandType, setSelectedHandType] = useState<string | null>(null);
 
+  const teamOptions = useMemo(() => {
+    return Team.filter(
+        (team) => team.name === hitterRequest.awayTeam || team.name === hitterRequest.homeTeam
+    ).map((team) => ({ key: team.name, value: team.displayName }));
+  }, [hitterRequest]);
 
   const filteredHitters = useMemo(() => {
     if (!hitters) return [];
@@ -54,7 +59,7 @@ const ComboHittersPopup = () => {
         />
         <ComboHittersFilter
               title="소속팀"
-              options={Team.map((team) => ({ key: team.name, value: team.displayName }))}
+              options={teamOptions}
               selectedOption={selectedTeamType}
             onSelectOption={setSelectedTeamType}
         />
