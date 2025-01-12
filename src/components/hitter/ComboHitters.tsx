@@ -26,12 +26,18 @@ const ComboHitters = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const ensureAbsoluteUrl = (url: string) => {
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
+
   return (
       <Wrapper>
         <PlayerListWrapper>
           {hitters?.map((hitter) => (
               <PlayerCard key={hitter.playerId}>
-                <PlayerImage src={hitter.imageUrl || "/default-player.png"} alt={hitter.name} />
+                <PlayerImage
+                    src={ensureAbsoluteUrl(hitter.imageUrl || "/default-player.png")}
+                    alt={hitter.name} />
                 <PlayerName>{hitter.name}</PlayerName>
                 <PlayerPosition>{hitter.detailPosition}</PlayerPosition>
               </PlayerCard>
