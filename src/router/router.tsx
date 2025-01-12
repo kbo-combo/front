@@ -8,7 +8,7 @@
   import CallbackPage from "@components/member/CallbackPage.tsx";
   import AuthRoute from "@/router/AuthRoute.tsx";
   import NotFoundPage from "@pages/@common/common/NotFound.tsx";
-  import ComboHitters from "@components/hitter/ComboHitters.tsx";
+  import ComboHittersPopup from "@components/hitter/ComboHittersPopup.tsx";
 
   const router = createBrowserRouter([
     {
@@ -22,7 +22,7 @@
         },
         {
           path: URL_PATH.combo_hitters,
-          element: <ComboHitters/>,
+          element: <ComboHittersPopup/>,
         },
         {
           path: URL_PATH.login,

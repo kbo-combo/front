@@ -6,11 +6,11 @@ import {
   PlayerImage,
   PlayerName,
   PlayerPosition,
-} from "./ComboHitters.style";
+} from "./ComboHittersPopup.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
 import {Team} from "@constant/player.ts";
 
-const ComboHitters = () => {
+const ComboHittersPopup = () => {
   const randomIndex = useMemo(() => Math.floor(Math.random() * 10), []);
 
   const hitterRequest = useMemo(() => {
@@ -47,4 +47,4 @@ const ComboHitters = () => {
   );
 };
 
-export default ComboHitters;
+export default ComboHittersPopup;
