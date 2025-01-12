@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "@style/theme.style.ts";
 
 export const FilterWrapper = styled.div`
   flex-direction: column;
@@ -17,25 +18,22 @@ export const FilterWrapper = styled.div`
 
 export const FilterTitle = styled.span`
   font-weight: bold;
-  font-size: 1.4rem; 
+  font: ${theme.font.text};
+  font-size: 1.8rem; 
   color: ${({ theme: { color } }) => color.primaryText};
   margin-right: 0.5rem; 
 `;
 
 export const FilterButton = styled.button<{ isSelected: boolean }>`
-  padding: 0.5rem 0.75rem; 
-  background-color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.primary : theme.color.buttonBackground};
+  padding: 0.5rem 0.75rem;
+  font: ${theme.font.text};
+  font-size: 1.4rem;
   color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.buttonText : theme.color.secondaryText};
-  border: none;
-  border-radius: 0.25rem; 
+    isSelected ? theme.color.sub : theme.color.grayDark};
+  border: ${({ isSelected, theme }) =>
+      isSelected ? `1px solid ${theme.color.primary}` : "none"}; 
   cursor: pointer;
 
-  &:hover {
-    background-color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.primaryHover : theme.color.buttonHoverBackground};
-  }
 
   transition: background-color 0.3s ease;
 `;
