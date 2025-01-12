@@ -1,10 +1,17 @@
 import {createContext, useContext, useState} from "react";
+import {matchRoutes, useLocation} from "react-router-dom";
+import {URL_PATH} from "@/constant";
 
 interface NavBarContextValue {
   navBarOpen: boolean;
   showNavBar: () => void;
   hideNavBar: () => void;
 }
+
+const NO_NAVIGATION_BAR_URLS = [
+  URL_PATH.login,
+].map((path) => ({ path }));
+
 
 const NavBarContext = createContext<NavBarContextValue | undefined>(undefined);
 
@@ -27,4 +34,11 @@ export const useNavBar = () => {
     throw new Error("useNavBar must be used within a NavBarProvider");
   }
   return context;
+};
+
+export const useNavBarVisibility = () => {
+  const { pathname } = useLocation();
+  const { navBarOpen } = useNavBar();
+
+  return matchRoutes(NO_NAVIGATION_BAR_URLS, pathname) === null && navBarOpen;
 };

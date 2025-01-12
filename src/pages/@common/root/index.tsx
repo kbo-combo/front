@@ -1,24 +1,18 @@
 import {PageArea, Wrapper} from "./RootTemplate.style.ts";
-import {matchRoutes, Outlet, useLocation} from "react-router-dom";
-import {URL_PATH} from "constant";
+import {Outlet} from "react-router-dom";
 import NavBar from "@components/@common/navbar/NavBar.tsx";
-import {useNavBar} from "@components/@common/navbar/NavBarContext.tsx";
+import {useNavBarVisibility} from "@components/@common/navbar/NavBarContext.tsx";
 
-const NO_NAVIGATION_BAR_URLS = [
-  URL_PATH.login
-].map((path) => ({ path }));
 
 const RootTemplate = () => {
 
-  const { pathname } = useLocation();
-  const { navBarOpen } = useNavBar();
-  const showNavBar = matchRoutes(NO_NAVIGATION_BAR_URLS, pathname) === null && navBarOpen;
+  const navBarOpen = useNavBarVisibility();
 
   return (
       <Wrapper>
         <PageArea>
           <Outlet />
-          {showNavBar && <NavBar />}
+          {navBarOpen && <NavBar />}
         </PageArea>
       </Wrapper>
   );
