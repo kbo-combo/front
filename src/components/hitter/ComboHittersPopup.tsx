@@ -1,17 +1,16 @@
-import { useMemo, useState } from "react";
+import {useMemo, useState} from "react";
 import {
-  Wrapper,
-  PlayerListWrapper,
   PlayerCard,
   PlayerImage,
+  PlayerListWrapper,
   PlayerName,
   PlayerPosition,
+  Wrapper,
 } from "./ComboHittersPopup.style.ts";
-import { useHitterQuery } from "@/hooks/useHitterQuery.ts";
-import { Team } from "@constant/player.ts";
-import ComboHittersFilter from "./ComboHittersFilter.tsx";
-import { HitterQueryResponse } from "@apis/player.ts";
+import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
+import {HittingHandType, Team} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
+import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
 
 const ComboHittersPopup = () => {
   const randomIndex = useMemo(() => Math.floor(Math.random() * 10), []);
@@ -24,11 +23,19 @@ const ComboHittersPopup = () => {
     };
   }, [randomIndex]);
 
+  const [selectedHandType, setSelectedHandType] = useState<HittingHandType | null>(null);
+
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
-  const [filteredHitters, setFilteredHitters] = useState<HitterQueryResponse[]>([]);
 
-  if (isLoading) return <Loading/>
+  const filteredHitters = useMemo(() => {
+    if (!hitters) return [];
+    return selectedHandType
+        ? hitters.filter((hitter) => hitter.hittingHandType === selectedHandType)
+        : hitters;
+  }, [hitters, selectedHandType]);
+
+  if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
   const ensureAbsoluteUrl = (url: string) => {
@@ -38,9 +45,10 @@ const ComboHittersPopup = () => {
   return (
       <Wrapper>
         <ComboHittersFilter
-            hitters={hitters || []}
-            teams={[hitterRequest.awayTeam, hitterRequest.homeTeam]}
-            onFilteredHitters={setFilteredHitters}
+            title="타격 타입"
+            options={HittingHandType}
+            selectedOption={selectedHandType}
+            onSelectOption={setSelectedHandType}
         />
         <PlayerListWrapper>
           {filteredHitters.map((hitter) => (

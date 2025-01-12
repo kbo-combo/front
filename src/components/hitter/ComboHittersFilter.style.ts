@@ -1,35 +1,41 @@
 import styled from "styled-components";
 
 export const FilterWrapper = styled.div`
-  display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 1rem; 
+  margin-bottom: 1rem; 
   width: 100%;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; 
+  align-items: flex-start; 
 
   & > div {
     display: flex;
-    gap: 8px;
+    gap: 0.5rem; 
     align-items: center;
   }
+`;
 
-  & span {
-    font-weight: bold;
-  }
+export const FilterTitle = styled.span`
+  font-weight: bold;
+  font-size: 1.4rem; 
+  color: ${({ theme: { color } }) => color.primaryText};
+  margin-right: 0.5rem; 
 `;
 
 export const FilterButton = styled.button<{ isSelected: boolean }>`
-  padding: 8px 12px;
-  background-color: ${({ isSelected }) => (isSelected ? "#007bff" : "#f0f0f0")};
-  color: ${({ isSelected }) => (isSelected ? "white" : "#333")};
+  padding: 0.5rem 0.75rem; 
+  background-color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.primary : theme.color.buttonBackground};
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.buttonText : theme.color.secondaryText};
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem; 
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ isSelected }) => (isSelected ? "#0056b3" : "#e0e0e0")};
+    background-color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.primaryHover : theme.color.buttonHoverBackground};
   }
-`;
 
+  transition: background-color 0.3s ease;
+`;
