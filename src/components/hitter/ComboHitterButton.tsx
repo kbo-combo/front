@@ -6,17 +6,17 @@ import {useNavBar} from "@components/@common/navbar/NavBarContext.tsx";
 const ComboHitterButton = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const { hideNavBar, showNavBar } = useNavBar();
+  const { showNavBar } = useNavBar();
 
 
   const handleOpenPopup = () => {
     setIsPopupOpen(true);
-    hideNavBar()
+    showNavBar(false)
   };
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
-    showNavBar()
+    showNavBar(true)
   };
 
   return (
@@ -43,7 +43,6 @@ const ComboHitterButton = () => {
 
 export default ComboHitterButton;
 
-// 애니메이션
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -64,7 +63,6 @@ const slideUp = keyframes`
   }
 `;
 
-// 버튼 스타일
 const OpenButton = styled.button`
   padding: 10px 20px;
   background: #007bff;
@@ -80,7 +78,6 @@ const OpenButton = styled.button`
   }
 `;
 
-// 팝업 스타일
 const PopupWrapper = styled.div`
   position: fixed;
   top: 0;

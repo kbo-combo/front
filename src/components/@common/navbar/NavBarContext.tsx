@@ -4,25 +4,22 @@ import {URL_PATH} from "@/constant";
 
 interface NavBarContextValue {
   navBarOpen: boolean;
-  showNavBar: () => void;
-  hideNavBar: () => void;
+  showNavBar: (isOpen: boolean) => void;
 }
 
 const NO_NAVIGATION_BAR_URLS = [
   URL_PATH.login,
 ].map((path) => ({ path }));
 
-
 const NavBarContext = createContext<NavBarContextValue | undefined>(undefined);
 
-export const NavBarProvider = ({children}: { children: React.ReactNode }) => {
+export const NavBarProvider = ({ children }: { children: React.ReactNode }) => {
   const [navBarOpen, setNavBarOpen] = useState(true);
 
-  const showNavBar = () => setNavBarOpen(true);
-  const hideNavBar = () => setNavBarOpen(false);
+  const showNavBar = (isOpen: boolean) => setNavBarOpen(isOpen);
 
   return (
-      <NavBarContext.Provider value={{navBarOpen, showNavBar, hideNavBar}}>
+      <NavBarContext.Provider value={{ navBarOpen, showNavBar }}>
         {children}
       </NavBarContext.Provider>
   );
