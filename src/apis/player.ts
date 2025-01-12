@@ -1,15 +1,15 @@
 import {client} from "@apis/apiClient.ts";
-import {HittingHandType, PlayerDetailPosition, Team} from "@constant/player.ts";
+import {HittingHandType, PlayerDetailPosition,  TeamName} from "@constant/player.ts";
 
 export interface HitterQueryRequest {
-  awayTeam: Team,
-  homeTeam: Team,
+  awayTeam: TeamName,
+  homeTeam: TeamName,
 }
 
 export interface HitterQueryResponse {
   playerId: number
   name: string,
-  team: Team,
+  team: TeamName,
   detailPosition: PlayerDetailPosition,
   hittingHandType: HittingHandType,
   imageUrl: string | null

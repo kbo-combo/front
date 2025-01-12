@@ -16,8 +16,8 @@ const ComboHitters = () => {
   const hitterRequest = useMemo(() => {
     const nextIndex = (randomIndex + 1) % Team.length;
     return {
-      awayTeam: Team[randomIndex], // 팀 이름 매핑
-      homeTeam: Team[nextIndex],
+      awayTeam: Team[randomIndex].name,
+      homeTeam: Team[nextIndex].name,
     };
   }, [randomIndex]);
 

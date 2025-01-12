@@ -11,10 +11,9 @@ export const Team = [
   { id: 10, name: "KT" },
 ] as const;
 
-export type TeamType = typeof Team[number];
+export type Team = (typeof Team)[number];
 
-
-export type Team = typeof Team[keyof typeof Team];
+export type TeamName = Team["name"];
 
 export const HittingHandType = {
   LEFT: "좌타",
