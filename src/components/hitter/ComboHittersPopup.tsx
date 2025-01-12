@@ -6,11 +6,12 @@ import {
   PlayerImage,
   PlayerName,
   PlayerPosition,
-  FilterWrapper,
-  FilterButton,
 } from "./ComboHittersPopup.style.ts";
 import { useHitterQuery } from "@/hooks/useHitterQuery.ts";
 import { Team } from "@constant/player.ts";
+import ComboHittersFilter from "./ComboHittersFilter.tsx";
+import { HitterQueryResponse } from "@apis/player.ts";
+import Loading from "@pages/@common/common/Loading.tsx";
 
 const ComboHittersPopup = () => {
   const randomIndex = useMemo(() => Math.floor(Math.random() * 10), []);
@@ -25,18 +26,9 @@ const ComboHittersPopup = () => {
 
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
+  const [filteredHitters, setFilteredHitters] = useState<HitterQueryResponse[]>([]);
 
-  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
-
-  const filteredHitters = useMemo(() => {
-    return hitters?.filter((hitter) => {
-      const isInRequestTeams =
-          hitter.team === hitterRequest.awayTeam || hitter.team === hitterRequest.homeTeam;
-      return !selectedTeam ? isInRequestTeams : hitter.team === selectedTeam;
-    });
-  }, [hitters, hitterRequest, selectedTeam]);
-
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>
   if (error) return <div>Error: {error.message}</div>;
 
   const ensureAbsoluteUrl = (url: string) => {
@@ -45,24 +37,13 @@ const ComboHittersPopup = () => {
 
   return (
       <Wrapper>
-        <FilterWrapper>
-          <div>
-            <span>팀:</span>
-            {[hitterRequest.awayTeam, hitterRequest.homeTeam].map((team) => (
-                <FilterButton
-                    key={team}
-                    isSelected={selectedTeam === team}
-                    onClick={() => setSelectedTeam(selectedTeam === team ? null : team)}
-                >
-                  {team}
-                </FilterButton>
-            ))}
-          </div>
-        </FilterWrapper>
-
-        {/* 선수 목록 */}
+        <ComboHittersFilter
+            hitters={hitters || []}
+            teams={[hitterRequest.awayTeam, hitterRequest.homeTeam]}
+            onFilteredHitters={setFilteredHitters}
+        />
         <PlayerListWrapper>
-          {filteredHitters?.map((hitter) => (
+          {filteredHitters.map((hitter) => (
               <PlayerCard key={hitter.playerId}>
                 <PlayerImage
                     src={ensureAbsoluteUrl(hitter.imageUrl || "/default-player.png")}
