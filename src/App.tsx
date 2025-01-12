@@ -6,6 +6,7 @@ import SvgSpriteMap from "@components/@common/icons/SvgSpriteMap";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import router from "@/router/router.tsx";
+import {NavBarProvider} from "@components/@common/navbar/NavBarContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,9 @@ function App() {
             </Helmet>
             <ThemeProvider theme={theme}>
               <SvgSpriteMap/>
-              <RouterProvider router={router}/>
+              <NavBarProvider>
+                <RouterProvider router={router}/>
+              </NavBarProvider>
             </ThemeProvider>
           </HelmetProvider>
         </QueryClientProvider>

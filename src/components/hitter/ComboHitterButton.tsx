@@ -1,16 +1,22 @@
 import styled, { keyframes } from "styled-components";
 import ComboHittersPopup from "@components/hitter/ComboHittersPopup.tsx";
 import { useState } from "react";
+import {useNavBar} from "@components/@common/navbar/NavBarContext.tsx";
 
 const ComboHitterButton = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const { hideNavBar, showNavBar } = useNavBar();
+
+
   const handleOpenPopup = () => {
     setIsPopupOpen(true);
+    hideNavBar()
   };
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
+    showNavBar()
   };
 
   return (
