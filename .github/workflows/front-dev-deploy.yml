@@ -22,8 +22,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.SUBMODULE_TOKEN }}
           submodules: true
-      - name: Update submodules to latest
-        run: git submodule update --remote
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3

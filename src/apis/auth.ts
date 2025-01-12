@@ -23,6 +23,7 @@ export const getLoginResult = async (
       `/oauth/${socialProvider}/login`,
       {
         params: loginRequest,
+        withCredentials: true
       }
   );
   return response.data;
