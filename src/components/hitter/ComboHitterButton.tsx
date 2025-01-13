@@ -1,9 +1,16 @@
 import styled, { keyframes } from "styled-components";
-import ComboHittersPopup from "@components/hitter/ComboHittersPopup.tsx";
+import ComboHittersPopup, {ComboHittersPopupProps} from "@components/hitter/ComboHittersPopup.tsx";
 import { useState } from "react";
 import {useNavBar} from "@/hooks/useNavBar.ts";
+import {TeamName} from "@constant/player.ts";
 
-const ComboHitterButton = () => {
+export interface ComboHittersButtonProps {
+  homeTeam: TeamName,
+  awayTeam: TeamName,
+}
+
+
+const ComboHitterButton = ({homeTeam, awayTeam} : ComboHittersPopupProps) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const { showNavBar } = useNavBar();
@@ -21,7 +28,7 @@ const ComboHitterButton = () => {
 
   return (
       <div>
-        <OpenButton onClick={handleOpenPopup}>Show Combo Hitters</OpenButton>
+        <OpenButton onClick={handleOpenPopup}>타자 선택</OpenButton>
 
         {isPopupOpen && (
             <PopupWrapper>
@@ -32,7 +39,7 @@ const ComboHitterButton = () => {
                 >
                   ✕
                 </CloseButton>
-                <ComboHittersPopup />
+                <ComboHittersPopup homeTeam={homeTeam} awayTeam={awayTeam}/>
               </PopupContent>
               <Overlay onClick={handleClosePopup} />
             </PopupWrapper>

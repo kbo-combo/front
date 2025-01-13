@@ -12,6 +12,7 @@ import kiwoomLogo from "@assets/logos/kiwoom-logo.svg";
 import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
 import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
+import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -45,6 +46,7 @@ const GameList = () => {
                 <GameInfo>
                   <GameTime>{game.gameSchedule}</GameTime>
                   <StadiumName>{game.stadiumName}</StadiumName>
+                  <ComboHitterButton homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
                 </GameInfo>
 
                 <TeamWrapper align="right">

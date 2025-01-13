@@ -8,21 +8,21 @@ import {
   Wrapper, SearchInput,
 } from "./ComboHittersPopup.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
-import {HittingHandType, PlayerDetailPosition, Team} from "@constant/player.ts";
+import {HittingHandType, PlayerDetailPosition, Team, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
+import {HitterQueryRequest} from "@apis/player.ts";
 
-const ComboHittersPopup = () => {
-  const randomIndex = useMemo(() => Math.floor(Math.random() * 10), []);
+export interface ComboHittersPopupProps {
+  homeTeam: TeamName,
+  awayTeam: TeamName,
+}
 
-  const hitterRequest = useMemo(() => {
-    const nextIndex = (randomIndex + 1) % Team.length;
-    return {
-      awayTeam: Team[randomIndex].name,
-      homeTeam: Team[nextIndex].name,
-    };
-  }, [randomIndex]);
-
+const ComboHittersPopup = ({homeTeam, awayTeam} : ComboHittersPopupProps) => {
+  const hitterRequest: HitterQueryRequest = {
+    awayTeam,
+    homeTeam,
+  };
 
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
