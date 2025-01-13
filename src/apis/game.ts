@@ -19,7 +19,7 @@ export const findRecentGame = async (): Promise<GameResponse[]> => {
           homePitcherName: "곽빈",
           awayPitcherName: "임찬규",
           gameSchedule: "18:30",
-          stadiumName: "잠실 종합운동",
+          stadiumName: "잠실 종합운동장",
         },
         {
           homeTeam: "SSG",

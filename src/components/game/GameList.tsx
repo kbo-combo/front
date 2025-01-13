@@ -11,6 +11,7 @@ import lotteLogo from "@assets/logos/lotte-logo.svg";
 import kiwoomLogo from "@assets/logos/kiwoom-logo.svg";
 import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
 import ktLogo from "@assets/logos/kt-logo.svg";
+import theme from "@style/theme.style.ts";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -26,56 +27,54 @@ const teamLogos: { [key: string]: string } = {
 };
 
 const GameList = () => {
-  const {data: games, isLoading, error} = useRecentGame();
+  const { data: games, isLoading, error } = useRecentGame();
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading games: {error.message}</p>;
 
   return (
       <Wrapper>
-        <PlayerListWrapper>
+        <GameListWrapper>
           {games?.slice(0, 5).map((game, index) => (
               <PlayerCard key={index}>
-                {/* 홈 팀 정보 */}
-                <TeamWrapper>
-                  <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
-                  <PlayerInfo>{game.homePitcherName || "투수 정보 없음"}</PlayerInfo>
+                <TeamWrapper align="left">
+                  <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
+                  <PlayerName>{game.homePitcherName || "투수 정보 없음"}</PlayerName>
                 </TeamWrapper>
 
-                {/* 경기 결과 */}
-                <GameResult>
-                  <span>{game.stadiumName}</span>
-                  <span>{game.gameSchedule}</span>
-                </GameResult>
+                <GameInfo>
+                  <GameTime>{game.gameSchedule}</GameTime>
+                  <StadiumName>{game.stadiumName}</StadiumName>
+                </GameInfo>
 
-                {/* 원정 팀 정보 */}
-                <TeamWrapper>
-                  <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
-                  <PlayerInfo>{game.awayPitcherName || "투수 정보 없음"}</PlayerInfo>
+                <TeamWrapper align="right">
+                  <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
+                  <PlayerName>{game.awayPitcherName || "투수 정보 없음"}</PlayerName>
                 </TeamWrapper>
               </PlayerCard>
           ))}
-        </PlayerListWrapper>
+        </GameListWrapper>
       </Wrapper>
   );
 };
+
 
 export const Wrapper = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  background: ${({theme: {color}}) => color.background};
-  color: ${({theme: {color}}) => color.primary};
+  width: 80%;
+  height: 80%;
+  background: ${({ theme: { color } }) => color.background};
+  color: ${({ theme: { color } }) => color.primary};
 `;
 
-export const PlayerListWrapper = styled.div`
+export const GameListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   justify-content: center;
-  padding: 1.7rem;
+  padding: 1.2rem;
 `;
 
 export const PlayerCard = styled.div`
@@ -85,10 +84,10 @@ export const PlayerCard = styled.div`
   justify-content: space-between;
   padding: 1rem;
   border-radius: 1rem;
-  background: ${({theme: {color}}) => color.cardBackground};
+  background: ${({ theme: { color } }) => color.cardBackground};
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 
   &:hover {
     transform: scale(1.05);
@@ -96,37 +95,45 @@ export const PlayerCard = styled.div`
   }
 `;
 
-export const PlayerInfo = styled.span`
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  color: ${({theme: {color}}) => color.subLight};
-`;
-
-export const TeamWrapper = styled.div`
+export const TeamWrapper = styled.div<{ align: string }>`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0.5rem;
-  width: 100%;
+  flex-direction: column;
+  align-items: ${({ align }) => (align === "left" ? "flex-start" : "flex-end")};
+  justify-content: center;
+  gap: 0.5rem;
 `;
 
 export const TeamLogo = styled.img`
-  width: 4rem;
-  height: 4rem;
+  width: 6rem; 
+  height: 6rem;
   border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 0.5rem;
+  object-fit: contain;
+`;
+export const PlayerName = styled.span`
+  font-size: 1.4rem;
+  color: ${({ theme: { color } }) => color.sub};
+  text-align: center;
 `;
 
-export const GameResult = styled.div`
+export const GameInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 0;
+  text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: ${({theme: {color}}) => color.subLight};
+  color: ${({ theme: { color } }) => color.primary};
+  gap: 0.5rem; 
+`;
+
+export const StadiumName = styled.span`
+  font: ${theme.font.text};
+  color: ${theme.color.subLight};
+`;
+
+export const GameTime = styled.span`
+  font: ${theme.font.text};  
+  font-size : 2rem;
 `;
 
 
