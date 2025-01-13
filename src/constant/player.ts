@@ -2,7 +2,7 @@ export const Team = [
   { id: 1, name: "NC", displayName: "NC" },
   { id: 2, name: "KIA", displayName: "기아"},
   { id: 3, name: "DOOSAN", displayName: "두산"},
-  { id: 4, name: "LG", displayName: "NC"},
+  { id: 4, name: "LG", displayName: "LG"},
   { id: 5, name: "SSG", displayName : "SSG"},
   { id: 6, name: "SAMSUNG", displayName: "삼성"},
   { id: 7, name: "LOTTE", displayName: "롯데"},
