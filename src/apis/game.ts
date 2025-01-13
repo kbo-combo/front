@@ -1,7 +1,7 @@
 import {TeamName} from "@constant/player.ts";
 
 
-export const getRecentGame = async (): Promise<GameResponse[]> => {
+export const findRecentGame = async (): Promise<GameResponse[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
