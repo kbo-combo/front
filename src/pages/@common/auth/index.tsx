@@ -1,6 +1,6 @@
 import {ContentBox, KakaoLogin, LoginBox, PrimaryText, Text, Wrapper} from "./Login.style.tsx";
-import KakaoLoginLargePng from '@assets/kakao_login_large_narrow.png';
-import KakaoLoginLargeWebp from '@assets/kakao_login_large_narrow.webp';
+import KakaoLoginLargePng from "@assets/kakao_login_large_narrow.png";
+import KakaoLoginLargeWebp from "@assets/kakao_login_large_narrow.webp";
 import {useAuthLoginPage} from "@/hooks/login.ts";
 
 const Login = () => {
