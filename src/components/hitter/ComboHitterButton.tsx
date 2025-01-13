@@ -1,14 +1,7 @@
-import styled, { keyframes } from "styled-components";
+import styled  from "styled-components";
 import ComboHittersPopup, {ComboHittersPopupProps} from "@components/hitter/ComboHittersPopup.tsx";
-import { useState } from "react";
+import {useState} from "react";
 import {useNavBar} from "@/hooks/useNavBar.ts";
-import {TeamName} from "@constant/player.ts";
-
-export interface ComboHittersButtonProps {
-  homeTeam: TeamName,
-  awayTeam: TeamName,
-}
-
 
 const ComboHitterButton = ({homeTeam, awayTeam} : ComboHittersPopupProps) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -50,26 +43,6 @@ const ComboHitterButton = ({homeTeam, awayTeam} : ComboHittersPopupProps) => {
 
 export default ComboHitterButton;
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const slideUp = keyframes`
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
 const OpenButton = styled.button`
   padding: 10px 20px;
   background: #007bff;
@@ -80,40 +53,9 @@ const OpenButton = styled.button`
   font-size: 1rem;
   transition: background 0.3s ease;
 
-  &:hover {
-    background: #0056b3;
-  }
-`;
-
-const PopupWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  animation: ${fadeIn} 0.3s ease;
-`;
-
-const PopupContent = styled.div`
-  position: relative;
-  z-index: 1001;
-  width: 80%;
-  height: 400px;
-  width: 600px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  overflow: auto;
-  animation: ${slideUp} 0.3s ease;
 `;
 
 const CloseButton = styled.button`
-  position: absolute;
   top: 10px;
   right: 10px;
   background: none;
@@ -122,9 +64,31 @@ const CloseButton = styled.button`
   cursor: pointer;
   color: #666;
 
-  &:hover {
-    color: #000;
-  }
+`;
+
+const PopupWrapper = styled.div`
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+
+const PopupContent = styled.div`
+  position: relative;
+  width: 100rem;
+  max-width: 90%;
+  height: 60rem;
+  max-height: 90%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  overflow: auto;
 `;
 
 const Overlay = styled.div`
@@ -134,6 +98,4 @@ const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  animation: ${fadeIn} 0.3s ease;
 `;
