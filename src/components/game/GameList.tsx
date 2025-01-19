@@ -67,8 +67,8 @@ export const Wrapper = styled.main`
   flex-direction: column;
   width: 80%;
   height: 80%;
-  background: ${({ theme: { color } }) => color.background};
   color: ${({ theme: { color } }) => color.primary};
+  background-color: ${({ theme: { color } }) => color.background}; // 밝은 배경 유지
 `;
 
 export const GameListWrapper = styled.div`
@@ -106,11 +106,12 @@ export const TeamWrapper = styled.div<{ align: string }>`
 `;
 
 export const TeamLogo = styled.img`
-  width: 6rem; 
+  width: 6rem;
   height: 6rem;
   border-radius: 50%;
   object-fit: contain;
 `;
+
 export const PlayerName = styled.span`
   font-size: 1.4rem;
   color: ${({ theme: { color } }) => color.sub};
@@ -125,7 +126,7 @@ export const GameInfo = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   color: ${({ theme: { color } }) => color.primary};
-  gap: 0.5rem; 
+  gap: 0.5rem;
 `;
 
 export const StadiumName = styled.span`
@@ -134,9 +135,8 @@ export const StadiumName = styled.span`
 `;
 
 export const GameTime = styled.span`
-  font: ${theme.font.text};  
+  font: ${theme.font.text};
   font-size : 2rem;
 `;
-
 
 export default GameList;

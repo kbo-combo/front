@@ -34,7 +34,6 @@ const ComboHitterButton = ({homeTeam, awayTeam} : ComboHittersPopupProps) => {
                 </CloseButton>
                 <ComboHittersPopup homeTeam={homeTeam} awayTeam={awayTeam}/>
               </PopupContent>
-              <Overlay onClick={handleClosePopup} />
             </PopupWrapper>
         )}
       </div>
@@ -69,8 +68,6 @@ const CloseButton = styled.button`
 const PopupWrapper = styled.div`
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,11 +88,3 @@ const PopupContent = styled.div`
   overflow: auto;
 `;
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-`;

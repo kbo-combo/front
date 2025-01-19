@@ -17,7 +17,7 @@ const MemberPage = () => {
     <ContentHeader title={"마이페이지"}/>
     <ProfileWrapper>
       <ProfileImage src="/santa-sunnam.png" alt="프로필 이미지"/>
-      <Nickname>산타 선남 이름을 좀 길게 해보자</Nickname>
+      <Nickname>팬심 저격하는 곽빈</Nickname>
       <MemberEditLink to={`${URL_PATH.member}/edit`}>
       <EditButton>
         <FiEdit3 size={16} color='white'/>
