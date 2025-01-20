@@ -5,6 +5,7 @@ import {NavBarContext} from "@components/@common/navbar/NavBarContext.ts";
 
 const NO_NAVIGATION_BAR_URLS = [
   URL_PATH.login,
+  URL_PATH.hitter_select,
 ].map((path) => ({ path }));
 
 
