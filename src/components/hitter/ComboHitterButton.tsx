@@ -1,27 +1,39 @@
 import styled from "styled-components";
-import ComboHittersPopup, {ComboHittersPopupProps} from "@components/hitter/ComboHittersPopup.tsx";
+import {useNavigate} from "react-router-dom";
+import {URL_PATH} from "@/constant";
 
-const ComboHitterButton = ({homeTeam, awayTeam}: ComboHittersPopupProps) => {
+interface ComboHitterButtonProps {
+  homeTeam: string;
+  awayTeam: string;
+}
 
+
+const ComboHitterButton = ({homeTeam, awayTeam}: ComboHitterButtonProps) => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(URL_PATH.combo_hitters, {
+      state: { homeTeam, awayTeam },
+    });
+  };
 
   return (
-      <div>
-        <OpenButton>타자 선택</OpenButton>
-        <ComboHittersPopup homeTeam={homeTeam} awayTeam={awayTeam}/>
-      </div>
+        <Button onClick={handleClick}>타자 선택</Button>
   );
 };
 
 export default ComboHitterButton;
 
-const OpenButton = styled.button`
-  padding: 10px 20px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+
+const Button = styled.button`
+padding: 10px 20px;
+background: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 1rem;
+transition: background 0.3s ease;
 
 `;

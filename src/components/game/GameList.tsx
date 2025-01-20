@@ -140,3 +140,4 @@ export const GameTime = styled.span`
 `;
 
 export default GameList;
+
