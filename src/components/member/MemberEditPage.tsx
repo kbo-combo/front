@@ -2,7 +2,7 @@ import {
   ButtonGroup,
   EditPageWrapper,
   NicknameInput, NicknameInputContainer, NickNameLabel, NicknameLengthIndicator,
-  SaveButton
+  SaveButton, WarningText
 } from "@components/member/member-edit.style.ts";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -43,6 +43,7 @@ const MemberEditPage = () => {
             {nickname.length} / {MAX_NICKNAME_LENGTH}
           </NicknameLengthIndicator>
         </NicknameInputContainer>
+        <WarningText>부적절한 표현이 포함된 닉네임은 변경 될 수 있습니다.</WarningText>
         <ButtonGroup>
           <SaveButton onClick={handleSave}>수정하기</SaveButton>
         </ButtonGroup>

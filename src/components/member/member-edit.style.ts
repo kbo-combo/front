@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "@style/theme.style.ts";
 
 export const EditPageWrapper = styled.div`
   position: relative;
@@ -33,6 +34,15 @@ export const NicknameInput = styled.input`
   border-radius: 4px;
 `;
 
+export const WarningText = styled.p`
+  font: ${theme.font.text};
+  font-size: 1.4rem;
+  color: ${({ theme: { color } }) => color.gray};
+  margin-top: 1rem;
+  text-align: center;
+  max-width: 80%;
+`
+
 export const NicknameLengthIndicator = styled.text`
   position: absolute;
   top: 70%;
@@ -64,3 +74,5 @@ export const SaveButton = styled.button`
     background: ${({ theme: { color } }) => color.water};
   }
 `;
+
+
