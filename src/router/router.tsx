@@ -1,16 +1,16 @@
-  import {createBrowserRouter} from 'react-router-dom';
-  import {URL_PATH} from "constant";
-  import Home from "@pages/@common/home";
-  import RootTemplate from "@pages/@common/root";
-  import Login from "@pages/@common/auth";
-  import MemberPage from "components/member";
-  import MemberEditPage from "@components/member/MemberEditPage.tsx";
-  import CallbackPage from "@components/member/CallbackPage.tsx";
-  import AuthRoute from "@/router/AuthRoute.tsx";
-  import NotFoundPage from "@pages/@common/common/NotFound.tsx";
-  import ComboHittersPage from "@components/hitter/ComboHittersPage.tsx";
+import {createBrowserRouter} from 'react-router-dom';
+import {URL_PATH} from "constant";
+import Home from "@pages/@common/home";
+import RootTemplate from "@pages/@common/root";
+import Login from "@pages/@common/auth";
+import MemberPage from "components/member";
+import MemberEditPage from "@components/member/MemberEditPage.tsx";
+import CallbackPage from "@components/member/CallbackPage.tsx";
+import AuthRoute from "@/router/AuthRoute.tsx";
+import NotFoundPage from "@pages/@common/common/NotFound.tsx";
+import HitterSelectPage from "@pages/@common/hitter-select";
 
-  const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
       path: URL_PATH.main,
       element: <RootTemplate/>,
@@ -21,8 +21,8 @@
           element: <Home/>,
         },
         {
-          path: URL_PATH.combo_hitters,
-          element: <ComboHittersPage/>
+          path: URL_PATH.hitter_select,
+          element: <HitterSelectPage/>
         },
         {
           path: URL_PATH.login,

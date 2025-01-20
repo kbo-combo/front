@@ -8,21 +8,20 @@ import {
   Wrapper, SearchInput,
 } from "./ComboHittersPopup.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
-import {HittingHandType, PlayerDetailPosition, Team} from "@constant/player.ts";
+import {HittingHandType, PlayerDetailPosition, Team, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
-import {useLocation} from "react-router-dom";
 
+interface ComboHitterListProps {
+  homeTeam: TeamName;
+  awayTeam: TeamName;
+}
 
-const ComboHittersPage = () => {
-  const location = useLocation();
-  const { homeTeam, awayTeam } = location.state || {}; // 전달된 데이터
-
+const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
   const hitterRequest = {
     homeTeam,
     awayTeam,
   };
-
 
   const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
 
@@ -90,7 +89,7 @@ const ComboHittersPage = () => {
   );
 };
 
-export default ComboHittersPage;
+export default ComboHitterList;
 
 function getUrl() {
   const ensureAbsoluteUrl = (url: string) => {

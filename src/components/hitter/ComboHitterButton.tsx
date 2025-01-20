@@ -13,7 +13,7 @@ const ComboHitterButton = ({homeTeam, awayTeam}: ComboHitterButtonProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(URL_PATH.combo_hitters, {
+    navigate(URL_PATH.hitter_select, {
       state: { homeTeam, awayTeam },
     });
   };
