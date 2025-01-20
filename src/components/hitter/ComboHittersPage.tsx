@@ -40,7 +40,7 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
     return hitters.filter((hitter) => {
       const matchesTeam = selectedTeamType ? hitter.team === selectedTeamType : true;
       const matchesHand = selectedHandType ? hitter.hittingHandType === selectedHandType : true;
-      const matchesSearch = hitter.name.includes(searchKeyword); // 검색어 필터 추가
+      const matchesSearch = hitter.name.includes(searchKeyword);
       return matchesTeam && matchesHand && matchesSearch;
     });
   }, [hitters, selectedTeamType, selectedHandType, searchKeyword]);
