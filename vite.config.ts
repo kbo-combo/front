@@ -7,10 +7,10 @@ const mode = process.env.NODE_ENV || 'development';
 const envFile = path.resolve(__dirname, `front-submodule/.env.${mode}`);
 dotenv.config({ path: envFile });
 import svgr from 'vite-plugin-svgr';
-
+import mkcert from "vite-plugin-mkcert";
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), svgr()],
+  plugins: [react(), tsconfigPaths(), svgr(), mkcert()],
   define: {
     'process.env': process.env,
   },
