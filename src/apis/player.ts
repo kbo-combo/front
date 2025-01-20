@@ -19,7 +19,7 @@ export const findAllHitter = async (
     hitterRequest: HitterQueryRequest,
 ): Promise<HitterQueryResponse[]> => {
   const response = await client.get<HitterQueryResponse[]>(
-      `/players`,
+      `/hitters`,
       {
         params: hitterRequest
       }
