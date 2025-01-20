@@ -1,4 +1,4 @@
-import ComboHittersPage from "@components/hitter/ComboHittersPage.tsx";
+import ComboHittersPage from "@components/hitter/ComboHittersList.tsx";
 import {useLocation} from "react-router-dom";
 import {TeamName} from "@constant/player.ts";
 

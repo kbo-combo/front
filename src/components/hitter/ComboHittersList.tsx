@@ -1,12 +1,14 @@
 import {useMemo, useState} from "react";
 import {
+  BottomButton,
   PlayerCard,
   PlayerImage,
+  PlayerInfo,
   PlayerListWrapper,
   PlayerName,
-  PlayerInfo,
-  Wrapper, SearchInput,
-} from "./ComboHittersPopup.style.ts";
+  SearchInput,
+  Wrapper,
+} from "./ComboHittersList.style.ts";
 import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
 import {HittingHandType, PlayerDetailPosition, Team, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
@@ -28,6 +30,12 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
   const [selectedTeamType, setSelectedTeamType] = useState<string | null>(null);
   const [selectedHandType, setSelectedHandType] = useState<string | null>(null);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
+
+  const handleSelectPlayer = (playerId: number) => {
+    setSelectedPlayerId(playerId);
+  };
+
 
   const teamOptions = useMemo(() => {
     return Team.filter(
@@ -72,7 +80,11 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
         />
         <PlayerListWrapper>
           {filteredHitters.map((hitter) => (
-              <PlayerCard key={hitter.playerId}>
+              <PlayerCard
+                  key={hitter.playerId}
+                  isSelected={hitter.playerId === selectedPlayerId}
+                  onClick={() => handleSelectPlayer(hitter.playerId)}
+              >
                 <PlayerImage
                     src={ensureAbsoluteUrl(hitter.imageUrl || "/default-player.png")}
                     alt={hitter.name}
@@ -85,6 +97,12 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
               </PlayerCard>
           ))}
         </PlayerListWrapper>
+          <BottomButton
+              isSelected={selectedPlayerId !== null}
+              onClick={() => alert(`선택된 선수: ${selectedPlayerId}`)}
+          >
+            타자 선택
+          </BottomButton>
       </Wrapper>
   );
 };

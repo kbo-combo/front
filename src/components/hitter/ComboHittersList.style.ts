@@ -19,23 +19,24 @@ export const PlayerListWrapper = styled.div`
   padding: 1.7rem;
 `;
 
-export const PlayerCard = styled.div`
+export const PlayerCard = styled.div<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
-  background: ${({ theme: { color } }) => color.cardBackground};
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: ${({ isSelected }) =>
+      isSelected ? theme.color.primary : theme.color.background};
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   margin-bottom: 3rem;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 10px ${theme.color.sub};
   }
-`;
 
+  cursor: pointer;
+`;
 export const PlayerName = styled.span`
   margin-top: 1rem;
   font: ${theme.font.text};
@@ -71,4 +72,21 @@ export const SearchInput = styled.input`
   &:focus {
     border-color: ${({ theme }) => theme.color.primary};
   }
+`;
+
+export const BottomButton= styled.div<{ isSelected: boolean }>`
+  position: fixed;
+  z-index: ${(props) => props.theme.zIndex.fixed};
+  max-width: ${(props) => props.theme.width.pad};
+  bottom: 0;
+  width: 100%;
+  padding: 1.5rem;
+  font: ${theme.font.text};
+  font-size: 2.2rem;
+  background: ${({ isSelected }) =>
+      isSelected ? theme.color.primary : theme.color.grayDark};
+  color: ${theme.color.background};
+  display: flex;
+  justify-content: center;
+  align-content: center;
 `;

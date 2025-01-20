@@ -29,7 +29,7 @@ const width = {
 } as const;
 
 const zIndex = {
-  dropdownBackdrop: 1000,
+  bottomBar: 1000,
   dropdown: 1010,
   sticky: 1020,
   fixed: 1030,
