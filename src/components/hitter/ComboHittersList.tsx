@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react";
+import {useState} from "react";
 import {
   BottomButton,
   PlayerCard,
@@ -6,13 +6,13 @@ import {
   PlayerInfo,
   PlayerListWrapper,
   PlayerName,
-  SearchInput,
   Wrapper,
 } from "./ComboHittersList.style.ts";
-import {useHitterQuery} from "@/hooks/useHitterQuery.ts";
-import {HittingHandType, PlayerDetailPosition, Team, TeamName} from "@constant/player.ts";
+import {HittingHandType, PlayerDetailPosition, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
-import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
+import ComboHitterFilterList from "@components/hitter/ComboHitterFilterList.tsx";
+import {useHitterFilter} from "@/hooks/useHitterFilter.ts";
+import {HitterQueryResponse} from "@apis/player.ts";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;
@@ -20,38 +20,24 @@ interface ComboHitterListProps {
 }
 
 const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
-  const hitterRequest = {
-    homeTeam,
-    awayTeam,
-  };
-
-  const { data: hitters, error, isLoading } = useHitterQuery(hitterRequest);
-
-  const [selectedTeamType, setSelectedTeamType] = useState<string | null>(null);
-  const [selectedHandType, setSelectedHandType] = useState<string | null>(null);
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
 
   const handleSelectPlayer = (playerId: number) => {
     setSelectedPlayerId(playerId);
   };
 
-
-  const teamOptions = useMemo(() => {
-    return Team.filter(
-        (team) => team.name === hitterRequest.awayTeam || team.name === hitterRequest.homeTeam
-    ).map((team) => ({ key: team.name, value: team.displayName }));
-  }, [hitterRequest]);
-
-  const filteredHitters = useMemo(() => {
-    if (!hitters) return [];
-    return hitters.filter((hitter) => {
-      const matchesTeam = selectedTeamType ? hitter.team === selectedTeamType : true;
-      const matchesHand = selectedHandType ? hitter.hittingHandType === selectedHandType : true;
-      const matchesSearch = hitter.name.includes(searchKeyword);
-      return matchesTeam && matchesHand && matchesSearch;
-    });
-  }, [hitters, selectedTeamType, selectedHandType, searchKeyword]);
+  const {
+    filteredHitters,
+    teamOptions,
+    searchKeyword,
+    setSearchKeyword,
+    selectedTeamType,
+    setSelectedTeamType,
+    selectedHandType,
+    setSelectedHandType,
+    isLoading,
+    error,
+  } = useHitterFilter(homeTeam, awayTeam);
 
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
@@ -60,26 +46,12 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
 
   return (
       <Wrapper>
-        <SearchInput
-            type="text"
-            placeholder="선수 이름 검색"
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-        />
-        <ComboHittersFilter
-            title="타격 타입"
-            options={Object.entries(HittingHandType).map(([key, value]) => ({ key, value }))}
-            selectedOption={selectedHandType}
-            onSelectOption={setSelectedHandType}
-        />
-        <ComboHittersFilter
-              title="소속팀"
-              options={teamOptions}
-              selectedOption={selectedTeamType}
-            onSelectOption={setSelectedTeamType}
-        />
+        <ComboHitterFilterList searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword}
+                               selectedTeamType={selectedTeamType} setSelectedTeamType={setSelectedTeamType}
+                               selectedHandType={selectedHandType} setSelectedHandType={setSelectedHandType}
+                               teamOptions={teamOptions}/>
         <PlayerListWrapper>
-          {filteredHitters.map((hitter) => (
+          {filteredHitters.map((hitter : HitterQueryResponse) => (
               <PlayerCard
                   key={hitter.playerId}
                   isSelected={hitter.playerId === selectedPlayerId}
