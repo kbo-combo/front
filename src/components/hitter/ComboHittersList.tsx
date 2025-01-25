@@ -8,6 +8,8 @@ import {
   PlayerName,
   Wrapper,
 } from "./ComboHittersList.style.ts";
+import default_image from "@assets/default-player.png";
+
 import {HittingHandType, PlayerDetailPosition, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ComboHitterFilterList from "@components/hitter/ComboHitterFilterList.tsx";
@@ -58,8 +60,11 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
                   onClick={() => handleSelectPlayer(hitter.playerId)}
               >
                 <PlayerImage
-                    src={ensureAbsoluteUrl(hitter.imageUrl || "/default-player.png")}
+                    src={ensureAbsoluteUrl(hitter.imageUrl || default_image)}
                     alt={hitter.name}
+                    onError={(e) => {
+                      e.currentTarget.src = default_image;
+                    }}
                 />
                 <PlayerName>{hitter.name}</PlayerName>
                 <PlayerInfo>  {HittingHandType[hitter.hittingHandType as keyof typeof HittingHandType] +
