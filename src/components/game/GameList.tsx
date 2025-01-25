@@ -38,21 +38,21 @@ const GameList = () => {
         <GameListWrapper>
           {games?.slice(0, 5).map((game, index) => (
               <PlayerCard key={index}>
-                <TeamWrapper align="left">
-                  <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
-                  <PlayerName>{game.homePitcherName || "투수 정보 없음"}</PlayerName>
+                <TeamWrapper>
+                  <TeamRow>
+                    <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
+                    <PlayerName>{game.homePitcherName || "투수 정보 없음"}</PlayerName>
+                  </TeamRow>
+                  <TeamRow>
+                    <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
+                    <PlayerName>{game.awayPitcherName || "투수 정보 없음"}</PlayerName>
+                  </TeamRow>
                 </TeamWrapper>
-
                 <GameInfo>
                   <GameTime>{game.gameSchedule}</GameTime>
                   <StadiumName>{game.stadiumName}</StadiumName>
                   <ComboHitterButton homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
                 </GameInfo>
-
-                <TeamWrapper align="right">
-                  <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
-                  <PlayerName>{game.awayPitcherName || "투수 정보 없음"}</PlayerName>
-                </TeamWrapper>
               </PlayerCard>
           ))}
         </GameListWrapper>
@@ -97,12 +97,17 @@ export const PlayerCard = styled.div`
   }
 `;
 
-export const TeamWrapper = styled.div<{ align: string }>`
+export const TeamWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: ${({ align }) => (align === "left" ? "flex-start" : "flex-end")};
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem; 
+`;
+
+export const TeamRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem; 
 `;
 
 export const TeamLogo = styled.img`
@@ -115,9 +120,9 @@ export const TeamLogo = styled.img`
 export const PlayerName = styled.span`
   font-size: 1.4rem;
   color: ${({ theme: { color } }) => color.sub};
-  text-align: center;
+  text-align: left; 
+  white-space: nowrap; 
 `;
-
 export const GameInfo = styled.div`
   display: flex;
   flex-direction: column;
