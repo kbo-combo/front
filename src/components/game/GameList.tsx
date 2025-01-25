@@ -65,8 +65,8 @@ export const Wrapper = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   color: ${({ theme: { color } }) => color.primary};
   background-color: ${({ theme: { color } }) => color.background}; // 밝은 배경 유지
 `;
@@ -76,7 +76,7 @@ export const GameListWrapper = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 1.0rem;
 `;
 
 export const PlayerCard = styled.div`
