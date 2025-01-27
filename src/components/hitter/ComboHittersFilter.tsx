@@ -25,6 +25,13 @@ const ComboHittersFilter = ({
   return (
       <FilterWrapper>
         <FilterTitle>{title}</FilterTitle>
+        <FilterButton
+            key="all"
+            isSelected={selectedOption === null}
+            onClick={() => onSelectOption(null)}
+        >
+          전체
+        </FilterButton>
         {options.map(({ key, value }) => (
             <FilterButton
                 key={key}
