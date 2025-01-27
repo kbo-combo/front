@@ -16,6 +16,7 @@ export const PlayerListWrapper = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
+  margin-top: 20rem;
 `;
 
 export const PlayerCard = styled.div<{ isSelected: boolean }>`

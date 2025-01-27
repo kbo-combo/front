@@ -48,11 +48,13 @@ export default ComboHitterFilterList
 
 
 export const Wrapper = styled.main`
+  position: fixed;
+  z-index: ${(props) => props.theme.zIndex.fixed};
   display: flex;
   flex-direction: column;
     gap: 1rem;
   width: 100%;
-  padding: 1rem 2rem; /* 상하, 좌우 패딩 조정 */
+  padding: 1rem 2rem;
   background: ${({ theme: { color } }) => color.background};
   color: ${({ theme: { color } }) => color.primary};
 `;
