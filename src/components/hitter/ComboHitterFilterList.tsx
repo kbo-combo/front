@@ -1,6 +1,7 @@
 import { SearchInput } from "./ComboHittersList.style.ts";
 import ComboHittersFilter from "@components/hitter/ComboHittersFilter.tsx";
 import {HittingHandType} from "@constant/player.ts";
+import styled from "styled-components";
 
 const ComboHitterFilterList = ({
                                 searchKeyword,
@@ -20,6 +21,7 @@ const ComboHitterFilterList = ({
   teamOptions: { key: string; value: string }[];
 }) => (
     <>
+      <Wrapper>
       <SearchInput
           type="text"
           placeholder="선수 이름 검색"
@@ -38,7 +40,21 @@ const ComboHitterFilterList = ({
           selectedOption={selectedTeamType}
           onSelectOption={setSelectedTeamType}
       />
+      </Wrapper>
     </>
 );
 
 export default ComboHitterFilterList
+
+
+export const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 2rem; /* 상하, 좌우 패딩 조정 */
+  background: ${({ theme: { color } }) => color.background};
+  color: ${({ theme: { color } }) => color.primary};
+`;

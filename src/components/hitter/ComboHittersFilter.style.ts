@@ -20,6 +20,8 @@ export const FilterTitle = styled.span`
   font-weight: bold;
   font: ${theme.font.text};
   font-size: 1.8rem; 
+  display: inline-block;
+  width: 7.5rem;
   color: ${({ theme: { color } }) => color.primaryText};
   margin-right: 0.5rem; 
 `;
