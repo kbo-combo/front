@@ -14,9 +14,9 @@ const Login = () => {
   return (
       <Wrapper>
         <ContentBox>
-          <Text><PrimaryText>KBO</PrimaryText>를 더욱 즐겁게</Text>
+          <Text>야구와 일상에 즐거움을</Text>
           <Text>
-            <PrimaryText>어쩌구저쩌구</PrimaryText>
+            <PrimaryText>하루한타</PrimaryText>
           </Text>
         </ContentBox>
         <LoginBox>
