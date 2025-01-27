@@ -59,15 +59,13 @@ export const PlayerInfo  = styled.span`
 
 export const SearchInput = styled.input`
   width: 100%;
-  max-width: 10rem;
-  padding: 0.5rem 1rem;
+  max-width: 20rem;
+  padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: 1px solid ${({ theme }) => theme.color.buttonBackground};
-  border-radius: 0.25rem;
-  outline: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
+  border-radius: 1.0rem;
+  
   &:focus {
     border-color: ${({ theme }) => theme.color.primary};
   }
