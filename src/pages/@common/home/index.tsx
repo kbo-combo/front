@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
       <Main>
-      <MainMessage>안녕하세요. 야구를 좋아해서 만들었어요.</MainMessage>
+      <MainMessage>하루한타</MainMessage>
         <GameList/>
       </Main>
   );
