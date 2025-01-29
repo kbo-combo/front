@@ -22,7 +22,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const todayRef = useRef<HTMLDivElement>(null);
 
-  /** 해당 월의 날짜 리스트 생성 */
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -40,7 +39,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
     });
   };
 
-  /** 오늘 날짜 위치로 자동 스크롤 */
   useEffect(() => {
     if (scrollContainerRef.current && todayRef.current) {
       const scrollContainer = scrollContainerRef.current;
@@ -53,7 +51,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
     }
   }, []);
 
-  /** 이전 달로 이동 (3월 미만 이동 불가) */
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
       const newMonth = prev.getMonth() - 1;
@@ -61,7 +58,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
     });
   };
 
-  /** 다음 달로 이동 (11월 초과 이동 불가) */
   const handleNextMonth = () => {
     setCurrentMonth((prev) => {
       const newMonth = prev.getMonth() + 1;
@@ -69,7 +65,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
     });
   };
 
-  /** 날짜 선택 핸들러 */
   const handleSelectDate = (date: Date) => {
     setSelectedDate(date);
     if (onSelectDate) {
@@ -81,7 +76,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
   const isPrevDisabled = currentMonth.getMonth() <= MIN_MONTH;
   const isNextDisabled = currentMonth.getMonth() >= MAX_MONTH;
 
-  /** 선택된 날짜가 현재 월에 존재하지 않으면 초기화 */
   useEffect(() => {
     const existsInCurrentMonth = formattedDays.some(
         (dateObj) => selectedDate?.toDateString() === dateObj.date.toDateString()
