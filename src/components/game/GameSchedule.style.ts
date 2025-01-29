@@ -77,10 +77,10 @@ export const DateItem = styled.div<{ isSelected: boolean }>`
 `;
 
 export const WeekDay = styled.div`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: ${theme.color.grayDark};
 `;
 
 export const Day = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.85rem;
 `;
