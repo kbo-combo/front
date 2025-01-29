@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   CurrentMonth, DateItem, DatesWrapper, Day,
   Header,
@@ -7,10 +7,10 @@ import {
   Wrapper
 } from "@components/game/GameSchedule.style.ts";
 
-const MIN_MONTH = 2; // 3월 (JavaScript 기준 0부터 시작)
-const MAX_MONTH = 10; // 11월
+const MIN_MONTH = 0;
+const MAX_MONTH = 10;
 
-const GameSchedule = () => {
+const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void }) => {
   const today = new Date();
   const initialMonth =
       today.getMonth() < MIN_MONTH || today.getMonth() > MAX_MONTH
@@ -18,16 +18,20 @@ const GameSchedule = () => {
           : new Date(today.getFullYear(), today.getMonth(), 1);
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(today);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const todayRef = useRef<HTMLDivElement>(null);
 
-  /** 현재 월의 날짜 리스트 생성 */
+  /** 해당 월의 날짜 리스트 생성 */
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
-    const days = new Date(year, month + 1, 0).getDate(); // 해당 월의 총 일 수
+    const days = new Date(year, month + 1, 0).getDate();
 
     return Array.from({ length: days }, (_, i) => {
       const dayDate = new Date(year, month, i + 1);
       return {
+        date: dayDate,
         year: year,
         month: month + 1, // JS에서는 0부터 시작하므로 +1
         day: dayDate.getDate(),
@@ -35,6 +39,19 @@ const GameSchedule = () => {
       };
     });
   };
+
+  /** 오늘 날짜 위치로 자동 스크롤 */
+  useEffect(() => {
+    if (scrollContainerRef.current && todayRef.current) {
+      const scrollContainer = scrollContainerRef.current;
+      const todayElement = todayRef.current;
+
+      scrollContainer.scrollTo({
+        left: todayElement.offsetLeft - scrollContainer.clientWidth / 2 + todayElement.clientWidth / 2,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   /** 이전 달로 이동 (3월 미만 이동 불가) */
   const handlePrevMonth = () => {
@@ -52,13 +69,30 @@ const GameSchedule = () => {
     });
   };
 
+  /** 날짜 선택 핸들러 */
+  const handleSelectDate = (date: Date) => {
+    setSelectedDate(date);
+    if (onSelectDate) {
+      onSelectDate(date);
+    }
+  };
+
   const formattedDays = getDaysInMonth(currentMonth);
   const isPrevDisabled = currentMonth.getMonth() <= MIN_MONTH;
   const isNextDisabled = currentMonth.getMonth() >= MAX_MONTH;
 
+  /** 선택된 날짜가 현재 월에 존재하지 않으면 초기화 */
+  useEffect(() => {
+    const existsInCurrentMonth = formattedDays.some(
+        (dateObj) => selectedDate?.toDateString() === dateObj.date.toDateString()
+    );
+    if (!existsInCurrentMonth) {
+      setSelectedDate(null);
+    }
+  }, [currentMonth]);
+
   return (
       <Wrapper>
-        {/* 상단 월 표시 */}
         <Header>
           <NavButton onClick={handlePrevMonth} disabled={isPrevDisabled}>
             ◀
@@ -69,12 +103,18 @@ const GameSchedule = () => {
           </NavButton>
         </Header>
 
-        <ScrollContainer>
+        <ScrollContainer ref={scrollContainerRef}>
           <DatesWrapper>
-            {formattedDays.map((date, index) => (
-                <DateItem key={index} isToday={date.day === today.getDate() && date.month === today.getMonth() + 1}>
-                  <WeekDay>{date.weekDay}</WeekDay>
-                  <Day>{date.day}</Day>
+            {formattedDays.map((dateObj, index) => (
+                <DateItem
+                    key={index}
+                    ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
+                    isToday={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1}
+                    isSelected={selectedDate?.toDateString() === dateObj.date.toDateString()}
+                    onClick={() => handleSelectDate(dateObj.date)}
+                >
+                  <WeekDay>{dateObj.weekDay}</WeekDay>
+                  <Day>{dateObj.day}</Day>
                 </DateItem>
             ))}
           </DatesWrapper>

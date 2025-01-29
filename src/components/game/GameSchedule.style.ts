@@ -50,17 +50,28 @@ export const DatesWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const DateItem = styled.div<{ isToday: boolean }>`
-  flex: 0 0 auto; /* 크기 고정 */
-  min-width: 60px; /* 날짜 너비 지정 */
+export const DateItem = styled.div<{ isToday: boolean; isSelected: boolean }>`
+  flex: 0 0 auto;
+  min-width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   text-align: center;
-  font-weight: ${({ isToday }) => (isToday ? "bold" : "normal")};
-  color: ${({ isToday, theme }) => (isToday ? theme.color.primary || "blue" : "#000")};
+  font-weight: ${({ isToday, isSelected }) => (isSelected ? "bold" : isToday ? "bold" : "normal")};
+  color: ${({ isToday, isSelected, theme }) =>
+      isSelected ? theme.color.primary || "blue"
+          : isToday ? theme.color.primary || "blue"
+              : "#000"};
+  border-bottom: ${({ isSelected, theme }) =>
+      isSelected ? `2px solid ${theme.color.primary || "blue"}` : "none"};
+  padding: 0.5rem;
+  border-radius: 8px;
+
+  &:hover {
+    background: ${({ theme }) => theme.color.grayLight || "#f5f5f5"};
+  }
 `;
 
 export const WeekDay = styled.div`
