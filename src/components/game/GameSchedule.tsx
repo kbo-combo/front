@@ -1,8 +1,13 @@
 import { useState } from "react";
-import styled from "styled-components";
-import theme from "@style/theme.style.ts";
+import {
+  CurrentMonth, DateItem, DatesWrapper, Day,
+  Header,
+  NavButton,
+  ScrollContainer, WeekDay,
+  Wrapper
+} from "@components/game/GameSchedule.style.ts";
 
-const MIN_MONTH = 2; // 3월 (JavaScript 월은 0부터 시작)
+const MIN_MONTH = 2; // 3월 (JavaScript 기준 0부터 시작)
 const MAX_MONTH = 10; // 11월
 
 const GameSchedule = () => {
@@ -31,6 +36,7 @@ const GameSchedule = () => {
     });
   };
 
+  /** 이전 달로 이동 (3월 미만 이동 불가) */
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
       const newMonth = prev.getMonth() - 1;
@@ -38,6 +44,7 @@ const GameSchedule = () => {
     });
   };
 
+  /** 다음 달로 이동 (11월 초과 이동 불가) */
   const handleNextMonth = () => {
     setCurrentMonth((prev) => {
       const newMonth = prev.getMonth() + 1;
@@ -62,79 +69,18 @@ const GameSchedule = () => {
           </NavButton>
         </Header>
 
-        {/* 날짜 리스트 */}
-        <DatesWrapper>
-          {formattedDays.map((date, index) => (
-              <DateItem key={index} isToday={date.day === today.getDate() && date.month === today.getMonth() + 1}>
-                <WeekDay>{date.weekDay}</WeekDay>
-                <Day>{date.day}</Day>
-              </DateItem>
-          ))}
-        </DatesWrapper>
+        <ScrollContainer>
+          <DatesWrapper>
+            {formattedDays.map((date, index) => (
+                <DateItem key={index} isToday={date.day === today.getDate() && date.month === today.getMonth() + 1}>
+                  <WeekDay>{date.weekDay}</WeekDay>
+                  <Day>{date.day}</Day>
+                </DateItem>
+            ))}
+          </DatesWrapper>
+        </ScrollContainer>
       </Wrapper>
   );
 };
 
 export default GameSchedule;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: ${({ theme }) => theme.color.background || "#fff"};
-  margin-bottom: 1.5rem;
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
-
-const NavButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  color: ${({ theme }) => theme.color.primary || "#000"};
-`;
-
-const CurrentMonth = styled.div`
-  margin: 0 1rem;
-  font-size: 2rem;
-  font-weight: bold;
-`;
-
-const DatesWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.5rem 0;
-`;
-
-const DateItem = styled.div<{ isToday: boolean }>`
-  flex: 1;
-  max-width: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  cursor: pointer;
-  text-align: center;
-  font-weight: ${({ isToday }) => (isToday ? "bold" : "normal")};
-  color: ${({ isToday, theme }) => (isToday ? theme.color.primary || "blue" : "#000")};
-`;
-
-const WeekDay = styled.div`
-  font-size: 1rem;
-  color: ${theme.color.grayDark};
-`;
-
-const Day = styled.div`
-  font-size: 1.6rem;
-`;
