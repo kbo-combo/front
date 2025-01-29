@@ -88,13 +88,7 @@ export const PlayerCard = styled.div`
   border-radius: 1rem;
   background: ${({ theme: { color } }) => color.cardBackground};
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
   margin-bottom: 2rem;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
 `;
 
 export const TeamWrapper = styled.div`
