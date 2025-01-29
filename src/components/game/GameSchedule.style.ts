@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: ${({ theme }) => theme.color.background || "#fff"};
+  background-color: ${({theme}) => theme.color.background || "#fff"};
   margin-bottom: 1.5rem;
 `;
 
@@ -22,10 +22,13 @@ export const NavButton = styled.button<{ disabled: boolean }>`
   background: none;
   border: none;
   font-size: 1.5rem;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: ${({disabled}) => (disabled ? "not-allowed" : "pointer")};
   padding: 0.5rem;
-  color: ${({ disabled, theme }) => (disabled ? theme.color.grayDark : theme.color.primary || "#000")};
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  color: ${({
+              disabled,
+              theme
+            }) => (disabled ? theme.color.grayDark : theme.color.primary || "#000")};
+  opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
 `;
 
 export const CurrentMonth = styled.div`
@@ -34,14 +37,14 @@ export const CurrentMonth = styled.div`
   font-weight: bold;
 `;
 
-/* 가로 스크롤 가능 */
 export const ScrollContainer = styled.div`
   overflow-x: auto;
   white-space: nowrap;
   width: 100%;
   padding-bottom: 0.5rem;
+
   &::-webkit-scrollbar {
-    display: none; /* 스크롤바 숨김 */
+    display: none;
   }
 `;
 
@@ -50,7 +53,7 @@ export const DatesWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const DateItem = styled.div<{ isToday: boolean; isSelected: boolean }>`
+export const DateItem = styled.div<{ isSelected: boolean }>`
   flex: 0 0 auto;
   min-width: 60px;
   display: flex;
@@ -59,18 +62,17 @@ export const DateItem = styled.div<{ isToday: boolean; isSelected: boolean }>`
   justify-content: center;
   cursor: pointer;
   text-align: center;
-  font-weight: ${({ isToday, isSelected }) => (isSelected ? "bold" : isToday ? "bold" : "normal")};
-  color: ${({ isToday, isSelected, theme }) =>
+  font-weight: ${({isSelected}) => (isSelected ? "bold" : "normal")};
+  color: ${({isSelected, theme}) =>
       isSelected ? theme.color.primary || "blue"
-          : isToday ? theme.color.primary || "blue"
-              : "#000"};
-  border-bottom: ${({ isSelected, theme }) =>
+          : "#000"};
+  border-bottom: ${({isSelected, theme}) =>
       isSelected ? `2px solid ${theme.color.primary || "blue"}` : "none"};
   padding: 0.5rem;
   border-radius: 8px;
 
   &:hover {
-    background: ${({ theme }) => theme.color.grayLight || "#f5f5f5"};
+    background: ${({theme}) => theme.color.grayLight || "#f5f5f5"};
   }
 `;
 

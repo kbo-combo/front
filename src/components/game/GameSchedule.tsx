@@ -109,7 +109,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
                 <DateItem
                     key={index}
                     ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
-                    isToday={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1}
                     isSelected={selectedDate?.toDateString() === dateObj.date.toDateString()}
                     onClick={() => handleSelectDate(dateObj.date)}
                 >
