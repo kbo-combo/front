@@ -83,7 +83,7 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
     if (!existsInCurrentMonth) {
       setSelectedDate(null);
     }
-  }, [currentMonth]);
+  }, [formattedDays, selectedDate, currentMonth]);
 
   return (
       <Wrapper>
