@@ -6,9 +6,20 @@ export interface NicknameChangeRequest {
 
 export const changeNickname = async (
     request: NicknameChangeRequest,
-): Promise<{ redirectUri: string }> => {
+): Promise<void> => {
   const response = await client.put(
       `members/nickname`, request
   );
   return response.data;
 };
+
+export const getMemberDetail = async (): Promise<MemberDetailResponse> => {
+  const response = await client.get(
+      `members/`);
+  return response.data;
+};
+
+export interface MemberDetailResponse {
+  memberId: number,
+  nickname: string,
+}
