@@ -56,7 +56,7 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
           {filteredHitters.map((hitter : HitterQueryResponse) => (
               <PlayerCard
                   key={hitter.playerId}
-                  isSelected={hitter.playerId === selectedPlayerId}
+                  selected={hitter.playerId === selectedPlayerId}
                   onClick={() => handleSelectPlayer(hitter.playerId)}
               >
                 <PlayerImage
@@ -75,7 +75,7 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
           ))}
         </PlayerListWrapper>
           <BottomButton
-              isSelected={selectedPlayerId !== null}
+              selected={selectedPlayerId !== null}
               onClick={() => alert(`선택된 선수: ${selectedPlayerId}`)}
           >
             타자 선택

@@ -19,14 +19,14 @@ export const PlayerListWrapper = styled.div`
   margin-top: 20rem;
 `;
 
-export const PlayerCard = styled.div<{ isSelected: boolean }>`
+export const PlayerCard = styled.div<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
-  background: ${({ isSelected }) =>
-      isSelected ? theme.color.primary : theme.color.background};
+  background: ${({ selected }) =>
+      selected ? theme.color.primary : theme.color.background};
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   margin-bottom: 3rem;
 
@@ -72,7 +72,7 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const BottomButton= styled.div<{ isSelected: boolean }>`
+export const BottomButton= styled.div<{ selected: boolean }>`
   position: fixed;
   z-index: ${(props) => props.theme.zIndex.fixed};
   max-width: ${(props) => props.theme.width.pad};
@@ -81,8 +81,8 @@ export const BottomButton= styled.div<{ isSelected: boolean }>`
   padding: 1.5rem;
   font: ${theme.font.text};
   font-size: 2.2rem;
-  background: ${({ isSelected }) =>
-      isSelected ? theme.color.primary : theme.color.grayDark};
+  background: ${({ selected }) =>
+      selected ? theme.color.primary : theme.color.grayDark};
   color: ${theme.color.background};
   display: flex;
   justify-content: center;

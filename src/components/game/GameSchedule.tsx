@@ -32,7 +32,7 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
       return {
         date: dayDate,
         year: year,
-        month: month + 1, // JS에서는 0부터 시작하므로 +1
+        month: month + 1,
         day: dayDate.getDate(),
         weekDay: dayDate.toLocaleDateString("ko-KR", { weekday: "short" }),
       };
@@ -103,7 +103,7 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
                 <DateItem
                     key={index}
                     ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
-                    isSelected={selectedDate?.toDateString() === dateObj.date.toDateString()}
+                    selected={selectedDate?.toDateString() === dateObj.date.toDateString()}
                     onClick={() => handleSelectDate(dateObj.date)}
                 >
                   <WeekDay>{dateObj.weekDay}</WeekDay>

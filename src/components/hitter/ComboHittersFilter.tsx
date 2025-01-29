@@ -27,7 +27,7 @@ const ComboHittersFilter = ({
         <FilterTitle>{title}</FilterTitle>
         <FilterButton
             key="all"
-            isSelected={selectedOption === null}
+            selected={selectedOption === null}
             onClick={() => onSelectOption(null)}
         >
           전체
@@ -35,7 +35,7 @@ const ComboHittersFilter = ({
         {options.map(({ key, value }) => (
             <FilterButton
                 key={key}
-                isSelected={selectedOption === key}
+                selected={selectedOption === key}
                 onClick={() => onSelectOption(selectedOption === key ? null : key)}
             >
               {value}

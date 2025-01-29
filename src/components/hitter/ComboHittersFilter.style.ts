@@ -26,14 +26,14 @@ export const FilterTitle = styled.span`
   margin-right: 0.5rem; 
 `;
 
-export const FilterButton = styled.button<{ isSelected: boolean }>`
+export const FilterButton = styled.button<{ selected: boolean }>`
   padding: 0.5rem 0.75rem;
   font: ${theme.font.text};
   font-size: 1.4rem;
-  color: ${({ isSelected, theme }) =>
-    isSelected ? theme.color.sub : theme.color.grayDark};
-  border: ${({ isSelected, theme }) =>
-      isSelected ? `1px solid ${theme.color.primary}` : "none"}; 
+  color: ${({ selected, theme }) =>
+    selected ? theme.color.sub : theme.color.grayDark};
+  border: ${({ selected, theme }) =>
+      selected ? `1px solid ${theme.color.primary}` : "none"}; 
   cursor: pointer;
 
 

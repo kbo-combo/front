@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: ${({theme}) => theme.color.background || "#fff"};
+  background-color: ${theme.color.background};
   margin-bottom: 1.5rem;
 `;
 
@@ -27,7 +27,7 @@ export const NavButton = styled.button<{ disabled: boolean }>`
   color: ${({
               disabled,
               theme
-            }) => (disabled ? theme.color.grayDark : theme.color.primary || "#000")};
+            }) => (disabled ? theme.color.grayDark : theme.color.primary)};
   opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
 `;
 
@@ -53,27 +53,21 @@ export const DatesWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const DateItem = styled.div<{ isSelected: boolean }>`
+export const DateItem = styled.div<{ selected: boolean }>`
   flex: 0 0 auto;
-  min-width: 60px;
+  min-width: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   text-align: center;
-  font-weight: ${({isSelected}) => (isSelected ? "bold" : "normal")};
-  color: ${({isSelected, theme}) =>
-      isSelected ? theme.color.primary || "blue"
-          : "#000"};
-  border-bottom: ${({isSelected, theme}) =>
-      isSelected ? `2px solid ${theme.color.primary || "blue"}` : "none"};
-  padding: 0.5rem;
-  border-radius: 8px;
+  font-weight: ${({selected}) => (selected ? "bold" : "normal")};
+  color: ${({selected, theme}) =>
+      selected ? theme.color.primary : theme.color.sub};
+  border-bottom: ${({selected, theme}) =>
+      selected ? `0.25rem solid ${theme.color.fontPrimaryForBackground }` : theme.color.sub};
 
-  &:hover {
-    background: ${({theme}) => theme.color.grayLight || "#f5f5f5"};
-  }
 `;
 
 export const WeekDay = styled.div`
