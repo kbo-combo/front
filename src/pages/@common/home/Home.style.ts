@@ -18,5 +18,6 @@ export const MainMessage = styled.p`
   font-size: 2.4rem;
   font-weight: 900;
   line-height: 3rem;
+  margin-bottom: 2.5rem;
   color: ${(props) => props.theme.color.primary};
 `;
