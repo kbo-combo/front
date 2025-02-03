@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import theme from "@style/theme.style.ts";
-import {useComboByGame} from "@/hooks/useCombo.ts";
+import {useComboByGame, useDeleteCombo} from "@/hooks/useCombo.ts";
 import {ComboStatusType, getStatusText} from "@constant/combo.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
+import Loading from "@pages/@common/common/Loading.tsx";
 
 
 const SelectedCombo = () => {
 
-  const { data: combo, isLoading, error } = useComboByGame();
-  if (isLoading) return <div>로딩 중...</div>;
+  const {data: combo, isLoading, error, comboDate} = useComboByGame();
+  const {mutate: deleteCombo} = useDeleteCombo();
 
-  const handleCancel = () => {
-  };
-
+  if (isLoading) return <Loading/>;
   if (error || !combo) {
+
     return (
         <ComboWrapper>
           <TopSection>
@@ -21,7 +21,13 @@ const SelectedCombo = () => {
           </TopSection>
         </ComboWrapper>
     );
+
   }
+
+  const handleCancel = () => {
+    deleteCombo({ comboId: combo.comboId, comboDate: comboDate});
+  };
+
 
   return (
       <ComboWrapper>
@@ -37,7 +43,8 @@ const SelectedCombo = () => {
               <StatItem>
                 <StatValue>{combo.pa}타수 {combo.hits}안타</StatValue>
               </StatItem>
-              <ComboStatus status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
+              <ComboStatus
+                  status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
             </PlayerDetails>
           </PlayerInfo>
           <Stats>
@@ -110,12 +117,12 @@ const PlayerDetails = styled.div`
 const PlayerName = styled.div`
   font-size: 2.4rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.color.primaryText || "#000"};
+  color: ${({theme}) => theme.color.primaryText || "#000"};
 `;
 
 const ComboStatus = styled.div<{ status: ComboStatusType }>`
   font-size: 2.0rem;
-  color: ${({ status, theme }) =>
+  color: ${({status, theme}) =>
       status === "PASS" ? theme.color.success || "#28a745"
           : status === "PENDING" ? theme.color.warning || "#ffc107"
               : theme.color.error || "#dc3545"};
@@ -135,5 +142,5 @@ const StatItem = styled.div`
 const StatValue = styled.div`
   font-size: 1.4rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.color.primaryText || "#000"};
+  color: ${({theme}) => theme.color.primaryText || "#000"};
 `;

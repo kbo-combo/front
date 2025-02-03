@@ -1,33 +1,32 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
-import {deleteCombo, findComboByGame} from "@apis/combo.ts";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {deleteComboById, findComboByGame} from "@apis/combo.ts";
 import {useGameDate} from "@components/game/GameDateContext.tsx";
 
-
 export const useDeleteCombo = () => {
-  const mutation = useMutation({
-    mutationFn: ({comboId}: { comboId: number }) =>
-        deleteCombo(comboId),
-    onSuccess: () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ comboId }: { comboId: number; comboDate: string }) =>
+        deleteComboById(comboId),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["combo", variables.comboDate] });
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("삭제 실패:", error);
     },
   });
-
-  return mutation
 };
-
 
 export const useComboByGame = () => {
   const { selectedDate } = useGameDate();
-  const formattedDate = selectedDate.toISOString().split("T")[0];
+  const comboDate = selectedDate.toISOString().split("T")[0];
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["combo", formattedDate],
-    queryFn: () => findComboByGame(formattedDate),
+    queryKey: ["combo", comboDate],
+    queryFn: () => findComboByGame(comboDate),
     staleTime: 600000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
 
-  return { data, error, isLoading };
+  return { data, error, isLoading, comboDate };
 };
