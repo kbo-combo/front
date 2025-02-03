@@ -1,54 +1,63 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMemberDetail, useChangeNickname } from "@/hooks/useMember.ts";
 import {
-  ButtonGroup,
-  EditPageWrapper,
-  NicknameInput, NicknameInputContainer, NickNameLabel, NicknameLengthIndicator,
-  SaveButton, WarningText
-} from "@components/member/member-edit.style.ts";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+  Wrapper,
+  ProfileWrapper,
+  ProfileImage,
+  MemberEditLink,
+  EditButton,
+} from "@components/member/member.style.ts";
 import ContentHeader from "@components/@common/contentHeader";
-import {URL_PATH} from "@/constant";
+import { FiEdit3 } from "react-icons/fi";
+import { URL_PATH } from "@/constant";
+import Loading from "@pages/@common/common/Loading.tsx";
+import {NicknameInput, SaveButton} from "@components/member/member-edit.style.ts";
 
-
-const MAX_NICKNAME_LENGTH = 16;
-
-const MemberEditPage = () => {
-  const [nickname, setNickname] = useState("산타 선남");
+const MemberPage = () => {
+  const { data, isLoading, error } = useMemberDetail();
+  const { mutate: changeNickname } = useChangeNickname();
   const navigate = useNavigate();
 
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value.length <= MAX_NICKNAME_LENGTH) {
-      setNickname(value);
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    if (data?.nickname) {
+      setNickname(data.nickname);
     }
+  }, [data]);
+
+  const handleNicknameChange = () => {
+    changeNickname({ request: { nickname } }, {
+      onSuccess: () => {
+        navigate(URL_PATH.member);
+        alert("닉네임이 변경되었습니다!");
+      },
+    });
   };
 
-
-  const handleSave = () => {
-    navigate(URL_PATH.member);
-  };
+  if (isLoading) return <Loading />;
+  if (error || !data) return <div>데이터를 불러올 수 없습니다.</div>;
 
   return (
-      <EditPageWrapper>
-        <ContentHeader title={"내 정보 수정"}/>
-        <NicknameInputContainer>
-          <NickNameLabel htmlFor="nickname">닉네임</NickNameLabel>
+      <Wrapper>
+        <ContentHeader title="마이페이지" />
+        <ProfileWrapper>
+          <ProfileImage src="/santa-sunnam.png" alt="프로필 이미지" />
           <NicknameInput
-              id="nickname"
               type="text"
               value={nickname}
-              onChange={handleNicknameChange}
+              onChange={(e) => setNickname(e.target.value)}
           />
-          <NicknameLengthIndicator>
-            {nickname.length} / {MAX_NICKNAME_LENGTH}
-          </NicknameLengthIndicator>
-        </NicknameInputContainer>
-        <WarningText>부적절한 표현이 포함된 닉네임은 변경 될 수 있습니다.</WarningText>
-        <ButtonGroup>
-          <SaveButton onClick={handleSave}>수정하기</SaveButton>
-        </ButtonGroup>
-      </EditPageWrapper>
+          <SaveButton onClick={handleNicknameChange}>닉네임 변경</SaveButton>
+          <MemberEditLink to={`${URL_PATH.member}/edit`}>
+            <EditButton>
+              <FiEdit3 size={16} color="white" />
+            </EditButton>
+          </MemberEditLink>
+        </ProfileWrapper>
+      </Wrapper>
   );
 };
 
-export default MemberEditPage;
+export default MemberPage;

@@ -15,7 +15,10 @@ export const changeNickname = async (
 
 export const getMemberDetail = async (): Promise<MemberDetailResponse> => {
   const response = await client.get(
-      `members/`);
+      `members`,
+  {
+    withCredentials: true
+  });
   return response.data;
 };
 

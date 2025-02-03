@@ -1,13 +1,9 @@
 import {useMutation} from '@tanstack/react-query';
-import {
-  getLoginPage,
-  getLoginResult,
-  LoginRequest, LoginResponse,
-} from "@apis/auth.ts";
+import {getLoginPage, getLoginResult, LoginRequest,} from "@apis/auth.ts";
 import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
-import {getSession, setSession} from "@/utils/storage.ts";
+import {useMemberDetail} from "@/hooks/useMember.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -38,8 +34,7 @@ export const useLogin = (socialProvider: string, code: string) => {
   const {mutateAsync : mutation} = useMutation({
     mutationFn: (loginRequest: LoginRequest) =>
         getLoginResult(socialProvider, loginRequest),
-    onSuccess: (response: LoginResponse) => {
-      setSession(response.socialId)
+    onSuccess: () => {
       navigate(URL_PATH.main);
     },
     onError: () => {
@@ -59,8 +54,8 @@ export const useLogin = (socialProvider: string, code: string) => {
 };
 
 export const useCheckLogin = () => {
-  const session = getSession();
-  return { isLoggedIn: session !== null };
+  const data = useMemberDetail();
+  return { isLoggedIn: data !== null};
 };
 
 function getRedirectUri(socialProvider: string) {

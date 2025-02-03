@@ -9,7 +9,10 @@ export const getLoginPage = async (
     redirectUri: string
 ): Promise<{ redirectUri: string }> => {
   const response = await client.get<{ redirectUri: string }>(
-      `/oauth/${loginRequest.socialProvider}?redirectUri=${encodeURIComponent(redirectUri)}`
+      `/oauth/${loginRequest.socialProvider}?redirectUri=${encodeURIComponent(redirectUri)}`,
+  {
+    withCredentials: true
+  }
   );
   return response.data;
 };
