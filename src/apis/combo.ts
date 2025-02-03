@@ -1,4 +1,5 @@
 import {client} from "@apis/apiClient.ts";
+import {ComboStatusType} from "@constant/combo.ts";
 
 export const deleteCombo = async (
     comboId: number
@@ -16,8 +17,8 @@ export interface ComboResponse {
   comboId: number;
   playerId: number;
   playerName: string;
-  playerImage: string | null;
-  comboStatus: string;
+  playerImage: string
+  comboStatus: ComboStatusType;
   pa: number | null;
   hits: number | null;
 }
@@ -47,19 +48,19 @@ export const findComboByGame = async (gameDate: string): Promise<ComboResponse |
 
 const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
   {
-    gameDate: "2024-02-01",
+    gameDate: "2025-02-01",
     combo: {
       comboId: 1,
       playerId: 101,
       playerName: "김도영",
-      playerImage: null,
+      playerImage: "https://example.com/jane.jpg",
       comboStatus: "PENDING",
       pa: null,
       hits: null,
     },
   },
   {
-    gameDate: "2024-02-02",
+    gameDate: "2025-02-02",
     combo: {
       comboId: 2,
       playerId: 102,
@@ -71,12 +72,12 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
     },
   },
   {
-    gameDate: "2024-02-03",
+    gameDate: "2025-02-03",
     combo: {
       comboId: 3,
       playerId: 103,
       playerName: "서호철",
-      playerImage: null,
+      playerImage: "https://example.com/jane.jpg",
       comboStatus: "FAIL",
       pa: 4,
       hits: 0,
