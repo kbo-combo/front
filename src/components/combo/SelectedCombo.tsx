@@ -9,12 +9,19 @@ const SelectedCombo = () => {
 
   const { data: combo, isLoading, error } = useComboByGame();
   if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>오류 발생: {error.message}</div>;
-  if (!combo) return <div>선택한 날짜에 등록된 콤보가 없습니다.</div>;
 
   const handleCancel = () => {
   };
 
+  if (error || !combo) {
+    return (
+        <ComboWrapper>
+          <TopSection>
+            <SelectionText>선택한 날짜에 등록된 콤보가 없습니다.</SelectionText>
+          </TopSection>
+        </ComboWrapper>
+    );
+  }
 
   return (
       <ComboWrapper>
@@ -22,7 +29,6 @@ const SelectedCombo = () => {
           <SelectionText>내 선택</SelectionText>
           <CancelButton onClick={handleCancel}>취소</CancelButton>
         </TopSection>
-
         <PlayerSection>
           <PlayerInfo>
             <PlayerImage url={combo.playerImage}/>
@@ -35,7 +41,6 @@ const SelectedCombo = () => {
             </PlayerDetails>
           </PlayerInfo>
           <Stats>
-
           </Stats>
         </PlayerSection>
       </ComboWrapper>
