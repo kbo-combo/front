@@ -1,16 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import {
   CurrentMonth, DateItem, DatesWrapper, Day,
-  Header,
-  NavButton,
-  ScrollContainer, WeekDay,
-  Wrapper
+  Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
+import {useGameDate} from "@components/game/GameDateContext.tsx";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
 
-const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void }) => {
+const GameSchedule = () => {
+  const { selectedDate, setSelectedDate } = useGameDate();
   const today = new Date();
   const initialMonth =
       today.getMonth() < MIN_MONTH || today.getMonth() > MAX_MONTH
@@ -18,7 +17,6 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
           : new Date(today.getFullYear(), today.getMonth(), 1);
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(today);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const todayRef = useRef<HTMLDivElement>(null);
 
@@ -66,24 +64,12 @@ const GameSchedule = ({ onSelectDate }: { onSelectDate?: (date: Date) => void })
   };
 
   const handleSelectDate = (date: Date) => {
-    setSelectedDate(date);
-    if (onSelectDate) {
-      onSelectDate(date);
-    }
+    setSelectedDate(date); // ✅ Context에서 날짜 업데이트
   };
 
   const formattedDays = getDaysInMonth(currentMonth);
   const isPrevDisabled = currentMonth.getMonth() <= MIN_MONTH;
   const isNextDisabled = currentMonth.getMonth() >= MAX_MONTH;
-
-  useEffect(() => {
-    const existsInCurrentMonth = formattedDays.some(
-        (dateObj) => selectedDate?.toDateString() === dateObj.date.toDateString()
-    );
-    if (!existsInCurrentMonth) {
-      setSelectedDate(null);
-    }
-  }, [formattedDays, selectedDate, currentMonth]);
 
   return (
       <Wrapper>

@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import theme from "@style/theme.style.ts";
+import {useComboByGame} from "@/hooks/useCombo.ts";
+import {ComboStatusType, getStatusText} from "@constant/combo.ts";
 
-interface SelectedComboProps {
-  playerName: string;
-  playerImage: string;
-  comboStatus: "ACTIVE" | "PENDING" | "PASS";
-  atBats: number;
-  hits: number;
-}
 
-const SelectedCombo = ({ playerName, playerImage, comboStatus, atBats, hits}: SelectedComboProps) => {
+const SelectedCombo = () => {
+
+  const { data: combo, isLoading, error } = useComboByGame();
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>오류 발생: {error.message}</div>;
+  if (!combo) return <div>선택한 날짜에 등록된 콤보가 없습니다.</div>;
 
   const handleCancel = () => {
   };
@@ -23,13 +23,13 @@ const SelectedCombo = ({ playerName, playerImage, comboStatus, atBats, hits}: Se
 
         <PlayerSection>
           <PlayerInfo>
-            <PlayerImage src={playerImage} alt={playerName} />
+            <PlayerImage src={combo.playerImage} alt={combo.playerName} />
             <PlayerDetails>
-              <PlayerName>{playerName}</PlayerName>
+              <PlayerName>{combo.playerName}</PlayerName>
               <StatItem>
-                <StatValue>{atBats}타수 {hits}안타</StatValue>
+                <StatValue>{combo.pa}타수 {combo.hits}안타</StatValue>
               </StatItem>
-              <ComboStatus status={comboStatus}>{getStatusText(comboStatus)}</ComboStatus>
+              <ComboStatus status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
             </PlayerDetails>
           </PlayerInfo>
           <Stats>
@@ -42,18 +42,6 @@ const SelectedCombo = ({ playerName, playerImage, comboStatus, atBats, hits}: Se
 
 export default SelectedCombo;
 
-const getStatusText = (status: "ACTIVE" | "PENDING" | "PASS") => {
-  switch (status) {
-    case "ACTIVE":
-      return "진행 중";
-    case "PENDING":
-      return "대기 중";
-    case "PASS":
-      return "성공!";
-    default:
-      return "알 수 없음";
-  }
-};
 
 const ComboWrapper = styled.div`
   display: flex;
@@ -126,7 +114,7 @@ const PlayerName = styled.div`
   color: ${({ theme }) => theme.color.primaryText || "#000"};
 `;
 
-const ComboStatus = styled.div<{ status: "ACTIVE" | "PENDING" | "PASS" }>`
+const ComboStatus = styled.div<{ status: ComboStatusType }>`
   font-size: 2.0rem;
   color: ${({ status, theme }) =>
       status === "PASS" ? theme.color.success || "#28a745"
