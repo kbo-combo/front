@@ -25,7 +25,7 @@ const SelectedCombo = () => {
   }
 
   const handleCancel = () => {
-    deleteCombo({ comboId: combo.comboId, comboDate: comboDate});
+    deleteCombo({comboId: combo.comboId, comboDate: comboDate});
   };
 
 
@@ -40,11 +40,14 @@ const SelectedCombo = () => {
             <PlayerImage url={combo.playerImage}/>
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
-              <StatItem>
-                <StatValue>{combo.pa}타수 {combo.hits}안타</StatValue>
-              </StatItem>
               <ComboStatus
-                  status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
+                  status={combo.comboStatus}>{getStatusText(combo.comboStatus)}
+              </ComboStatus>
+              {combo.pa !== null && (
+                  <StatItem>
+                    <StatValue>{combo.pa}타수 {combo.hits}안타</StatValue>
+                  </StatItem>
+              )}
             </PlayerDetails>
           </PlayerInfo>
           <Stats>
