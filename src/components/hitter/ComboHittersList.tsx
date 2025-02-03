@@ -2,19 +2,18 @@ import {useState} from "react";
 import {
   BottomButton,
   PlayerCard,
-  PlayerImage,
   PlayerInfo,
   PlayerListWrapper,
   PlayerName,
   Wrapper,
 } from "./ComboHittersList.style.ts";
-import default_image from "@assets/default-player.png";
 
 import {HittingHandType, PlayerDetailPosition, TeamName} from "@constant/player.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ComboHitterFilterList from "@components/hitter/ComboHitterFilterList.tsx";
 import {useHitterFilter} from "@/hooks/useHitterFilter.ts";
 import {HitterQueryResponse} from "@apis/player.ts";
+import {PlayerImage} from "@components/player/PlayerImage.tsx";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;
@@ -44,8 +43,6 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
   if (isLoading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
 
-  const ensureAbsoluteUrl = getUrl();
-
   return (
       <Wrapper>
         <ComboHitterFilterList searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword}
@@ -59,13 +56,7 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
                   selected={hitter.playerId === selectedPlayerId}
                   onClick={() => handleSelectPlayer(hitter.playerId)}
               >
-                <PlayerImage
-                    src={ensureAbsoluteUrl(hitter.imageUrl || default_image)}
-                    alt={hitter.name}
-                    onError={(e) => {
-                      e.currentTarget.src = default_image;
-                    }}
-                />
+                <PlayerImage url={hitter.imageUrl}/>
                 <PlayerName>{hitter.name}</PlayerName>
                 <PlayerInfo>  {HittingHandType[hitter.hittingHandType as keyof typeof HittingHandType] +
                     " " +
@@ -85,10 +76,3 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
 };
 
 export default ComboHitterList;
-
-function getUrl() {
-  const ensureAbsoluteUrl = (url: string) => {
-    return url.startsWith("http") ? url : `https://${url}`;
-  };
-  return ensureAbsoluteUrl;
-}

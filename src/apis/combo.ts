@@ -17,7 +17,7 @@ export interface ComboResponse {
   comboId: number;
   playerId: number;
   playerName: string;
-  playerImage: string
+  playerImage: string | null
   comboStatus: ComboStatusType;
   pa: number | null;
   hits: number | null;
@@ -53,10 +53,10 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
       comboId: 1,
       playerId: 101,
       playerName: "김도영",
-      playerImage: "https://example.com/jane.jpg",
-      comboStatus: "PENDING",
-      pa: null,
-      hits: null,
+      playerImage: "6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/2024/52605.jpg",
+      comboStatus: "PASS",
+      pa: 4,
+      hits: 4,
     },
   },
   {
@@ -65,10 +65,10 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
       comboId: 2,
       playerId: 102,
       playerName: "황성빈",
-      playerImage: "https://example.com/jane.jpg",
-      comboStatus: "PASS",
+      playerImage: "6ptotvmi5753.edge.naverncp.com/KBO_IMAGE/person/middle/2024/50500.jpg",
+      comboStatus: "FAIL",
       pa: 4,
-      hits: 2,
+      hits: 0,
     },
   },
   {
@@ -77,10 +77,10 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
       comboId: 3,
       playerId: 103,
       playerName: "서호철",
-      playerImage: "https://example.com/jane.jpg",
-      comboStatus: "FAIL",
-      pa: 4,
-      hits: 0,
+      playerImage: null,
+      comboStatus: "PENDING",
+      pa: null,
+      hits: null,
     },
   },
 ];

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "@style/theme.style.ts";
 import {useComboByGame} from "@/hooks/useCombo.ts";
 import {ComboStatusType, getStatusText} from "@constant/combo.ts";
+import {PlayerImage} from "@components/player/PlayerImage.tsx";
 
 
 const SelectedCombo = () => {
@@ -14,6 +15,7 @@ const SelectedCombo = () => {
   const handleCancel = () => {
   };
 
+
   return (
       <ComboWrapper>
         <TopSection>
@@ -23,7 +25,7 @@ const SelectedCombo = () => {
 
         <PlayerSection>
           <PlayerInfo>
-            <PlayerImage src={combo.playerImage} alt={combo.playerName} />
+            <PlayerImage url={combo.playerImage}/>
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
               <StatItem>
@@ -93,14 +95,6 @@ const PlayerInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-`;
-
-const PlayerImage = styled.img`
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid ${({ theme }) => theme.color.primary || "#007BFF"};
 `;
 
 const PlayerDetails = styled.div`
