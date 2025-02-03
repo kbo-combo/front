@@ -20,12 +20,11 @@ export const useDeleteCombo = () => {
 export const useComboByGame = () => {
   const { selectedDate } = useGameDate();
   const formattedDate = selectedDate.toISOString().split("T")[0];
-  console.log("date = " +  formattedDate)
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["combo", formattedDate],
     queryFn: () => findComboByGame(formattedDate),
-    staleTime: 600000, // ✅ 10분 동안 캐싱 유지
+    staleTime: 600000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
