@@ -5,6 +5,7 @@ import {
   MemberDetailResponse,
   NicknameChangeRequest
 } from "@apis/member.ts";
+import {toast} from "react-toastify";
 
 export const useMemberDetail = () => {
   const {data, error, isLoading} = useQuery<MemberDetailResponse, Error>({
@@ -26,6 +27,7 @@ export const useChangeNickname = () => {
         changeNickname(request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['member'] });
+      toast.success("닉네임 변경 완료")
     },
     onError: () => {
     },
