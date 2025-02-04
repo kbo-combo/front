@@ -1,4 +1,5 @@
 import {Component, ReactNode} from "react";
+import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -26,11 +27,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-          <div style={{ padding: "2rem", textAlign: "center" }}>
-            <h2>에러가 발생했습니다!</h2>
-            <p>{this.state.error?.message || "알 수 없는 오류"}</p>
-            <button onClick={this.handleReset}>홈으로 돌아가기</button>
-          </div>
+          <NotFoundPage message={"알수없는 에러가 발생했습니다. 잠시후 다시 시도해주세요."} onClick={this.handleReset}/>
       );
     }
 

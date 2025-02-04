@@ -37,11 +37,9 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
     selectedHandType,
     setSelectedHandType,
     isLoading,
-    error,
   } = useHitterFilter(homeTeam, awayTeam);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
       <Wrapper>
