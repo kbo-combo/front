@@ -31,7 +31,6 @@ const MemberPage = () => {
     changeNickname({ request: { nickname } }, {
       onSuccess: () => {
         navigate(URL_PATH.member);
-        alert("닉네임이 변경되었습니다!");
       },
     });
   };
