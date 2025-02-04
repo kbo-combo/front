@@ -1,6 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {deleteComboById, findComboByGame} from "@apis/combo.ts";
 import {useGameDate} from "@components/game/GameDateContext.tsx";
+import {toast} from "react-toastify";
 
 export const useDeleteCombo = () => {
   const queryClient = useQueryClient();
@@ -9,6 +10,7 @@ export const useDeleteCombo = () => {
         deleteComboById(comboId),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["combo", variables.comboDate] });
+      toast.success("콤보 삭제 완료!")
     },
     onError: (error) => {
       console.error("삭제 실패:", error);

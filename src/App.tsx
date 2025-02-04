@@ -7,6 +7,7 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import router from "@/router/router.tsx";
 import {NavBarProvider} from "@components/@common/navbar/NavBarContextProvider.tsx";
+import CustomToastContainer from "@components/@common/toast/CustomToastContainer.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <HelmetProvider>
             <GlobalStyle/>
+            <CustomToastContainer/>
             <Helmet>
               {process.env.NODE_ENV !== 'production' && (
                   <meta name="robots" content="noindex, nofollow"/>
