@@ -4,6 +4,7 @@ import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
 import {getSession, setSession} from "@/utils/storage.ts";
+import {toast} from "react-toastify";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -40,6 +41,7 @@ export const useLogin = (socialProvider: string, code: string) => {
     },
     onError: () => {
       navigate(URL_PATH.login);
+      toast.error("잠시 후 다시 시도해주세요.")
     },
   });
 
