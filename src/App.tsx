@@ -8,10 +8,15 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import router from "@/router/router.tsx";
 import {NavBarProvider} from "@components/@common/navbar/NavBarContextProvider.tsx";
 import CustomToastContainer from "@components/@common/toast/CustomToastContainer.tsx";
-import ErrorBoundary from "@components/@common/error/ErrorBoundary.tsx";
 
-const queryClient = new QueryClient();
-
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      throwOnError: true,
+    },
+  },
+});
 
 function App() {
 
@@ -26,13 +31,11 @@ function App() {
               )}
             </Helmet>
             <ThemeProvider theme={theme}>
-              <ErrorBoundary>
                 <CustomToastContainer/>
                   <SvgSpriteMap/>
                   <NavBarProvider>
                     <RouterProvider router={router}/>
                   </NavBarProvider>
-              </ErrorBoundary>
             </ThemeProvider>
 
           </HelmetProvider>
