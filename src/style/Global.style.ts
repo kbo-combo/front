@@ -11,6 +11,14 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
   }
+
+  @font-face {
+    font-family: "jiugae";
+    font-display: swap;
+    src: url("/fonts/jiugae.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+  }
   
   * {
     font-family: "NanumSquareRound", "Noto Sans KR", sans-serif;
