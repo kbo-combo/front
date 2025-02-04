@@ -18,7 +18,7 @@ export const Wrapper = styled.main`
 export const Nickname = styled.span`
   font: bold 2.7rem / 3.2rem "jua";
   color: ${({ theme: { color } }) => color.sub};
-  padding: 8px 16px;
+  padding: 4px 8px;
 
 `;
 
@@ -26,7 +26,7 @@ export const ProfileImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%; 
-  border: 2px solid ${({ theme: { color } }) => color.primary}; 
+  border: 0.5rem solid ${({ theme: { color } }) => color.primary}; 
   object-fit: cover; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -35,8 +35,8 @@ export const ProfileWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
-  gap: 12px; 
+  margin-top: 4rem;
+  gap: 2.5rem; 
 `;
 
 
@@ -48,8 +48,8 @@ export const EditButton = styled.button`
   color: ${({ theme: { color } }) => color.textOnPrimary};
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 5rem;
+  height: 5rem;
   cursor: pointer;
   transition: background 0.3s;
 
