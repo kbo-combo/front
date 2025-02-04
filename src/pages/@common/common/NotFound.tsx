@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {URL_PATH} from '@/constant';
 import theme from "@style/theme.style.ts";
 
-const NotFoundPage = ({ message, onClick }: { message: string; onClick?: () => void }) => {
+const NotFoundPage = ({ message = '존재하지 않는 페이지입니다.', onClick }: { message?: string; onClick?: () => void }) => {
   return (
       <Container>
         <IconWrapper>
