@@ -1,16 +1,9 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMemberDetail, useChangeNickname } from "@/hooks/useMember.ts";
-import {
-  Wrapper,
-  ProfileWrapper,
-  ProfileImage,
-  MemberEditLink,
-  EditButton,
-} from "@components/member/member.style.ts";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useChangeNickname, useMemberDetail} from "@/hooks/useMember.ts";
+import {ProfileImage, ProfileWrapper, Wrapper,} from "@components/member/member.style.ts";
 import ContentHeader from "@components/@common/contentHeader";
-import { FiEdit3 } from "react-icons/fi";
-import { URL_PATH } from "@/constant";
+import {URL_PATH} from "@/constant";
 import Loading from "@pages/@common/common/Loading.tsx";
 import {NicknameInput, SaveButton} from "@components/member/member-edit.style.ts";
 
@@ -49,11 +42,6 @@ const MemberPage = () => {
               onChange={(e) => setNickname(e.target.value)}
           />
           <SaveButton onClick={handleNicknameChange}>닉네임 변경</SaveButton>
-          <MemberEditLink to={`${URL_PATH.member}/edit`}>
-            <EditButton>
-              <FiEdit3 size={16} color="white" />
-            </EditButton>
-          </MemberEditLink>
         </ProfileWrapper>
       </Wrapper>
   );
