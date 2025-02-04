@@ -16,7 +16,7 @@ export const useAuthLoginPage = () => {
       window.location.href = data.redirectUri;
     },
     onError: () => {
-      alert("로그인 요청에 실패했습니다. 다시 시도해주세요.");
+      toast.error("잠시 후 다시 시도해주세요.")
     },
   });
 
