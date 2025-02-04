@@ -1,11 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
-import {findRecentGame, GameResponse} from "@apis/game.ts";
+import {findGameByDate, GameResponse} from "@apis/game.ts";
 
 
-export const useRecentGame = () => {
+export const useGameList = (gameDate: string) => {
+
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [],
-    queryFn: () => findRecentGame(),
+    queryFn: () => findGameByDate(gameDate),
     staleTime: 600,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

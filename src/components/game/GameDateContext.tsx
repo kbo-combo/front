@@ -22,5 +22,11 @@ export const useGameDate = () => {
   if (!context) {
     throw new Error("useGameDate must be used within a GameDateProvider");
   }
-  return context;
+  const { selectedDate, ...rest } = context;
+
+  return {
+    selectedDate,
+    formattedDate: selectedDate.toISOString().split("T")[0],
+    ...rest,
+  };
 };

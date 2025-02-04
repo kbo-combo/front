@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useRecentGame} from "@/hooks/useRecentGame.ts";
+import {useGameList} from "@/hooks/useGameList.ts";
 
 import ncLogo from "@assets/logos/nc-logo.svg";
 import kiaLogo from "@assets/logos/kia-logo.svg";
@@ -13,6 +13,7 @@ import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
 import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
 import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
+import {useGameDate} from "@components/game/GameDateContext.tsx";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -28,7 +29,8 @@ const teamLogos: { [key: string]: string } = {
 };
 
 const GameList = () => {
-  const { data: games, isLoading, error } = useRecentGame();
+  const { formattedDate } = useGameDate();
+  const { data: games, isLoading, error } = useGameList(formattedDate);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading games: {error.message}</p>;

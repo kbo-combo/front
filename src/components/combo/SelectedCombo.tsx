@@ -21,7 +21,6 @@ const SelectedCombo = () => {
           </TopSection>
         </ComboWrapper>
     );
-
   }
 
   const handleCancel = () => {

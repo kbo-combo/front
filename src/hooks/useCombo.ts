@@ -17,8 +17,7 @@ export const useDeleteCombo = () => {
 };
 
 export const useComboByGame = () => {
-  const { selectedDate } = useGameDate();
-  const comboDate = selectedDate.toISOString().split("T")[0];
+  const { formattedDate : comboDate } = useGameDate();
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["combo", comboDate],

@@ -1,7 +1,10 @@
 import {TeamName} from "@constant/player.ts";
 
 
-export const findRecentGame = async (): Promise<GameResponse[]> => {
+export const findGameByDate = async (gameDate: string): Promise<GameResponse[]> => {
+  if (gameDate === null) {
+    console.log("hello world")
+  }
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
