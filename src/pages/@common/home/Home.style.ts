@@ -13,11 +13,11 @@ export const Main = styled.main`
 `;
 
 export const MainMessage = styled.p`
-  margin-top: 10vh;
-
-  font-size: 2.4rem;
+  margin-top: 4vh;
+  align-self: flex-start;
+  font: 5.4rem "jiugae";
   font-weight: 900;
   line-height: 3rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 8.5rem;
   color: ${(props) => props.theme.color.primary};
 `;

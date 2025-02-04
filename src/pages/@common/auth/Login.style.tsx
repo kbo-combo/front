@@ -27,16 +27,6 @@ export const ContentBox = styled.section`
 `;
 
 
-export const Text = styled.p`
-  width: 300px;
-  font: 900 3.2rem/4rem 'NanumSquareRound';
-  color: #231f21;
-`;
-
-export const PrimaryText = styled.span`
-  color: ${({ theme: { color } }) => color.primary};
-`;
-
 export const LoginBox = styled.section`
   position: fixed;
   bottom: 24px;
@@ -54,4 +44,19 @@ export const LoginBox = styled.section`
 export const KakaoLogin = styled.img`
   width: 210px;
   height: 52.5px;
+`;
+
+export const SubMessage = styled.p`
+  font: 4.4rem "jiugae";
+  font-weight: 900;
+  color: ${(props) => props.theme.color.sub};
+`;
+
+export const MainMessage = styled.p`
+  margin-top: 4vh;
+  font: 7.4rem "jiugae";
+  font-weight: 900;
+  line-height: 3rem;
+  margin-bottom: 12.5rem;
+  color: ${(props) => props.theme.color.primary};
 `;
