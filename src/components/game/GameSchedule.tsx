@@ -64,7 +64,7 @@ const GameSchedule = () => {
   };
 
   const handleSelectDate = (date: Date) => {
-    setSelectedDate(date); // ✅ Context에서 날짜 업데이트
+    setSelectedDate(date);
   };
 
   const formattedDays = getDaysInMonth(currentMonth);
