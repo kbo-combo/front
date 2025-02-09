@@ -12,12 +12,18 @@ const SelectedCombo = () => {
   const {mutate: deleteCombo} = useDeleteCombo();
 
   if (isLoading) return <Loading/>;
-  if (error || !combo) {
 
+  const now = new Date();
+  const comboDateObj = new Date(comboDate);
+  const isComboDateTooEarly = comboDateObj > new Date(now.setDate(now.getDate() + 2));
+
+  if (error || !combo || isComboDateTooEarly) {
     return (
         <ComboWrapper>
           <TopSection>
-            <SelectionText>선택한 날짜에 등록된 콤보가 없습니다.</SelectionText>
+            <SelectionText>
+              {isComboDateTooEarly ? '경기 시작 2일 전부터 선택 가능합니다.' : '콤보를 선택하지 않았습니다.'}
+            </SelectionText>
           </TopSection>
         </ComboWrapper>
     );
@@ -81,7 +87,7 @@ const TopSection = styled.div`
 
 const SelectionText = styled.div`
   font: ${theme.font.subTitle};
-  font-size: 2.6rem;
+  font-size: 2.0rem;
 `;
 
 const CancelButton = styled.button`

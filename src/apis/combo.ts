@@ -36,7 +36,7 @@ export const findComboByGame = async (gameDate: string): Promise<ComboResponse |
 
 const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
   {
-    gameDate: "2025-02-01",
+    gameDate: "2025-02-08",
     combo: {
       comboId: 1,
       playerId: 101,
@@ -48,7 +48,7 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
     },
   },
   {
-    gameDate: "2025-02-02",
+    gameDate: "2025-02-09",
     combo: {
       comboId: 2,
       playerId: 102,
@@ -60,7 +60,7 @@ const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
     },
   },
   {
-    gameDate: "2025-02-03",
+    gameDate: "2025-02-10",
     combo: {
       comboId: 3,
       playerId: 103,
