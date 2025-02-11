@@ -30,8 +30,8 @@ const teamLogos: { [key: string]: string } = {
 };
 
 const GameList = () => {
-  const { formattedDate } = useGameDate();
-  const { data: games, isLoading, error} = useGameList(formattedDate);
+  const {formattedDate} = useGameDate();
+  const {data: games, isLoading, error} = useGameList(formattedDate);
 
   if (isLoading) return <Loading/>
 
@@ -44,17 +44,18 @@ const GameList = () => {
               <PlayerCard key={index}>
                 <TeamWrapper>
                   <TeamRow>
-                    <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
+                    <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
                     <PlayerName>{game.homeStartingPitcher?.name ?? "선발 미정"}</PlayerName>
                   </TeamRow>
                   <TeamRow>
-                    <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
+                    <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
                     <PlayerName>{game.awayStartingPitcher?.name ?? "선발 미정"}</PlayerName>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
                   <GameTime>{game.startTime}</GameTime>
-                  <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
+                  <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
+                                     awayTeam={game.awayTeam}/>
                 </GameInfo>
               </PlayerCard>
           ))}
@@ -70,8 +71,8 @@ export const Wrapper = styled.main`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  color: ${({ theme: { color } }) => color.primary};
-  background-color: ${({ theme: { color } }) => color.background}; // 밝은 배경 유지
+  color: ${({theme: {color}}) => color.primary};
+  background-color: ${({theme: {color}}) => color.background}; // 밝은 배경 유지
 `;
 
 export const GameListWrapper = styled.div`
@@ -89,7 +90,7 @@ export const PlayerCard = styled.div`
   justify-content: space-between;
   padding: 1rem;
   border-radius: 1rem;
-  background: ${({ theme: { color } }) => color.cardBackground};
+  background: ${({theme: {color}}) => color.cardBackground};
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 `;
@@ -97,14 +98,14 @@ export const PlayerCard = styled.div`
 export const TeamWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem; 
+  gap: 1rem;
 `;
 
 export const TeamRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem; 
+  gap: 1rem;
 `;
 
 export const TeamLogo = styled.img`
@@ -116,9 +117,9 @@ export const TeamLogo = styled.img`
 
 export const PlayerName = styled.span`
   font-size: 1.4rem;
-  color: ${({ theme: { color } }) => color.sub};
-  text-align: left; 
-  white-space: nowrap; 
+  color: ${({theme: {color}}) => color.sub};
+  text-align: left;
+  white-space: nowrap;
 `;
 export const GameInfo = styled.div`
   display: flex;
@@ -127,7 +128,7 @@ export const GameInfo = styled.div`
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: ${({ theme: { color } }) => color.primary};
+  color: ${({theme: {color}}) => color.primary};
   gap: 0.5rem;
 `;
 
@@ -138,7 +139,7 @@ export const StadiumName = styled.span`
 
 export const GameTime = styled.span`
   font: ${theme.font.text};
-  font-size : 2rem;
+  font-size: 2rem;
 `;
 
 export default GameList;
