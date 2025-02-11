@@ -14,6 +14,7 @@ import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
 import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
 import {useGameDate} from "@components/game/GameDateContext.tsx";
+import Loading from "@pages/@common/common/Loading.tsx";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -30,10 +31,9 @@ const teamLogos: { [key: string]: string } = {
 
 const GameList = () => {
   const { formattedDate } = useGameDate();
-  const { data: games, isLoading, error } = useGameList(formattedDate);
+  const { data: games, isLoading} = useGameList(formattedDate);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading games: {error.message}</p>;
+  if (isLoading) return <Loading/>
 
   return (
       <Wrapper>
@@ -43,16 +43,15 @@ const GameList = () => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
-                    <PlayerName>{game.homePitcherName || "투수 정보 없음"}</PlayerName>
+                    <PlayerName>{game.homeStartingPitcher?.name ?? "투수 정보 없음"}</PlayerName>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
-                    <PlayerName>{game.awayPitcherName || "투수 정보 없음"}</PlayerName>
+                    <PlayerName>{game.awayStartingPitcher?.name ?? "투수 정보 없음"}</PlayerName>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
-                  <GameTime>{game.gameSchedule}</GameTime>
-                  <StadiumName>{game.stadiumName}</StadiumName>
+                  <GameTime>{game.startDate} {game.startTime}</GameTime>
                   <ComboHitterButton homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
                 </GameInfo>
               </PlayerCard>
