@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {createContext, useContext, useState, ReactNode} from "react";
 
 interface GameDateContextType {
   selectedDate: Date;
@@ -7,11 +7,11 @@ interface GameDateContextType {
 
 const GameDateContext = createContext<GameDateContextType | undefined>(undefined);
 
-export const GameDateProvider = ({ children }: { children: ReactNode }) => {
+export const GameDateProvider = ({children}: { children: ReactNode }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-      <GameDateContext.Provider value={{ selectedDate, setSelectedDate }}>
+      <GameDateContext.Provider value={{selectedDate, setSelectedDate}}>
         {children}
       </GameDateContext.Provider>
   );
@@ -22,11 +22,11 @@ export const useGameDate = () => {
   if (!context) {
     throw new Error("useGameDate must be used within a GameDateProvider");
   }
-  const { selectedDate, ...rest } = context;
+  const {selectedDate, ...rest} = context;
 
   return {
     selectedDate,
-    formattedDate: selectedDate.toISOString().split("T")[0],
+    formattedDate: selectedDate.toLocaleDateString("sv-SE"),
     ...rest,
   };
 };

@@ -6,7 +6,7 @@ export const findGameByDate = async (gameDate: string): Promise<GameResponse[]> 
   const response = await client.get<GameResponse[]>(
       `/games`,
       {
-        params: gameDate
+        params: { gameDate }
       }
   );
   return response.data;

@@ -31,9 +31,11 @@ const teamLogos: { [key: string]: string } = {
 
 const GameList = () => {
   const { formattedDate } = useGameDate();
-  const { data: games, isLoading} = useGameList(formattedDate);
+  const { data: games, isLoading, error} = useGameList(formattedDate);
 
   if (isLoading) return <Loading/>
+
+  if (error) return <div>error</div>
 
   return (
       <Wrapper>
@@ -43,11 +45,11 @@ const GameList = () => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam} />
-                    <PlayerName>{game.homeStartingPitcher?.name ?? "투수 정보 없음"}</PlayerName>
+                    <PlayerName>{game.homeStartingPitcher?.name ?? "선발 미정"}</PlayerName>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam} />
-                    <PlayerName>{game.awayStartingPitcher?.name ?? "투수 정보 없음"}</PlayerName>
+                    <PlayerName>{game.awayStartingPitcher?.name ?? "선발 미정"}</PlayerName>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
