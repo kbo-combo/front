@@ -6,15 +6,16 @@ import {TeamName} from "@constant/player.ts";
 interface HitterSelectPageState {
   homeTeam: string;
   awayTeam: string;
+  gameId: number;
 }
 
 const HitterSelectPage = () => {
 
   const location = useLocation();
-  const { homeTeam, awayTeam } = location.state as HitterSelectPageState;
+  const { gameId, homeTeam, awayTeam } = location.state as HitterSelectPageState;
 
   return (
-     <ComboHittersPage homeTeam={homeTeam as TeamName} awayTeam={awayTeam as TeamName}/>
+     <ComboHittersPage gameId={gameId} homeTeam={homeTeam as TeamName} awayTeam={awayTeam as TeamName}/>
   );
 };
 

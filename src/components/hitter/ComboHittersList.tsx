@@ -14,17 +14,27 @@ import ComboHitterFilterList from "@components/hitter/ComboHitterFilterList.tsx"
 import {useHitterFilter} from "@/hooks/useHitterFilter.ts";
 import {HitterQueryResponse} from "@apis/player.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
+import {useCreateCombo} from "@/hooks/useCombo.ts";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;
   awayTeam: TeamName;
+  gameId: number;
 }
 
-const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
+const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) => {
   const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
 
   const handleSelectPlayer = (playerId: number) => {
     setSelectedPlayerId(playerId);
+  };
+
+  const { mutate: createCombo } = useCreateCombo();
+
+  const handleCreateCombo = () => {
+    if (selectedPlayerId !== null) {
+      createCombo({ gameId: gameId, playerId: selectedPlayerId });
+    }
   };
 
   const {
@@ -65,7 +75,7 @@ const ComboHitterList = ({ homeTeam, awayTeam }: ComboHitterListProps) => {
         </PlayerListWrapper>
           <BottomButton
               selected={selectedPlayerId !== null}
-              onClick={() => alert(`선택된 선수: ${selectedPlayerId}`)}
+              onClick={() => handleCreateCombo()}
           >
             타자 선택
           </BottomButton>

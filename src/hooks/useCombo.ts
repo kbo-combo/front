@@ -1,7 +1,20 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {deleteComboById, findComboByGame} from "@apis/combo.ts";
+import {ComboCreateRequest, createCombo, deleteComboById, findComboByGame} from "@apis/combo.ts";
 import {useGameDate} from "@components/game/GameDateContext.tsx";
 import {toast} from "react-toastify";
+
+
+export const useCreateCombo = () => {
+  return useMutation({
+    mutationFn: (request: ComboCreateRequest) => createCombo(request),
+    onSuccess: () => {
+      toast.success("콤보가 생성되었습니다.")
+    },
+    onError: () => {
+      toast.error("콤보 생성 실패.")
+    },
+  });
+}
 
 export const useDeleteCombo = () => {
   const queryClient = useQueryClient();

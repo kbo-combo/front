@@ -1,13 +1,12 @@
 import {ComboStatusType} from "@constant/combo.ts";
+import {client} from "@apis/apiClient.ts";
 
-export interface ComboResponse {
-  comboId: number;
-  playerId: number;
-  playerName: string;
-  playerImage: string | null
-  comboStatus: ComboStatusType;
-  pa: number | null;
-  hits: number | null;
+
+export const createCombo = async (request: ComboCreateRequest): Promise<void> => {
+  const response = await client.post(
+      `combos`, request
+  )
+  return response.data
 }
 
 export const deleteComboById = async (comboId: number): Promise<boolean> => {
@@ -33,6 +32,20 @@ export const findComboByGame = async (gameDate: string): Promise<ComboResponse |
   });
 };
 
+export interface ComboCreateRequest {
+  gameId: number,
+  playerId: number
+}
+
+export interface ComboResponse {
+  comboId: number;
+  playerId: number;
+  playerName: string;
+  playerImage: string | null
+  comboStatus: ComboStatusType;
+  pa: number | null;
+  hits: number | null;
+}
 
 const mockComboData: { gameDate: string; combo: ComboResponse }[] = [
   {

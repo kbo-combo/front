@@ -5,16 +5,17 @@ import {URL_PATH} from "@/constant";
 interface ComboHitterButtonProps {
   homeTeam: string;
   awayTeam: string;
+  gameId: number
 }
 
 
-const ComboHitterButton = ({homeTeam, awayTeam}: ComboHitterButtonProps) => {
+const ComboHitterButton = ({gameId, homeTeam, awayTeam}: ComboHitterButtonProps) => {
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(URL_PATH.hitter_select, {
-      state: { homeTeam, awayTeam },
+      state: { gameId, homeTeam, awayTeam },
     });
   };
 

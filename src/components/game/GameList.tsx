@@ -54,7 +54,7 @@ const GameList = () => {
                 </TeamWrapper>
                 <GameInfo>
                   <GameTime>{game.startTime}</GameTime>
-                  <ComboHitterButton homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
+                  <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam} awayTeam={game.awayTeam}/>
                 </GameInfo>
               </PlayerCard>
           ))}
