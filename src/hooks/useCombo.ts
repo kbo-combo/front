@@ -1,5 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {ComboCreateRequest, createCombo, deleteComboById, findComboByGame} from "@apis/combo.ts";
+import {ComboCreateRequest, createCombo, deleteComboById, findComboByGameDate} from "@apis/combo.ts";
 import {useGameDate} from "@components/game/GameDateContext.tsx";
 import {toast} from "react-toastify";
 
@@ -36,7 +36,7 @@ export const useComboByGame = () => {
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["combo", comboDate],
-    queryFn: () => findComboByGame(comboDate),
+    queryFn: () => findComboByGameDate(comboDate),
     staleTime: 600000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
