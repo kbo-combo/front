@@ -9,6 +9,7 @@ import CallbackPage from "@components/member/CallbackPage.tsx";
 import AuthRoute from "@/router/AuthRoute.tsx";
 import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 import HitterSelectPage from "@pages/@common/hitter-select";
+import GameDateLayout from "@/contexts/GameDateLayout.tsx";
 
 const router = createBrowserRouter([
     {
@@ -17,12 +18,17 @@ const router = createBrowserRouter([
       errorElement: <NotFoundPage />,
       children: [
         {
-          index: true,
-          element: <Home/>,
-        },
-        {
-          path: URL_PATH.hitter_select,
-          element: <HitterSelectPage/>
+          element: <GameDateLayout />,
+          children: [
+            {
+              index: true,
+              element: <Home />,
+            },
+            {
+              path: URL_PATH.hitter_select,
+              element: <HitterSelectPage />,
+            },
+          ],
         },
         {
           path: URL_PATH.login,
