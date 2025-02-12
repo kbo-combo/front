@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {ComboCreateRequest, createCombo, deleteComboById, findComboByGameDate} from "@apis/combo.ts";
-import {useGameDate} from "@components/game/GameDateContext.tsx";
 import {toast} from "react-toastify";
+import {useGameDate} from "@/contexts/GameDateContext.tsx";
 
 
 export const useCreateCombo = () => {

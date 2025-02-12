@@ -13,8 +13,8 @@ import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
 import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
 import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
-import {useGameDate} from "@components/game/GameDateContext.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
+import {useGameDate} from "@/contexts/GameDateContext.tsx";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -130,11 +130,6 @@ export const GameInfo = styled.div`
   font-weight: bold;
   color: ${({theme: {color}}) => color.primary};
   gap: 0.5rem;
-`;
-
-export const StadiumName = styled.span`
-  font: ${theme.font.text};
-  color: ${theme.color.subLight};
 `;
 
 export const GameTime = styled.span`

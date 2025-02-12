@@ -2,9 +2,9 @@ import {Main, MainMessage} from "./Home.style.ts";
 import GameList from "@components/game/GameList.tsx";
 import GameSchedule from "@components/game/GameSchedule.tsx";
 import SelectedCombo from "@components/combo/SelectedCombo.tsx";
-import {GameDateProvider} from "@components/game/GameDateContext.tsx";
 import {useCheckLogin} from "@/hooks/login.ts";
 import SelectedComboError from "@components/combo/SelectedComboError.tsx";
+import {GameDateProvider} from "@/contexts/GameDateContext.tsx";
 
 
 const Home = () => {

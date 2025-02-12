@@ -3,7 +3,7 @@ import {
   CurrentMonth, DateItem, DatesWrapper, Day,
   Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
-import {useGameDate} from "@components/game/GameDateContext.tsx";
+import {useGameDate} from "@/contexts/GameDateContext.tsx";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
