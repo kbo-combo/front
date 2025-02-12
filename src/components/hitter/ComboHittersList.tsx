@@ -15,6 +15,8 @@ import {useHitterFilter} from "@/hooks/useHitterFilter.ts";
 import {HitterQueryResponse} from "@apis/player.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import {useCreateCombo} from "@/hooks/useCombo.ts";
+import {useNavigate} from "react-router-dom";
+import {URL_PATH} from "@/constant";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;
@@ -24,6 +26,7 @@ interface ComboHitterListProps {
 
 const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) => {
   const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const handleSelectPlayer = (playerId: number) => {
     setSelectedPlayerId(playerId);
@@ -33,7 +36,9 @@ const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) =
 
   const handleCreateCombo = () => {
     if (selectedPlayerId !== null) {
-      createCombo({ gameId: gameId, playerId: selectedPlayerId });
+      createCombo({ gameId, playerId: selectedPlayerId }, {
+        onSuccess: () => navigate(URL_PATH.main)
+      });
     }
   };
 
