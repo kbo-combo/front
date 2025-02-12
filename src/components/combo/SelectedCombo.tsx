@@ -46,7 +46,7 @@ const SelectedCombo = () => {
         </TopSection>
         <PlayerSection>
           <PlayerInfo>
-            <PlayerImage url={combo.playerImage}/>
+            <PlayerImage url={combo.playerImageUrl}/>
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
               <ComboStatus

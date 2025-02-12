@@ -34,6 +34,6 @@ export interface ComboResponse {
   comboId: number;
   playerId: number;
   playerName: string;
-  playerImage: string | null
+  playerImageUrl: string | null
   comboStatus: ComboStatusType;
 }
