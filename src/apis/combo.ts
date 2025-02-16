@@ -36,4 +36,6 @@ export interface ComboResponse {
   playerName: string;
   playerImageUrl: string | null
   comboStatus: ComboStatusType;
+  gameStartDate: string,
+  gameStartTime: string,
 }
