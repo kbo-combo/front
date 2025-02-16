@@ -4,7 +4,7 @@ import {client} from "@apis/apiClient.ts";
 
 export const findGameByDate = async (gameDate: string): Promise<GameResponse[]> => {
   const response = await client.get<GameResponse[]>(
-      `/games`,
+      `/games/daily`,
       {
         params: { gameDate }
       }
