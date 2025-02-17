@@ -46,11 +46,11 @@ const GameList = () => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
-                    <PlayerName>{game.homeStartingPitcher?.name ?? "선발 미정"}</PlayerName>
+                    <PlayerName>{game.homeStartingPitcher?.name ?? ""}</PlayerName>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
-                    <PlayerName>{game.awayStartingPitcher?.name ?? "선발 미정"}</PlayerName>
+                    <PlayerName>{game.awayStartingPitcher?.name ?? ""}</PlayerName>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
