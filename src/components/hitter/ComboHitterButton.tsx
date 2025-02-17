@@ -61,6 +61,7 @@ const Button = styled.button<{ disabled?: boolean }>`
   border-radius: 1rem;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   font: ${theme.font.text};
+  margin-top: auto;
   font-size: 1.5rem;
   transition: background 0.3s ease;
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};

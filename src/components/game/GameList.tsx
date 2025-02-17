@@ -72,7 +72,7 @@ export const Wrapper = styled.main`
   width: 100%;
   height: 100%;
   color: ${({theme: {color}}) => color.primary};
-  background-color: ${({theme: {color}}) => color.background}; // 밝은 배경 유지
+  background-color: ${({theme: {color}}) => color.background}; 
 `;
 
 export const GameListWrapper = styled.div`
@@ -84,6 +84,7 @@ export const GameListWrapper = styled.div`
 `;
 
 export const PlayerCard = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -123,6 +124,9 @@ export const PlayerName = styled.span`
 `;
 export const GameInfo = styled.div`
   display: flex;
+  height: 100%;
+  bottom: 0.1rem;
+  right: 4rem; 
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -134,6 +138,7 @@ export const GameInfo = styled.div`
 
 export const GameTime = styled.span`
   font: ${theme.font.text};
+  margin-bottom: auto;
   font-size: 2rem;
 `;
 
