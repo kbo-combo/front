@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, {AxiosError, AxiosRequestConfig} from "axios";
 import { URL_PATH } from "@/constant";
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -18,11 +18,12 @@ export const setupInterceptors = () => {
 
   client.interceptors.response.use(
       (response) => response,
-      (error) => {
+      (error: AxiosError<{ msg?: string }>) => {
         if (error.response?.status === 401) {
-          window.location.href = `${URL_PATH.login}`;
+          window.location.href = `${URL_PATH.login}?redirect=${encodeURIComponent(window.location.pathname)}`;
         }
-        return Promise.reject(error);
+
+        return Promise.reject(new Error(error.response?.data.msg || "알 수 없는 오류가 발생했습니다."));
       }
   );
 };

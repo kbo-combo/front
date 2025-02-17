@@ -18,8 +18,8 @@ export const useCreateCombo = () => {
       queryClient.invalidateQueries({ queryKey: ["combo", comboDate] });
       toast.success("콤보가 생성되었습니다.")
     },
-    onError: () => {
-      toast.error("콤보 생성 실패.")
+    onError: (error: Error) => {
+      toast.error(error.message)
     },
   });
 }
