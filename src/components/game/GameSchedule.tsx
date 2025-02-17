@@ -57,11 +57,19 @@ const GameSchedule = () => {
       const selectedElement = dateRefs.current[selectedKey];
 
       if (selectedElement) {
-        scrollContainerRef.current.scrollTo({
-          left:
-              selectedElement.offsetLeft -
-              scrollContainerRef.current.clientWidth / 2 +
-              selectedElement.clientWidth / 2,
+        const container = scrollContainerRef.current;
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = selectedElement.getBoundingClientRect();
+
+        const scrollLeft =
+            container.scrollLeft +
+            elementRect.left -
+            containerRect.left -
+            container.clientWidth / 2 +
+            elementRect.width / 2;
+
+        container.scrollTo({
+          left: scrollLeft,
           behavior: "smooth",
         });
       }
