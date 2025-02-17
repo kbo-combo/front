@@ -33,7 +33,7 @@ export const NavButton = styled.button<{ disabled: boolean }>`
 
 export const CurrentMonth = styled.div`
   margin: 0 1rem;
-  font-size: 2rem;
+  font-size: 3.2rem;
   font-weight: bold;
 `;
 
