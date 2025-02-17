@@ -16,10 +16,10 @@ export const Wrapper = styled.main`
 `;
 
 export const Nickname = styled.span`
-  font: bold 2.7rem / 3.2rem "jua";
+  font: bold 1.8rem / 2.2rem "jua";
   color: ${({ theme: { color } }) => color.sub};
   padding: 4px 8px;
-
+  white-space: nowrap;
 `;
 
 export const ProfileImage = styled.img`
