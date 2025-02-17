@@ -64,12 +64,6 @@ export const DateItem = styled.div<{ selected: boolean; disabled?: boolean }>`
   font-weight: ${({ selected }) => (selected ? "bold" : "normal")};
   color: ${({ selected, disabled, theme }) =>
       disabled ? theme.color.gray : selected ? theme.color.primary : theme.color.sub};
-  border-bottom: ${({ selected, disabled, theme }) =>
-      disabled
-          ? `0.25rem solid ${theme.color.gray}`
-          : selected
-              ? `0.25rem solid ${theme.color.fontPrimaryForBackground}`
-              : theme.color.sub};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
@@ -82,5 +76,7 @@ export const WeekDay = styled.div`
 `;
 
 export const Day = styled.div`
+  font: ${theme.font.text};
   font-size: 2.2rem;
+  
 `;
