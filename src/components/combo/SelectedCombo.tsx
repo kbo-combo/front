@@ -2,7 +2,6 @@ import {useComboByGame, useDeleteCombo} from "@/hooks/useCombo.ts";
 import {getStatusText} from "@constant/combo.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
-import SelectedComboError from "@components/combo/SelectedComboError.tsx";
 import {
   CancelButton,
   ComboStatus,
@@ -27,9 +26,7 @@ const SelectedCombo = () => {
 
   if (error || !combo || isComboDateTooEarly) {
     return (
-        <SelectedComboError
-            message={isComboDateTooEarly ? '경기 시작 2일 전부터 선택 가능합니다.' : '콤보를 선택하지 않았습니다.'}
-        />
+      <div></div>
     );
   }
 
