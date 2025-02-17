@@ -118,7 +118,8 @@ export const TeamLogo = styled.img`
 `;
 
 export const PlayerName = styled.span`
-  font-size: 1.4rem;
+  font: ${theme.font.text};
+  font-size: 1.6rem;
   color: ${({theme: {color}}) => color.sub};
   text-align: left;
   white-space: nowrap;
