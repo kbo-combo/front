@@ -4,8 +4,8 @@ import {
   Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
 import { useGameDate } from "@/contexts/GameDateContext.tsx";
-import {useGameListByYearAndMonth} from "@/hooks/useGameList.ts";
-import {GameDateResponse} from "@apis/game.ts";
+import { useGameListByYearAndMonth } from "@/hooks/useGameList.ts";
+import { GameDateResponse } from "@apis/game.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
@@ -27,34 +27,24 @@ const GameSchedule = () => {
       currentMonth.getMonth() + 1
   ) as { data?: GameDateResponse[]; isLoading: boolean };
 
-  const getDaysInMonth = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const days = new Date(year, month + 1, 0).getDate();
-
-    return Array.from({ length: days }, (_, i) => {
-      const dayDate = new Date(year, month, i + 1);
-      return {
-        date: dayDate,
-        year: year,
-        month: month + 1,
-        day: dayDate.getDate(),
-        weekDay: dayDate.toLocaleDateString("ko-KR", { weekday: "short" }),
-      };
-    });
-  };
-
   useEffect(() => {
-    if (scrollContainerRef.current && todayRef.current) {
-      const scrollContainer = scrollContainerRef.current;
-      const todayElement = todayRef.current;
+    if (!availableDates?.length) return;
 
-      scrollContainer.scrollTo({
-        left: todayElement.offsetLeft - scrollContainer.clientWidth / 2 + todayElement.clientWidth / 2,
-        behavior: "smooth",
-      });
+    const availableDays = availableDates
+    .map((d: GameDateResponse) => new Date(d.gameDate))
+    .filter((d) => d.getMonth() === currentMonth.getMonth());
+
+    if (availableDays.length) {
+      // 이전 달로 이동한 경우: 가장 마지막 날짜 선택
+      if (selectedDate && selectedDate.getMonth() > currentMonth.getMonth()) {
+        setSelectedDate(availableDays[availableDays.length - 1]);
+      }
+      // 다음 달로 이동한 경우: 가장 첫 번째 날짜 선택
+      else {
+        setSelectedDate(availableDays[0]);
+      }
     }
-  }, []);
+  }, [currentMonth, availableDates]);
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
@@ -74,6 +64,23 @@ const GameSchedule = () => {
     if (availableDates?.some((d: GameDateResponse) => new Date(d.gameDate).toDateString() === date.toDateString())) {
       setSelectedDate(date);
     }
+  };
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const days = new Date(year, month + 1, 0).getDate();
+
+    return Array.from({ length: days }, (_, i) => {
+      const dayDate = new Date(year, month, i + 1);
+      return {
+        date: dayDate,
+        year,
+        month: month + 1,
+        day: dayDate.getDate(),
+        weekDay: dayDate.toLocaleDateString("ko-KR", { weekday: "short" }),
+      };
+    });
   };
 
   const formattedDays = getDaysInMonth(currentMonth);
