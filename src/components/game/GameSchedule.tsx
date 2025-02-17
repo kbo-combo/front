@@ -20,7 +20,7 @@ const GameSchedule = () => {
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const todayRef = useRef<HTMLDivElement>(null);
+  const dateRefs = useRef<{ [key: string]: HTMLDivElement | null }>({}); // 날짜별 ref 저장
 
   const { data: availableDates } = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
@@ -45,6 +45,23 @@ const GameSchedule = () => {
       }
     }
   }, [currentMonth, availableDates]);
+
+  useEffect(() => {
+    if (selectedDate && scrollContainerRef.current) {
+      const selectedKey = selectedDate.toDateString();
+      const selectedElement = dateRefs.current[selectedKey];
+
+      if (selectedElement) {
+        scrollContainerRef.current.scrollTo({
+          left:
+              selectedElement.offsetLeft -
+              scrollContainerRef.current.clientWidth / 2 +
+              selectedElement.clientWidth / 2,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [selectedDate]);
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
@@ -109,7 +126,7 @@ const GameSchedule = () => {
               return (
                   <DateItem
                       key={index}
-                      ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
+                      ref={(el) => (dateRefs.current[dateObj.date.toDateString()] = el)}
                       selected={selectedDate?.toDateString() === dateObj.date.toDateString()}
                       disabled={!isAvailable}
                       onClick={() => handleSelectDate(dateObj.date)}
