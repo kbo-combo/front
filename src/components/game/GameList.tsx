@@ -15,6 +15,7 @@ import theme from "@style/theme.style.ts";
 import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
 import {useGameDate} from "@/contexts/GameDateContext.tsx";
+import {sliceSecond} from "@/function/utils.ts";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -53,7 +54,7 @@ const GameList = () => {
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
-                  <GameTime>{game.startTime}</GameTime>
+                  <GameTime>{sliceSecond(game.startTime)}</GameTime>
                   <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
                                      awayTeam={game.awayTeam} startDate={game.startDate} startTime={game.startTime}/>
                 </GameInfo>
