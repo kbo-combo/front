@@ -15,7 +15,7 @@ export const Header = styled.div`
   justify-content: center;
   font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 export const NavButton = styled.button<{ disabled: boolean }>`
