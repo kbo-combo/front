@@ -13,6 +13,8 @@ import {
   SelectionText,
   TopSection
 } from "@components/combo/SelectedCombo.style.tsx";
+import {canNotCancelCombo} from "@/function/combo/combo.ts";
+import {toDateFormat} from "@/function/utils.ts";
 
 const SelectedCombo = () => {
   const {data: combo, isLoading, error, comboDate} = useComboByGame();
@@ -34,12 +36,13 @@ const SelectedCombo = () => {
     deleteCombo({comboId: combo.comboId, comboDate: comboDate});
   };
 
+  const gameStartDateTime = toDateFormat(combo.gameStartDate, combo.gameStartTime);
 
   return (
       <ComboWrapper>
         <TopSection>
           <SelectionText>내 선택</SelectionText>
-          <CancelButton onClick={handleCancel}>취소</CancelButton>
+          <CancelButton onClick={handleCancel} disabled={canNotCancelCombo(now, gameStartDateTime)}>취소</CancelButton>
         </TopSection>
         <PlayerSection>
           <PlayerInfo>

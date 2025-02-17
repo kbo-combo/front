@@ -27,18 +27,23 @@ export const SelectionText = styled.div`
   font-size: 2.0rem;
 `;
 
-export const CancelButton = styled.button`
-  padding: 1.5rem 3rem;
-  background: ${theme.color.accent};
+export const CancelButton = styled.button<{ disabled?: boolean }>`
+  padding: 1.5rem 2.5rem;
+  min-width: 10rem;
+  min-height: 4rem;
+  background: ${({ disabled }) => (disabled ? theme.color.grayDark : theme.color.accent)};
   color: #fff;
   border: none;
-  border-radius: 1.5rem;
-  cursor: pointer;
-  font-size: 1rem;
+  border-radius: 1rem;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  font: ${theme.font.text};
+  font-size: 1.5rem;
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
   transition: background 0.3s ease;
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+  white-space: nowrap;
 `;
 
 export const PlayerSection = styled.div`
