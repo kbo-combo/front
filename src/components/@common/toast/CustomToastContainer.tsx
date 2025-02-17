@@ -6,8 +6,8 @@ import theme from "@style/theme.style.ts";
 const CustomToastContainer = styled(ToastContainer).attrs({
   position: "bottom-center",
   autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: false,
+  hideProgressBar: true,
+  closeOnClick: true,
   pauseOnHover: false,
 })`
   z-index: ${theme.zIndex.popover};
@@ -15,7 +15,7 @@ const CustomToastContainer = styled(ToastContainer).attrs({
 
   .Toastify__toast {
     font: ${theme.font.text};
-    font-size: 2.0rem;
+    font-size: 1.5rem;
     color: ${theme.color.sub};
   }
 
