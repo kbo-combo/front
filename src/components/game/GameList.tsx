@@ -138,6 +138,7 @@ export const GameInfo = styled.div`
 
 export const GameTime = styled.span`
   font: ${theme.font.text};
+  color: ${theme.color.sub};
   margin-bottom: auto;
   font-size: 2rem;
 `;
