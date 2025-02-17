@@ -54,8 +54,6 @@ export default ComboHitterButton;
 
 const Button = styled.button<{ disabled?: boolean }>`
   padding: 1.5rem 2.5rem;
-  min-width: 10rem;  
-  min-height: 4rem;
   white-space: nowrap;
   background: ${({ disabled }) => (disabled ? theme.color.grayDark : theme.color.fontPrimaryForBackground)};
   color: #fff;
