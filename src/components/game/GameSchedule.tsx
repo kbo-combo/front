@@ -3,7 +3,9 @@ import {
   CurrentMonth, DateItem, DatesWrapper, Day,
   Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
-import {useGameDate} from "@/contexts/GameDateContext.tsx";
+import { useGameDate } from "@/contexts/GameDateContext.tsx";
+import {useGameListByYearAndMonth} from "@/hooks/useGameList.ts";
+import {GameDateResponse} from "@apis/game.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
@@ -19,6 +21,11 @@ const GameSchedule = () => {
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const todayRef = useRef<HTMLDivElement>(null);
+
+  const { data: availableDates } = useGameListByYearAndMonth(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + 1
+  ) as { data?: GameDateResponse[]; isLoading: boolean };
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -64,7 +71,9 @@ const GameSchedule = () => {
   };
 
   const handleSelectDate = (date: Date) => {
-    setSelectedDate(date);
+    if (availableDates?.some((d: GameDateResponse) => new Date(d.gameDate).toDateString() === date.toDateString())) {
+      setSelectedDate(date);
+    }
   };
 
   const formattedDays = getDaysInMonth(currentMonth);
@@ -85,17 +94,24 @@ const GameSchedule = () => {
 
         <ScrollContainer ref={scrollContainerRef}>
           <DatesWrapper>
-            {formattedDays.map((dateObj, index) => (
-                <DateItem
-                    key={index}
-                    ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
-                    selected={selectedDate?.toDateString() === dateObj.date.toDateString()}
-                    onClick={() => handleSelectDate(dateObj.date)}
-                >
-                  <WeekDay>{dateObj.weekDay}</WeekDay>
-                  <Day>{dateObj.day}</Day>
-                </DateItem>
-            ))}
+            {formattedDays.map((dateObj, index) => {
+              const isAvailable = availableDates?.some(
+                  (d: GameDateResponse) => new Date(d.gameDate).toDateString() === dateObj.date.toDateString()
+              );
+
+              return (
+                  <DateItem
+                      key={index}
+                      ref={dateObj.day === today.getDate() && dateObj.month === today.getMonth() + 1 ? todayRef : null}
+                      selected={selectedDate?.toDateString() === dateObj.date.toDateString()}
+                      disabled={!isAvailable}
+                      onClick={() => handleSelectDate(dateObj.date)}
+                  >
+                    <WeekDay>{dateObj.weekDay}</WeekDay>
+                    <Day>{dateObj.day}</Day>
+                  </DateItem>
+              );
+            })}
           </DatesWrapper>
         </ScrollContainer>
       </Wrapper>
