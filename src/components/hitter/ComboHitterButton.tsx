@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { URL_PATH } from "@/constant";
 import {toDateFormat} from "@/function/utils.ts";
-import {canChangeCombo} from "@/function/combo/combo.ts";
+import {canNotChangeCombo} from "@/function/combo/combo.ts";
 
 interface ComboHitterButtonProps {
   homeTeam: string;
@@ -35,7 +35,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime }:
 
 
   return (
-      <Button onClick={handleClick} disabled={canChangeCombo(now, gameStartDateTime)}>
+      <Button onClick={handleClick} disabled={canNotChangeCombo(now, gameStartDateTime)}>
         타자 선택
       </Button>
   );

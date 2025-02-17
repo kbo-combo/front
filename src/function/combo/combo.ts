@@ -1,4 +1,4 @@
-export const canChangeCombo = (now: Date, gameStartDateTime: Date) => {
+export const canNotChangeCombo = (now: Date, gameStartDateTime: Date) => {
   const twoDaysBefore = new Date(gameStartDateTime);
   twoDaysBefore.setDate(gameStartDateTime.getDate() - 2);
 
