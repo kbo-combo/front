@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
   BottomButton,
   PlayerCard,
@@ -53,6 +53,12 @@ const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) =
     setSelectedHandType,
     isLoading,
   } = useHitterFilter(homeTeam, awayTeam);
+
+  useEffect(() => {
+    if (!filteredHitters.some(hitter => hitter.playerId === selectedPlayerId)) {
+      setSelectedPlayerId(null);
+    }
+  }, [filteredHitters, selectedPlayerId]);
 
   if (isLoading) return <Loading />;
 
