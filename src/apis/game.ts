@@ -12,6 +12,13 @@ export const findGameByDate = async (gameDate: string): Promise<GameResponse[]> 
   return response.data;
 };
 
+export const findGameByYearAndMonth = async (year: number, month: number): Promise<GameDateResponse[]> => {
+  const response = await client.get<GameDateResponse[]>(
+      `/games/${year}/${month}`
+  );
+  return response.data;
+};
+
 
 export interface GameResponse {
   id: number,
@@ -27,4 +34,8 @@ export interface GameResponse {
 export interface StartingPitcherResponse {
   pitcherId: number,
   name: string,
+}
+
+export interface GameDateResponse {
+  gameDate: string,
 }
