@@ -13,14 +13,14 @@ const MAX_MONTH = 10;
 const GameSchedule = () => {
   const { selectedDate, setSelectedDate } = useGameDate();
   const today = new Date();
-  const initialMonth =
-      today.getMonth() < MIN_MONTH || today.getMonth() > MAX_MONTH
-          ? new Date(today.getFullYear(), MIN_MONTH, 1)
-          : new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const initialMonth = selectedDate
+      ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
+      : new Date(today.getFullYear(), today.getMonth(), 1);
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const dateRefs = useRef<{ [key: string]: HTMLDivElement | null }>({}); // 날짜별 ref 저장
+  const dateRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const { data: availableDates } = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
@@ -35,12 +35,17 @@ const GameSchedule = () => {
     .filter((d) => d.getMonth() === currentMonth.getMonth());
 
     if (availableDays.length) {
-      // 이전 달로 이동한 경우: 가장 마지막 날짜 선택
-      if (selectedDate && selectedDate.getMonth() > currentMonth.getMonth()) {
+      if (selectedDate && selectedDate.getMonth() === currentMonth.getMonth()) {
+        // 🔹 같은 월이면 기존 날짜를 유지하되, 유효한 날짜인지 확인
+        const existingDate = availableDays.find(
+            (d) => d.getDate() === selectedDate.getDate()
+        );
+        setSelectedDate(existingDate || availableDays[0]); // 존재하지 않으면 첫 번째 날짜 선택
+      } else if (selectedDate && selectedDate.getMonth() > currentMonth.getMonth()) {
+        // 🔹 이전 달로 이동한 경우 → 가장 마지막 날짜 선택
         setSelectedDate(availableDays[availableDays.length - 1]);
-      }
-      // 다음 달로 이동한 경우: 가장 첫 번째 날짜 선택
-      else {
+      } else {
+        // 🔹 다음 달로 이동한 경우 → 가장 첫 번째 날짜 선택
         setSelectedDate(availableDays[0]);
       }
     }
