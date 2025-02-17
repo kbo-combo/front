@@ -10,6 +10,7 @@ const color = {
   grayLight: '#ECECEC',
   grayDark: '#A5A5A5',
   water: '#75AEDC',
+  green: '#15b737'
 } as const;
 
 const font = {

@@ -29,14 +29,14 @@ export const SelectionText = styled.div`
 
 export const CancelButton = styled.button<{ disabled?: boolean }>`
   padding: 1.5rem 2.5rem;
-  background: ${({ disabled }) => (disabled ? theme.color.grayDark : theme.color.accent)};
+  background: ${({disabled}) => (disabled ? theme.color.grayDark : theme.color.accent)};
   color: #fff;
   border: none;
   border-radius: 1rem;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: ${({disabled}) => (disabled ? "not-allowed" : "pointer")};
   font: ${theme.font.text};
   font-size: 1.5rem;
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  opacity: ${({disabled}) => (disabled ? 0.6 : 1)};
   transition: background 0.3s ease;
   position: absolute;
   bottom: 1rem;
@@ -63,15 +63,20 @@ export const PlayerDetails = styled.div`
 `;
 
 export const PlayerName = styled.div`
+  font: ${theme.font.text};
+  margin-left: 2.5rem;
   font-size: 2.4rem;
-  font-weight: bold;
-  color: ${({theme}) => theme.color.primaryText || "#000"};
 `;
 
 export const ComboStatus = styled.div<{ status: ComboStatusType }>`
+  font: ${theme.font.text};
   font-size: 2.0rem;
-  color: ${({status, theme}) =>
-      status === "PASS" ? theme.color.success || "#28a745"
-          : status === "PENDING" ? theme.color.warning || "#ffc107"
-              : theme.color.error || "#dc3545"};
+  margin-left: 2.5rem;
+  margin-top: 1.5rem;
+  color: ${({ status, theme }) =>
+      status === "SUCCESS" ? `${theme.color.green}`
+          : status === "PENDING" ? `${theme.color.grayDark}`
+              : status === "FAIL" ? `${theme.color.accent}`
+              : status === "PASS" ? `${theme.color.grayDark}`
+                  : theme.color.grayDark};
 `;
