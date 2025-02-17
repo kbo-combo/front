@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import {useState, useEffect, useRef} from "react";
 import {
   CurrentMonth, DateItem, DatesWrapper, Day,
   Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
-import { useGameDate } from "@/contexts/GameDateContext.tsx";
-import { useGameListByYearAndMonth } from "@/hooks/useGameList.ts";
-import { GameDateResponse } from "@apis/game.ts";
+import {useGameDate} from "@/contexts/GameDateContext.tsx";
+import {useGameListByYearAndMonth} from "@/hooks/useGameList.ts";
+import {GameDateResponse} from "@apis/game.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
 
 const GameSchedule = () => {
-  const { selectedDate, setSelectedDate } = useGameDate();
+  const {selectedDate, setSelectedDate} = useGameDate();
   const today = new Date();
 
   const initialMonth = selectedDate
@@ -22,7 +22,7 @@ const GameSchedule = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const dateRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const { data: availableDates } = useGameListByYearAndMonth(
+  const {data: availableDates} = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1
   ) as { data?: GameDateResponse[]; isLoading: boolean };
@@ -101,14 +101,14 @@ const GameSchedule = () => {
     const month = date.getMonth();
     const days = new Date(year, month + 1, 0).getDate();
 
-    return Array.from({ length: days }, (_, i) => {
+    return Array.from({length: days}, (_, i) => {
       const dayDate = new Date(year, month, i + 1);
       return {
         date: dayDate,
         year,
         month: month + 1,
         day: dayDate.getDate(),
-        weekDay: dayDate.toLocaleDateString("ko-KR", { weekday: "short" }),
+        weekDay: dayDate.toLocaleDateString("ko-KR", {weekday: "short"}),
       };
     });
   };
@@ -121,11 +121,21 @@ const GameSchedule = () => {
       <Wrapper>
         <Header>
           <NavButton onClick={handlePrevMonth} disabled={isPrevDisabled}>
-            ◀
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+                 style={{marginTop: "1rem"}}>
+              <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round"/>
+            </svg>
           </NavButton>
           <CurrentMonth>{`${currentMonth.getFullYear()}.${String(currentMonth.getMonth() + 1).padStart(2, "0")}`}</CurrentMonth>
           <NavButton onClick={handleNextMonth} disabled={isNextDisabled}>
-            ▶
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+                 style={{marginTop: "1rem"}}>
+              <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round"/>
+            </svg>
           </NavButton>
         </Header>
 

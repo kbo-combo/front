@@ -23,11 +23,11 @@ export const NavButton = styled.button<{ disabled: boolean }>`
   border: none;
   font-size: 1.5rem;
   cursor: ${({disabled}) => (disabled ? "not-allowed" : "pointer")};
-  padding: 0.5rem;
+  padding: 1.0rem;
   color: ${({
               disabled,
               theme
-            }) => (disabled ? theme.color.grayDark : theme.color.primary)};
+            }) => (disabled ? theme.color.grayDark : theme.color.sub)};
   opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
 `;
 
