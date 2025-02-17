@@ -55,7 +55,7 @@ const GameList = () => {
                 <GameInfo>
                   <GameTime>{game.startTime}</GameTime>
                   <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
-                                     awayTeam={game.awayTeam}/>
+                                     awayTeam={game.awayTeam} startDate={game.startDate} startTime={game.startTime}/>
                 </GameInfo>
               </PlayerCard>
           ))}
