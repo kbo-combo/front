@@ -14,3 +14,15 @@ export const toDateFormat = (localDate: string, localTime: string): Date => {
 export const sliceSecond = (localTime: string): string => {
   return localTime.split(":").slice(0, 2).join(":")
 };
+
+export const addDay = (date: Date, days: number): Date => {
+  return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
+};
+
+export const addMin = (date: Date, minutes: number): Date => {
+  return new Date(date.getTime() + minutes * 60 * 1000);
+};
+
+export const minusMin = (date: Date, minutes: number): Date => {
+  return new Date(date.getTime() - minutes * 60 * 1000);
+};

@@ -14,7 +14,7 @@ import {
   TopSection
 } from "@components/combo/SelectedCombo.style.tsx";
 import {canNotCancelCombo} from "@/function/combo/combo.ts";
-import {toDateFormat} from "@/function/utils.ts";
+import {addDay, toDateFormat} from "@/function/utils.ts";
 
 const SelectedCombo = () => {
   const {data: combo, isLoading, error, comboDate} = useComboByGame();
@@ -24,7 +24,7 @@ const SelectedCombo = () => {
 
   const now = new Date();
   const comboDateObj = new Date(comboDate);
-  const isComboDateTooEarly = comboDateObj > new Date(now.setDate(now.getDate() + 2));
+  const isComboDateTooEarly = comboDateObj > addDay(now, 2);
 
   if (error || !combo || isComboDateTooEarly) {
     return (
