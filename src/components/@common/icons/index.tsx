@@ -4,6 +4,8 @@ import theme from "../../../style/theme.style.ts";
 export const ICONS = [
   'account-circle-line',
   'home-line',
+  'left-month',
+  'right-month'
 ] as const;
 
 type IconIds = (typeof ICONS)[number];

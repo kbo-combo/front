@@ -6,6 +6,7 @@ import {
 import {useGameDate} from "@/contexts/GameDateContext.tsx";
 import {useGameListByYearAndMonth} from "@/hooks/useGameList.ts";
 import {GameDateResponse} from "@apis/game.ts";
+import SvgStroke from "@components/@common/icons";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
@@ -121,21 +122,11 @@ const GameSchedule = () => {
       <Wrapper>
         <Header>
           <NavButton onClick={handlePrevMonth} disabled={isPrevDisabled}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 style={{marginTop: "1rem"}}>
-              <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                    strokeLinejoin="round"/>
-            </svg>
+            <SvgStroke icon="left-month" size={20} style={{ marginTop: "1rem" }} />
           </NavButton>
           <CurrentMonth>{`${currentMonth.getFullYear()}.${String(currentMonth.getMonth() + 1).padStart(2, "0")}`}</CurrentMonth>
           <NavButton onClick={handleNextMonth} disabled={isNextDisabled}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 style={{marginTop: "1rem"}}>
-              <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                    strokeLinejoin="round"/>
-            </svg>
+            <SvgStroke icon="right-month" size={20} style={{ marginTop: "1rem" }} />
           </NavButton>
         </Header>
 
