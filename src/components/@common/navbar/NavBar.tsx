@@ -13,7 +13,7 @@ const NavBar = () => {
         <Button as={Link} to={URL_PATH.main}>
           <NavItem isActive={true} iconId="home-line" label="메인"/>
         </Button>
-        <Button as={Link} to={URL_PATH.main}>
+        <Button as={Link} to={URL_PATH.rule_book}>
           <NavItem isActive={true} iconId="rulebook" label="규칙"/>
         </Button>
         {isLoggedIn ? (

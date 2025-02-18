@@ -10,6 +10,7 @@ import AuthRoute from "@/router/AuthRoute.tsx";
 import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 import HitterSelectPage from "@pages/@common/hitter-select";
 import GameDateLayout from "@/contexts/GameDateLayout.tsx";
+import RuleBook from "@pages/@common/rule-book";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path: `${URL_PATH.login}/:socialProvider`,
           element: <AuthRoute isPrivate={false} element={<CallbackPage />} />,
+        },
+        {
+          path: URL_PATH.rule_book,
+          element: <RuleBook />,
         },
         {
           path: URL_PATH.member,
