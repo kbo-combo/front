@@ -115,6 +115,10 @@ export const TeamRow = styled.div`
 export const TeamLogo = styled.img`
   width: 5rem;
   height: 5rem;
+  @media (max-width: 500px) {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
   border-radius: 50%;
   object-fit: contain;
 `;
