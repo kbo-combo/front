@@ -42,6 +42,11 @@ const SvgIcons = () => (
             d="M9 6L15 12L9 18"
         />
       </symbol>
+      <symbol id="rulebook" viewBox="0 0 24 24">
+        <path fill="none" strokeWidth="2" strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3V3Zm4 5h8M7 12h8M7 15h5M3 19h14"/>
+      </symbol>
     </defs>
   </Svg>
 );
