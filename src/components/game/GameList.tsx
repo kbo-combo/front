@@ -36,7 +36,9 @@ const GameList = () => {
 
   if (isLoading) return <Loading/>
 
-  if (error) return <div>error</div>
+  if (error) {
+    throw error
+  }
 
   return (
       <Wrapper>
