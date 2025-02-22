@@ -26,9 +26,13 @@ function App() {
           <HelmetProvider>
             <GlobalStyle/>
             <Helmet>
-              {process.env.NODE_ENV !== 'production' && (
-                  <meta name="robots" content="noindex, nofollow"/>
-              )}
+              <>
+                {process.env.NODE_ENV !== 'prd' ? (
+                    <meta name="robots" content="noindex, nofollow" />
+                ) : (
+                    <title>하루한타</title>
+                )}
+              </>
             </Helmet>
             <ThemeProvider theme={theme}>
                 <CustomToastContainer/>
