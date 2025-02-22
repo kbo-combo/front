@@ -9,6 +9,8 @@
     "dev-server": "NODE_ENV=development  vite --mode development",
     "build-dev": "NODE_ENV=development  vite build --mode development",
     "build-local": "NODE_ENV=local vite build --mode local-dev",
+    "build-prd": "NODE_ENV=development  vite build --mode prd",
+    "prd": "NODE_ENV=development  vite --mode prd",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
