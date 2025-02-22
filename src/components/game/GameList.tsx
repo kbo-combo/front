@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {useGameList} from "@/hooks/useGameList.ts";
 
 import ncLogo from "@assets/logos/nc-logo.svg";
 import kiaLogo from "@assets/logos/kia-logo.svg";
@@ -14,8 +13,8 @@ import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
 import ComboHitterButton from "@components/hitter/ComboHitterButton.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
-import {useGameDate} from "@/contexts/GameDateContext.tsx";
 import {sliceSecond} from "@/function/utils.ts";
+import {useGameDate, useGameList} from "@/hooks/game/useGame.ts";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,

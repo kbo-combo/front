@@ -3,10 +3,9 @@ import {
   CurrentMonth, DateItem, DatesWrapper, Day,
   Header, NavButton, ScrollContainer, WeekDay, Wrapper
 } from "@components/game/GameSchedule.style.ts";
-import {useGameDate} from "@/contexts/GameDateContext.tsx";
-import {useGameListByYearAndMonth} from "@/hooks/useGameList.ts";
 import {GameDateResponse} from "@apis/game.ts";
 import SvgStroke from "@components/@common/icons";
+import {useGameDate, useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;

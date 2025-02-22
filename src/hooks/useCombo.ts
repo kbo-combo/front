@@ -6,7 +6,7 @@ import {
   findComboByGameDate
 } from "@apis/combo.ts";
 import {toast} from "react-toastify";
-import {useGameDate} from "@/contexts/GameDateContext.tsx";
+import {useGameDate} from "@/hooks/game/useGame.ts";
 
 
 export const useCreateCombo = () => {
