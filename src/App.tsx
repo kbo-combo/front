@@ -10,6 +10,7 @@ import {NavBarProvider} from "@components/@common/navbar/NavBarContextProvider.t
 import CustomToastContainer from "@components/@common/toast/CustomToastContainer.tsx";
 import {useEffect} from "react";
 import ReactGA from 'react-ga4';
+import {RecoilRoot} from "recoil";
 const GA_CODE = import.meta.env.VITE_GA_CODE;
 
 export const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ function App() {
   return (
       <>
         <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
           <HelmetProvider>
             <GlobalStyle/>
             <Helmet>
@@ -52,6 +54,7 @@ function App() {
             </ThemeProvider>
 
           </HelmetProvider>
+          </RecoilRoot>
         </QueryClientProvider>
       </>
   )

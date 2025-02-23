@@ -1,5 +1,3 @@
-import {useContext} from "react";
-import {GameDateContext} from "@/contexts/GameDateContext.tsx";
 import {useQuery} from "@tanstack/react-query";
 import {
   findGameByDate,
@@ -7,21 +5,18 @@ import {
   GameDateResponse,
   GameResponse
 } from "@apis/game.ts";
+import {useRecoilState} from "recoil";
+import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 
 export const useGameDate = () => {
-  const context = useContext(GameDateContext);
-  if (!context) {
-    throw new Error("useGameDate must be used within a GameDateProvider");
-  }
-  const {selectedDate, ...rest} = context;
+  const [selectedDate, setSelectedDate] = useRecoilState(gameDateAtom);
 
   return {
     selectedDate,
     formattedDate: selectedDate.toLocaleDateString("sv-SE"),
-    ...rest,
+    setSelectedDate,
   };
 };
-
 export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],
