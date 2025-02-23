@@ -34,22 +34,22 @@ const GameSchedule = () => {
     .map((d: GameDateResponse) => new Date(d.gameDate))
     .filter((d) => d.getMonth() === currentMonth.getMonth());
 
-    if (availableDays.length) {
-      if (selectedDate && selectedDate.getMonth() === currentMonth.getMonth()) {
-        // 🔹 같은 월이면 기존 날짜를 유지하되, 유효한 날짜인지 확인
-        const existingDate = availableDays.find(
-            (d) => d.getDate() === selectedDate.getDate()
-        );
-        setSelectedDate(existingDate || availableDays[0]); // 존재하지 않으면 첫 번째 날짜 선택
-      } else if (selectedDate && selectedDate.getMonth() > currentMonth.getMonth()) {
+    if (!availableDays.length) return;
+
+    setSelectedDate((prev) => {
+      if (prev && prev.getMonth() === currentMonth.getMonth()) {
+        // 🔹 기존 날짜가 유효한 경우 유지
+        const existingDate = availableDays.find((d) => d.getDate() === prev.getDate());
+        return existingDate || availableDays[0];
+      } else if (prev && prev.getMonth() > currentMonth.getMonth()) {
         // 🔹 이전 달로 이동한 경우 → 가장 마지막 날짜 선택
-        setSelectedDate(availableDays[availableDays.length - 1]);
+        return availableDays[availableDays.length - 1];
       } else {
         // 🔹 다음 달로 이동한 경우 → 가장 첫 번째 날짜 선택
-        setSelectedDate(availableDays[0]);
+        return availableDays[0];
       }
-    }
-  }, [currentMonth, availableDates]);
+    });
+  }, [currentMonth, availableDates, setSelectedDate]);
 
   useEffect(() => {
     if (selectedDate && scrollContainerRef.current) {
