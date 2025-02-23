@@ -11,6 +11,7 @@ const RuleBook = () => {
       <>
         <Wrapper>
           <MainMessage>콤보 규칙</MainMessage>
+
           <EmphasizedText>성공</EmphasizedText>
           <Description>선택한 선수가 1안타 이상을 기록한 경우</Description>
           <Description>강우 콜드등으로 경기가 종료되더라도 정식 경기로 성립된다면 성공으로 판정</Description>

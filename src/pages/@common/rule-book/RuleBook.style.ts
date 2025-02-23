@@ -20,16 +20,14 @@ export const MainMessage = styled.p`
 `;
 
 export const EmphasizedText = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
+  font: ${theme.font.dictTitle};
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: ${theme.color.primary}; 
 `;
 
 export const Description = styled.div`
-  font-size: 1.6rem;
-  font-weight: 500;
+  font: ${theme.font.dictContent};
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 `;
