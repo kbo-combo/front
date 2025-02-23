@@ -4,23 +4,16 @@ import theme from "@style/theme.style";
 import {RouterProvider} from "react-router-dom";
 import SvgSpriteMap from "@components/@common/icons/SvgSpriteMap";
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {QueryClientProvider} from "@tanstack/react-query";
 import router from "@/router/router.tsx";
 import {NavBarProvider} from "@components/@common/navbar/NavBarContextProvider.tsx";
 import CustomToastContainer from "@components/@common/toast/CustomToastContainer.tsx";
 import {useEffect} from "react";
 import ReactGA from 'react-ga4';
 import {RecoilRoot} from "recoil";
-const GA_CODE = import.meta.env.VITE_GA_CODE;
+import {queryClient} from "@/hooks/client/queryClient.ts";
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      throwOnError: false,
-    },
-  },
-});
+const GA_CODE = import.meta.env.VITE_GA_CODE;
 
 function App() {
 
