@@ -49,7 +49,7 @@ const GameSchedule = () => {
         setSelectedDate(availableDays[0]);
       }
     }
-  }, [currentMonth, availableDates]);
+  }, [currentMonth, availableDates, selectedDate,setSelectedDate]);
 
   useEffect(() => {
     if (selectedDate && scrollContainerRef.current) {
