@@ -22,15 +22,6 @@ export const Nickname = styled.span`
   white-space: nowrap;
 `;
 
-export const ProfileImage = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%; 
-  border: 0.5rem solid ${({ theme: { color } }) => color.primary}; 
-  object-fit: cover; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
 export const ProfileWrapper = styled.div`
   display: flex;
   justify-content: center;

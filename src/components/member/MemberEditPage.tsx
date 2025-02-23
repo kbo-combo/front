@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useChangeNickname, useMemberDetail} from "@/hooks/useMember.ts";
-import {ProfileImage, ProfileWrapper, Wrapper,} from "@components/member/member.style.ts";
+import {ProfileWrapper, Wrapper,} from "@components/member/member.style.ts";
 import ContentHeader from "@components/@common/contentHeader";
 import {URL_PATH} from "@/constant";
 import Loading from "@pages/@common/common/Loading.tsx";
@@ -35,7 +35,6 @@ const MemberPage = () => {
       <Wrapper>
         <ContentHeader title="마이페이지" />
         <ProfileWrapper>
-          <ProfileImage src="/santa-sunnam.png" alt="프로필 이미지" />
           <NicknameInput
               type="text"
               value={nickname}

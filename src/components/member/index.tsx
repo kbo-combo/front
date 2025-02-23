@@ -2,7 +2,6 @@ import {
   EditButton,
   MemberEditLink,
   Nickname,
-  ProfileImage,
   ProfileWrapper,
   Wrapper
 } from "@components/member/member.style.ts";
@@ -22,7 +21,6 @@ const MemberPage = () => {
   return <Wrapper>
     <ContentHeader title={"마이페이지"}/>
     <ProfileWrapper>
-      <ProfileImage src="/santa-sunnam.png" alt="프로필 이미지"/>
       <Nickname>{data.nickname}</Nickname>
       <MemberEditLink to={`${URL_PATH.member}/edit`}>
       <EditButton>
