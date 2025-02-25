@@ -17,9 +17,14 @@ const NavBar = () => {
           <NavItem isActive={true} iconId="rulebook" label="규칙"/>
         </Button>
         {isLoggedIn ? (
-            <Button as={Link} to={URL_PATH.member}>
-              <NavItem isActive={true} iconId="account-circle-line" label="내정보"/>
-            </Button>
+            <>
+              <Button as={Link} to={URL_PATH.combo}>
+                <NavItem isActive={true} iconId="combo-icon" label="콤보"/>
+              </Button>
+              <Button as={Link} to={URL_PATH.member}>
+                <NavItem isActive={true} iconId="account-circle-line" label="내정보"/>
+              </Button>
+            </>
         ) : (
             <Button as={Link} to={URL_PATH.login}>
               <NavItem isActive={true} iconId="account-circle-line" label="로그인"/>
