@@ -1,9 +1,15 @@
-import {useState, useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
-  CurrentMonth, DateItem, DatesWrapper, Day,
-  Header, NavButton, ScrollContainer, WeekDay, Wrapper
+  CurrentMonth,
+  DateItem,
+  DatesWrapper,
+  Day,
+  Header,
+  NavButton,
+  ScrollContainer,
+  WeekDay,
+  Wrapper
 } from "@components/game/GameSchedule.style.ts";
-import {GameDateResponse} from "@apis/game.ts";
 import SvgStroke from "@components/@common/icons";
 import {useGameDate, useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
 
@@ -11,7 +17,7 @@ const MIN_MONTH = 0;
 const MAX_MONTH = 10;
 
 const GameSchedule = () => {
-  const {selectedDate, setSelectedDate} = useGameDate();
+  const { selectedDate, setSelectedDate } = useGameDate();
   const today = new Date();
 
   const initialMonth = selectedDate
@@ -20,40 +26,40 @@ const GameSchedule = () => {
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const dateRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const {data: availableDates} = useGameListByYearAndMonth(
+  const { gameDateList } = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1
-  ) as { data?: GameDateResponse[]; isLoading: boolean };
+  );
+
+  const lastSelectedDate = useRef<Date | null>(null);
 
   useEffect(() => {
-    if (!availableDates?.length) return;
+    if (!gameDateList?.length) return;
 
-    const availableDays = availableDates
-    .map((d: GameDateResponse) => new Date(d.gameDate))
-    .filter((d) => d.getMonth() === currentMonth.getMonth());
+    const availableDays = gameDateList
+    .filter((d) => d.hasGame)
+    .map((d) => d.date);
 
-    if (!availableDays.length) return;
+    if (availableDays.length === 0) return;
 
-    setSelectedDate((prev) => {
-      if (prev && prev.getMonth() === currentMonth.getMonth()) {
-        // 🔹 기존 날짜가 유효한 경우 유지
-        const existingDate = availableDays.find((d) => d.getDate() === prev.getDate());
-        return existingDate || availableDays[0];
-      } else if (prev && prev.getMonth() > currentMonth.getMonth()) {
-        // 🔹 이전 달로 이동한 경우 → 가장 마지막 날짜 선택
-        return availableDays[availableDays.length - 1];
-      } else {
-        // 🔹 다음 달로 이동한 경우 → 가장 첫 번째 날짜 선택
-        return availableDays[0];
+    const newSelectedDate = (() => {
+      if (selectedDate && availableDays.includes(selectedDate.toISOString().split("T")[0])) {
+        return selectedDate;
       }
-    });
-  }, [currentMonth, availableDates, setSelectedDate]);
+      return new Date(availableDays[0]);
+    })();
+
+    if (!lastSelectedDate.current || lastSelectedDate.current.getTime() !== newSelectedDate.getTime()) {
+      lastSelectedDate.current = newSelectedDate;
+      setSelectedDate(newSelectedDate);
+    }
+  }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
 
   useEffect(() => {
     if (selectedDate && scrollContainerRef.current) {
-      const selectedKey = selectedDate.toDateString();
+      const selectedKey = selectedDate.toISOString().split("T")[0];
       const selectedElement = dateRefs.current[selectedKey];
 
       if (selectedElement) {
@@ -90,30 +96,12 @@ const GameSchedule = () => {
     });
   };
 
-  const handleSelectDate = (date: Date) => {
-    if (availableDates?.some((d: GameDateResponse) => new Date(d.gameDate).toDateString() === date.toDateString())) {
-      setSelectedDate(date);
+  const handleSelectDate = (dateStr: string) => {
+    if (gameDateList?.some((d) => d.date === dateStr)) {
+      setSelectedDate(new Date(dateStr));
     }
   };
 
-  const getDaysInMonth = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const days = new Date(year, month + 1, 0).getDate();
-
-    return Array.from({length: days}, (_, i) => {
-      const dayDate = new Date(year, month, i + 1);
-      return {
-        date: dayDate,
-        year,
-        month: month + 1,
-        day: dayDate.getDate(),
-        weekDay: dayDate.toLocaleDateString("ko-KR", {weekday: "short"}),
-      };
-    });
-  };
-
-  const formattedDays = getDaysInMonth(currentMonth);
   const isPrevDisabled = currentMonth.getMonth() <= MIN_MONTH;
   const isNextDisabled = currentMonth.getMonth() >= MAX_MONTH;
 
@@ -128,24 +116,19 @@ const GameSchedule = () => {
             <SvgStroke icon="right-month" size={20} style={{ marginTop: "1rem" }} />
           </NavButton>
         </Header>
-
         <ScrollContainer ref={scrollContainerRef}>
           <DatesWrapper>
-            {formattedDays.map((dateObj, index) => {
-              const isAvailable = availableDates?.some(
-                  (d: GameDateResponse) => new Date(d.gameDate).toDateString() === dateObj.date.toDateString()
-              );
-
+            {gameDateList.map((dateObj, index) => {
               return (
                   <DateItem
                       key={index}
-                      ref={(el) => (dateRefs.current[dateObj.date.toDateString()] = el)}
-                      selected={selectedDate?.toDateString() === dateObj.date.toDateString()}
-                      disabled={!isAvailable}
+                      ref={(el) => (dateRefs.current[dateObj.date] = el)}
+                      selected={selectedDate?.toISOString().split("T")[0] === dateObj.date}
+                      disabled={!dateObj.hasGame}
                       onClick={() => handleSelectDate(dateObj.date)}
                   >
-                    <WeekDay>{dateObj.weekDay}</WeekDay>
-                    <Day>{dateObj.day}</Day>
+                    <WeekDay>{new Date(dateObj.date).toLocaleDateString("ko-KR", { weekday: "short" })}</WeekDay>
+                    <Day>{dateObj.date.split("-")[2]}</Day>
                   </DateItem>
               );
             })}
