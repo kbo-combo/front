@@ -10,6 +10,7 @@ import AuthRoute from "@/router/AuthRoute.tsx";
 import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 import HitterSelectPage from "@pages/@common/hitter-select";
 import RuleBook from "@pages/@common/rule-book";
+import ComboPage from "@pages/@common/combo";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         {
           path: URL_PATH.rule_book,
           element: <RuleBook />,
+        },
+        {
+          path: URL_PATH.combo,
+          element: <AuthRoute isPrivate={true} element={<ComboPage />} />,
         },
         {
           path: URL_PATH.member,
