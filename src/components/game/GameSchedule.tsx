@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import {
   CurrentMonth,
   DateItem,
@@ -12,7 +12,7 @@ import {
 } from "@components/game/GameSchedule.style.ts";
 import SvgStroke from "@components/@common/icons";
 import {useGameDate, useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
-import {useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
+import {useInitializeSelectedDate, useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
@@ -26,39 +26,14 @@ const GameSchedule = () => {
       : new Date(today.getFullYear(), today.getMonth(), 1);
 
   const [currentMonth, setCurrentMonth] = useState(initialMonth);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const { gameDateList } = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1
   );
 
-  const lastSelectedDate = useRef<Date | null>(null);
-
-  useEffect(() => {
-    if (!gameDateList?.length) return;
-
-    const availableDays = gameDateList
-    .filter((d) => d.hasGame)
-    .map((d) => d.date);
-
-    if (availableDays.length === 0) return;
-
-    const newSelectedDate = (() => {
-      if (selectedDate && availableDays.includes(selectedDate.toISOString().split("T")[0])) {
-        return selectedDate;
-      }
-      return new Date(availableDays[0]);
-    })();
-
-    if (!lastSelectedDate.current || lastSelectedDate.current.getTime() !== newSelectedDate.getTime()) {
-      lastSelectedDate.current = newSelectedDate;
-      setSelectedDate(newSelectedDate);
-    }
-  }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
-
-  useScrollToSelectedDate(selectedDate, scrollContainerRef, dateRefs);
+  useInitializeSelectedDate(selectedDate, setSelectedDate, currentMonth, gameDateList);
+  const { scrollContainerRef, dateRefs } = useScrollToSelectedDate(selectedDate);
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {

@@ -1,10 +1,43 @@
-import React, { useEffect } from "react";
+import {useEffect, useRef} from "react";
+
+export const useInitializeSelectedDate = (
+    selectedDate: Date | null,
+    setSelectedDate: (date: Date) => void,
+    currentMonth: Date,
+    gameDateList: { date: string; hasGame: boolean }[]
+) => {
+  const lastSelectedDate = useRef<Date | null>(null);
+
+  useEffect(() => {
+    if (!gameDateList?.length) return;
+
+    const availableDays = gameDateList
+    .filter((d) => d.hasGame)
+    .map((d) => d.date);
+
+    if (availableDays.length === 0) return;
+
+    const newSelectedDate = (() => {
+      if (selectedDate && availableDays.includes(selectedDate.toISOString().split("T")[0])) {
+        return selectedDate;
+      }
+      return new Date(availableDays[0]);
+    })();
+
+    if (!lastSelectedDate.current || lastSelectedDate.current.getTime() !== newSelectedDate.getTime()) {
+      lastSelectedDate.current = newSelectedDate;
+      setSelectedDate(newSelectedDate);
+    }
+  }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
+};
 
 export const useScrollToSelectedDate = (
     selectedDate: Date | null,
-    scrollContainerRef: React.RefObject<HTMLDivElement>,
-    dateRefs: React.RefObject<Record<string, HTMLDivElement | null>>
 ) => {
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
   useEffect(() => {
     if (!selectedDate || !scrollContainerRef.current || !dateRefs.current) return;
 
@@ -29,4 +62,7 @@ export const useScrollToSelectedDate = (
       behavior: "smooth",
     });
   }, [selectedDate, scrollContainerRef, dateRefs]);
+
+  return { scrollContainerRef, dateRefs };
+
 };
