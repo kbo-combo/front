@@ -1,4 +1,3 @@
-import {useComboByGame, useDeleteCombo} from "@/hooks/useCombo.ts";
 import {getStatusText} from "@constant/combo.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
@@ -15,6 +14,7 @@ import {
 } from "@components/combo/SelectedCombo.style.tsx";
 import {canNotCancelCombo, showCancelButton} from "@/function/combo/combo.ts";
 import {addDay, toDateFormat} from "@/function/utils.ts";
+import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";
 
 const SelectedCombo = () => {
   const {data: combo, isLoading, error, comboDate} = useComboByGame();
