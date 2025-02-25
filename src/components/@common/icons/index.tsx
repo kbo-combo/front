@@ -6,7 +6,8 @@ export const ICONS = [
   'home-line',
   'left-month',
   'right-month',
-  'rulebook'
+  'rulebook',
+  'combo-icon'
 ] as const;
 
 type IconIds = (typeof ICONS)[number];
