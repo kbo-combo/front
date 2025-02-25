@@ -12,6 +12,7 @@ import {
 } from "@components/game/GameSchedule.style.ts";
 import SvgStroke from "@components/@common/icons";
 import {useGameDate, useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
+import {useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
 
 const MIN_MONTH = 0;
 const MAX_MONTH = 10;
@@ -57,30 +58,7 @@ const GameSchedule = () => {
     }
   }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
 
-  useEffect(() => {
-    if (selectedDate && scrollContainerRef.current) {
-      const selectedKey = selectedDate.toISOString().split("T")[0];
-      const selectedElement = dateRefs.current[selectedKey];
-
-      if (selectedElement) {
-        const container = scrollContainerRef.current;
-        const containerRect = container.getBoundingClientRect();
-        const elementRect = selectedElement.getBoundingClientRect();
-
-        const scrollLeft =
-            container.scrollLeft +
-            elementRect.left -
-            containerRect.left -
-            container.clientWidth / 2 +
-            elementRect.width / 2;
-
-        container.scrollTo({
-          left: scrollLeft,
-          behavior: "smooth",
-        });
-      }
-    }
-  }, [selectedDate]);
+  useScrollToSelectedDate(selectedDate, scrollContainerRef, dateRefs);
 
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
