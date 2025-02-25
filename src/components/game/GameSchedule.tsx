@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {
   CurrentMonth,
   DateItem,
@@ -11,28 +10,15 @@ import {
   Wrapper
 } from "@components/game/GameSchedule.style.ts";
 import SvgStroke from "@components/@common/icons";
-import {useGameDate, useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
+import {useGameDate} from "@/hooks/game/useGame.ts";
 import {useInitializeSelectedDate, useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
 
-const MIN_MONTH = 0;
+const MIN_MONTH = 1;
 const MAX_MONTH = 10;
 
 const GameSchedule = () => {
   const { selectedDate, setSelectedDate } = useGameDate();
-  const today = new Date();
-
-  const initialMonth = selectedDate
-      ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
-      : new Date(today.getFullYear(), today.getMonth(), 1);
-
-  const [currentMonth, setCurrentMonth] = useState(initialMonth);
-
-  const { gameDateList } = useGameListByYearAndMonth(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1
-  );
-
-  useInitializeSelectedDate(selectedDate, setSelectedDate, currentMonth, gameDateList);
+  const { currentMonth, setCurrentMonth, gameDateList } = useInitializeSelectedDate(selectedDate, setSelectedDate);
   const { scrollContainerRef, dateRefs } = useScrollToSelectedDate(selectedDate);
 
   const handlePrevMonth = () => {

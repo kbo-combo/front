@@ -1,11 +1,23 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
+import {useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
 
 export const useInitializeSelectedDate = (
     selectedDate: Date | null,
-    setSelectedDate: (date: Date) => void,
-    currentMonth: Date,
-    gameDateList: { date: string; hasGame: boolean }[]
+    setSelectedDate: (date: Date) => void
 ) => {
+  const today = new Date();
+
+  const initialMonth = selectedDate
+      ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
+      : new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const [currentMonth, setCurrentMonth] = useState(initialMonth);
+
+  const { gameDateList } = useGameListByYearAndMonth(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + 1
+  );
+
   const lastSelectedDate = useRef<Date | null>(null);
 
   useEffect(() => {
@@ -29,6 +41,8 @@ export const useInitializeSelectedDate = (
       setSelectedDate(newSelectedDate);
     }
   }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
+
+  return { currentMonth, setCurrentMonth, gameDateList };
 };
 
 export const useScrollToSelectedDate = (
