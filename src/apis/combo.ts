@@ -26,12 +26,25 @@ export const findComboByGameDate = async (gameDate: string): Promise<ComboRespon
   return response.data
 };
 
-export const findComboListByParam = async (gameDate?: string, gameType?: string): Promise<ComboListResponse[] | null> => {
+export const findComboListByParam = async (startDate?: string, endDate?: string): Promise<ComboListResponse[] | null> => {
   const response = await client.get<ComboListResponse[]>('combos/list', {
-        params: {gameDate, gameType}
+        params: {startDate, endDate}
       }
   )
   return response.data
+}
+
+export interface ComboListResponse {
+  comboId: number;
+  playerId: number;
+  playerName: string;
+  playerImageUrl: string | null
+  comboStatus: ComboStatusType;
+  gameStartDate: string,
+  gameStartTime: string,
+  homeTeam: TeamName,
+  awayTeam: TeamName,
+  gameType: string
 }
 
 export interface ComboCreateRequest {
@@ -47,16 +60,4 @@ export interface ComboResponse {
   comboStatus: ComboStatusType;
   gameStartDate: string,
   gameStartTime: string,
-}
-
-export interface ComboListResponse {
-  comboId: number;
-  playerId: number;
-  playerName: string;
-  playerImageUrl: string | null
-  comboStatus: ComboStatusType;
-  gameStartDate: string,
-  gameStartTime: string,
-  homeTeam: TeamName,
-  awayTeam: TeamName,
 }

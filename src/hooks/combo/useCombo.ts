@@ -3,7 +3,8 @@ import {
   ComboCreateRequest,
   createCombo,
   deleteComboById,
-  findComboByGameDate
+  findComboByGameDate,
+  findComboListByParam
 } from "@apis/combo.ts";
 import {toast} from "react-toastify";
 import {useGameDate} from "@/hooks/game/useGame.ts";
@@ -51,4 +52,16 @@ export const useComboByGame = () => {
   });
 
   return { data, error, isLoading, comboDate };
+};
+
+export const useComboList = (startDate?: string, endDate?: string) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["combo", startDate, endDate],
+    queryFn: () => findComboListByParam(startDate, endDate),
+    staleTime: 600000,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
+
+  return { data, error, isLoading };
 };
