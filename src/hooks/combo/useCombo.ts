@@ -54,14 +54,14 @@ export const useComboByGame = () => {
   return { data, error, isLoading, comboDate };
 };
 
-export const useComboList = (startDate?: string, endDate?: string) => {
+export const useComboList = (beforeGameDate?: string) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["combo", startDate, endDate],
-    queryFn: () => findComboListByParam(startDate, endDate),
+    queryKey: ["combo", beforeGameDate],
+    queryFn: () => findComboListByParam(beforeGameDate),
     staleTime: 600000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
 
-  return { data, error, isLoading };
+  return { data: data ?? [], error, isLoading };
 };

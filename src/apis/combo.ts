@@ -26,9 +26,9 @@ export const findComboByGameDate = async (gameDate: string): Promise<ComboRespon
   return response.data
 };
 
-export const findComboListByParam = async (startDate?: string, endDate?: string): Promise<ComboListResponse[] | null> => {
+export const findComboListByParam = async (beforeGameDate?: string): Promise<ComboListResponse[] | null> => {
   const response = await client.get<ComboListResponse[]>('combos/list', {
-        params: {startDate, endDate}
+        params: {startDate: beforeGameDate}
       }
   )
   return response.data

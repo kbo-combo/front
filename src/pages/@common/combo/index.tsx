@@ -1,64 +1,173 @@
-import {useCombinedComboList} from "@/hooks/combo/useComboList.ts";
-import {
-  ComboStatus, ComboWrapper,
-  PlayerDetails,
-  PlayerInfo,
-  PlayerName,
-  PlayerSection,
-} from "@components/combo/SelectedCombo.style.tsx";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
-import {getStatusText} from "@constant/combo.ts";
+import {ComboStatusType, getStatusText} from "@constant/combo.ts";
 import styled from "styled-components";
+import {useComboList} from "@/hooks/combo/useCombo.ts";
+import Loading from "@pages/@common/common/Loading.tsx";
+import ncLogo from "@assets/logos/nc-logo.svg";
+import kiaLogo from "@assets/logos/kia-logo.svg";
+import doosanLogo from "@assets/logos/doosan-log.svg";
+import lgLogo from "@assets/logos/lg-logo.svg";
+import ssgLogo from "@assets/logos/ssg-logo.svg";
+import samsungLogo from "@assets/logos/samsung-logo.svg";
+import lotteLogo from "@assets/logos/lotte-logo.svg";
+import kiwoomLogo from "@assets/logos/kiwoom-logo.svg";
+import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
+import ktLogo from "@assets/logos/kt-logo.svg";
+import theme from "@style/theme.style.ts";
+import {getComboStatusColor} from "@/function/combo/combo.ts";
+
+const teamLogos: { [key: string]: string } = {
+  NC: ncLogo,
+  KIA: kiaLogo,
+  DOOSAN: doosanLogo,
+  LG: lgLogo,
+  SSG: ssgLogo,
+  SAMSUNG: samsungLogo,
+  LOTTE: lotteLogo,
+  KIWOOM: kiwoomLogo,
+  HANWHA: hanwhwaLogo,
+  KT: ktLogo,
+};
 
 // CSS 변경
 // 무한 스크롤 추가
 const ComboPage = () => {
-  const { combinedList, isLoading } = useCombinedComboList(2025, 2);
+  const {data, isLoading} = useComboList();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading/>;
 
   return (
       <ComboWrapper>
-        {combinedList.map(({ date, hasGame, combos }) => (
-            <DateSection key={date}>
-              <DateTitle>{date} {hasGame ? "Game 존재" : "Game 없음"}</DateTitle>
-
-              {combos.length > 0 ? (
-                  combos.map((combo) => (
-                      <PlayerSection key={combo.comboId}>
-                        <PlayerInfo>
-                          <PlayerImage url={combo.playerImageUrl} />
-                          <PlayerDetails>
-                            <PlayerName>{combo.playerName}</PlayerName>
-                            <ComboStatus status={combo.comboStatus}>
-                              {getStatusText(combo.comboStatus)}
-                            </ComboStatus>
-                          </PlayerDetails>
-                        </PlayerInfo>
-                      </PlayerSection>
-                  ))
-              ) : (
-                  <NoComboText>미선택</NoComboText>
-              )}
-            </DateSection>
-        ))}
+        <MainMessage>콤보 목록</MainMessage>
+        {data?.length > 0 ? (
+            data.map((combo) => (
+                <ComboSection key={combo.comboId}>
+                  <GameInfoWrapper>
+                    <GameDate>{combo.gameStartDate}</GameDate>
+                    <TeamLogosWrapper>
+                      <TeamLogo src={teamLogos[combo.homeTeam]} alt={combo.homeTeam}/>
+                      <VSLabel>VS</VSLabel>
+                      <TeamLogo src={teamLogos[combo.awayTeam]} alt={combo.awayTeam}/>
+                    </TeamLogosWrapper>
+                  </GameInfoWrapper>
+                  <PlayerInfoWrapper>
+                    <PlayerImage url={combo.playerImageUrl}/>
+                    <PlayerName>{combo.playerName}</PlayerName>
+                  </PlayerInfoWrapper>
+                  <ComboStatus status={combo.comboStatus}>
+                    {getStatusText(combo.comboStatus)}
+                  </ComboStatus>
+                </ComboSection>
+            ))
+        ) : (
+            <NoComboText>미선택</NoComboText>
+        )}
       </ComboWrapper>
   );
 };
 
-
 export default ComboPage;
 
-const DateSection = styled.div`
-  margin-bottom: 16px;
+const ComboWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
 `;
 
-const DateTitle = styled.h3`
-  font-size: 16px;
-  margin-bottom: 8px;
+export const MainMessage = styled.p`
+  margin-top: 4vh;
+  font: ${theme.font.subTitle};
+  align-self: center;
+  font-size: 4.0rem;
+  font-weight: 900;
+  line-height: 3rem;
+  margin-bottom: 4.5rem;
+  color: ${theme.color.primary};
+`;
+
+
+const ComboSection = styled.div`
+  display: flex;
+  align-items: center;
+  max-width: 100rem;
+  justify-content: space-between;
+  width: 75%;
+  gap: 2.0rem;
+  padding: 1.0rem;
+  border-radius: 0.5rem;
+  background: ${({theme}) => theme.color.background};
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-wrap: nowrap;
+`;
+
+const GameInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const GameDate = styled.span`
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: ${theme.color.primary};
+`;
+
+const TeamLogosWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 12rem;
+`;
+
+const VSLabel = styled.span`
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: ${theme.color.subLight};
+`;
+
+const ComboStatus = styled.div<{ status: ComboStatusType }>`
+  font: ${({ theme }) => theme.font.text};
+  font-size: 2.0rem;
+  min-width: 6.0rem;
+  text-align: center;
+  flex-shrink: 0; 
+  margin-left: auto; 
+  color: ${({ status, theme }) => getComboStatusColor(status, theme)};
+`;
+
+const TeamLogo = styled.img`
+  width: 5rem;
+  height: 5rem;
+  @media (max-width: 500px) {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+  border-radius: 50%;
+  object-fit: contain;
+`;
+
+const PlayerInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 2rem; 
+  max-width: 10rem; 
+  flex-shrink: 0; 
+`;
+
+const PlayerName = styled.span`
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: ${({theme}) => theme.color.sub};
 `;
 
 const NoComboText = styled.p`
-  font-size: 14px;
+  font-size: 1.4rem;
   color: gray;
+  text-align: center;
+  margin-top: 2rem;
 `;
