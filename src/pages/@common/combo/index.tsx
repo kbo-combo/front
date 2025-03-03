@@ -75,11 +75,9 @@ const ComboSection = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 2.0rem;
-  padding: 1.0rem;
-  border-radius: 0.5rem;
   background: ${({theme}) => theme.color.background};
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   flex-wrap: nowrap;
+  padding-bottom: 4.0rem;
 `;
 
 const GameInfoWrapper = styled.div`
@@ -91,7 +89,7 @@ const GameInfoWrapper = styled.div`
 const GameDate = styled.span`
   font-size: 2.0rem;
   font-weight: bold;
-  color: ${theme.color.primary};
+  color: ${theme.color.sub};
 `;
 
 const TeamLogosWrapper = styled.div`
@@ -132,7 +130,8 @@ const PlayerInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 2rem; 
+  margin-top: 1.2rem;
+  margin-left: 3rem; 
   max-width: 10rem; 
   flex-shrink: 0; 
 `;
