@@ -41,26 +41,30 @@ const ComboPage = () => {
   return (
       <PageWrapper>
         <ContentHeader title={"콤보 목록"} />
-        {data?.map((combo, index) => (
-            <ComboSection key={combo.comboId} ref={index === data.length - 1 ? observerRef : null}>
-              <GameInfoWrapper>
-                <GameDate>{combo?.gameStartDate}</GameDate>
-                <TeamLogosWrapper>
-                  <TeamLogo src={teamLogos[combo?.homeTeam]} alt={combo?.homeTeam} />
-                  <VSLabel>VS</VSLabel>
-                  <TeamLogo src={teamLogos[combo?.awayTeam]} alt={combo?.awayTeam} />
-                </TeamLogosWrapper>
-              </GameInfoWrapper>
-              <PlayerInfoWrapper>
-                <PlayerImage url={combo?.playerImageUrl} />
-                <PlayerName>{combo?.playerName}</PlayerName>
-              </PlayerInfoWrapper>
-              <ComboStatus status={combo?.comboStatus}>
-                {getStatusText(combo?.comboStatus)}
-              </ComboStatus>
-            </ComboSection>
-        ))}
-        {!hasNextPage && <NoComboText>더 이상 데이터가 없습니다.</NoComboText>}
+        {data?.length === 0 ? (
+            <Message>등록된 콤보가 없습니다.</Message>
+        ) : (
+            data?.map((combo, index) => (
+                <ComboSection key={combo.comboId} ref={index === data.length - 1 ? observerRef : null}>
+                  <GameInfoWrapper>
+                    <GameDate>{combo?.gameStartDate}</GameDate>
+                    <TeamLogosWrapper>
+                      <TeamLogo src={teamLogos[combo?.homeTeam]} alt={combo?.homeTeam} />
+                      <VSLabel>VS</VSLabel>
+                      <TeamLogo src={teamLogos[combo?.awayTeam]} alt={combo?.awayTeam} />
+                    </TeamLogosWrapper>
+                  </GameInfoWrapper>
+                  <PlayerInfoWrapper>
+                    <PlayerImage url={combo?.playerImageUrl} />
+                    <PlayerName>{combo?.playerName}</PlayerName>
+                  </PlayerInfoWrapper>
+                  <ComboStatus status={combo?.comboStatus}>
+                    {getStatusText(combo?.comboStatus)}
+                  </ComboStatus>
+                </ComboSection>
+            ))
+        )}
+        {!hasNextPage && data?.length !== 0 && <Message>더 이상 콤보가 없습니다.</Message>}
       </PageWrapper>
   );
 };
@@ -142,9 +146,10 @@ const PlayerName = styled.span`
   color: ${({theme}) => theme.color.sub};
 `;
 
-const NoComboText = styled.p`
+const Message = styled.p`
   font-size: 1.4rem;
   color: gray;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 10rem;
 `;
