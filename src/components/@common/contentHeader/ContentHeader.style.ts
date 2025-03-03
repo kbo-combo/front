@@ -8,7 +8,7 @@ export const HeaderBox = styled.header`
   background: ${(props) => props.theme.color.background};
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: solid 1px ${(props) => props.theme.color.primary};
+  border-bottom: solid 1px ${(props) => props.theme.color.grayDark};
 `;
 
 export const Title = styled.p`
