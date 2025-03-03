@@ -29,8 +29,6 @@ const teamLogos: { [key: string]: string } = {
   KT: ktLogo,
 };
 
-// CSS 변경
-// 무한 스크롤 추가
 const ComboPage = () => {
   const {data, isLoading} = useComboList();
 

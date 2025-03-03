@@ -5,7 +5,7 @@ import {
   ProfileWrapper,
   Wrapper
 } from "@components/member/member.style.ts";
-import ContentHeader from "@components/@common/contentHeader";
+import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {FiEdit3} from "react-icons/fi";
 import {URL_PATH} from "@/constant";
 import {useMemberDetail} from "@/hooks/useMember.ts";
