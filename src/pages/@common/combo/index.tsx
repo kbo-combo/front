@@ -17,7 +17,7 @@ import theme from "@style/theme.style.ts";
 import {getComboStatusColor} from "@/function/combo/combo.ts";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
-import {useEffect, useRef} from "react";
+import {useInfiniteScroll} from "@/hooks/@common/usePage.ts";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -34,23 +34,7 @@ const teamLogos: { [key: string]: string } = {
 
 const ComboPage = () => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(10);
-  const observerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!hasNextPage) return;
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            fetchNextPage();
-          }
-        },
-        { threshold: 1 }
-    );
-
-    if (observerRef.current) observer.observe(observerRef.current);
-    return () => observer.disconnect();
-  }, [hasNextPage, fetchNextPage]);
+  const { observerRef } = useInfiniteScroll({ hasNextPage, fetchNextPage });
 
   if (isLoading) return <Loading />;
 
@@ -76,7 +60,7 @@ const ComboPage = () => {
               </ComboStatus>
             </ComboSection>
         ))}
-        {!isLoading && !hasNextPage && <NoComboText>더 이상 데이터가 없습니다.</NoComboText>}
+        {!hasNextPage && <NoComboText>더 이상 데이터가 없습니다.</NoComboText>}
       </PageWrapper>
   );
 };
