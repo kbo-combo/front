@@ -10,7 +10,7 @@ import AuthRoute from "@/router/AuthRoute.tsx";
 import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 import HitterSelectPage from "@pages/@common/hitter-select";
 import RuleBook from "@pages/@common/rule-book";
-import ComboPage from "@pages/@common/combo";
+import ComboPage from "@pages/@common/combo/ComboListPage.tsx";
 
 const router = createBrowserRouter([
     {
