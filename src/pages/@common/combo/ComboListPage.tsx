@@ -2,38 +2,22 @@ import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import {getStatusText} from "@constant/combo.ts";
 import {useInfiniteComboList} from "@/hooks/combo/useCombo.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
-import ncLogo from "@assets/logos/nc-logo.svg";
-import kiaLogo from "@assets/logos/kia-logo.svg";
-import doosanLogo from "@assets/logos/doosan-log.svg";
-import lgLogo from "@assets/logos/lg-logo.svg";
-import ssgLogo from "@assets/logos/ssg-logo.svg";
-import samsungLogo from "@assets/logos/samsung-logo.svg";
-import lotteLogo from "@assets/logos/lotte-logo.svg";
-import kiwoomLogo from "@assets/logos/kiwoom-logo.svg";
-import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
-import ktLogo from "@assets/logos/kt-logo.svg";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
 import {useInfiniteScroll} from "@/hooks/@common/usePage.ts";
 import {
-  ComboSection, ComboStatus,
+  ComboSection,
+  ComboStatus,
   GameDate,
   GameInfoWrapper,
-  Message, PlayerInfoWrapper, PlayerName, TeamLogo, TeamLogosWrapper, VSLabel
+  Message,
+  PlayerInfoWrapper,
+  PlayerName,
+  TeamLogo,
+  TeamLogosWrapper,
+  VSLabel
 } from "@pages/@common/combo/ComboListPage.style.ts";
-
-const teamLogos: { [key: string]: string } = {
-  NC: ncLogo,
-  KIA: kiaLogo,
-  DOOSAN: doosanLogo,
-  LG: lgLogo,
-  SSG: ssgLogo,
-  SAMSUNG: samsungLogo,
-  LOTTE: lotteLogo,
-  KIWOOM: kiwoomLogo,
-  HANWHA: hanwhwaLogo,
-  KT: ktLogo,
-};
+import {teamLogos} from "@/types/team/team.ts";
 
 const ComboPage = () => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(10);
