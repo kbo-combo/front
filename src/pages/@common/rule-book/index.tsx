@@ -1,17 +1,13 @@
-import {
-  Description,
-  EmphasizedText,
-  MainMessage,
-  Wrapper
-} from "@pages/@common/rule-book/RuleBook.style.ts";
+import {Description, EmphasizedText} from "@pages/@common/rule-book/RuleBook.style.ts";
+import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
+import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 
 const RuleBook = () => {
 
   return (
       <>
-        <Wrapper>
-          <MainMessage>콤보 규칙</MainMessage>
-
+        <PageWrapper>
+          <ContentHeader title={'콤보 규칙'}/>
           <EmphasizedText>성공</EmphasizedText>
           <Description>선택한 선수가 1안타 이상을 기록한 경우</Description>
           <Description>강우 콜드등으로 경기가 종료되더라도 정식 경기로 성립된다면 성공으로 판정</Description>
@@ -24,7 +20,7 @@ const RuleBook = () => {
           <EmphasizedText>PASS</EmphasizedText>
           <Description>기상 악화등으로 경기가 취소된 경우</Description>
           <Description>서스펜디드 게임으로 경기가 중단된 경우</Description>
-        </Wrapper>
+        </PageWrapper>
       </>
   );
 };

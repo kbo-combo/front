@@ -15,6 +15,8 @@ import hanwhwaLogo from "@assets/logos/hanhwa-logo.svg";
 import ktLogo from "@assets/logos/kt-logo.svg";
 import theme from "@style/theme.style.ts";
 import {getComboStatusColor} from "@/function/combo/combo.ts";
+import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
+import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -35,8 +37,8 @@ const ComboPage = () => {
   if (isLoading) return <Loading/>;
 
   return (
-      <ComboWrapper>
-        <MainMessage>콤보 목록</MainMessage>
+      <PageWrapper>
+        <ContentHeader title={'콤보 목록'}/>
         {data?.length > 0 ? (
             data.map((combo) => (
                 <ComboSection key={combo.comboId}>
@@ -60,39 +62,18 @@ const ComboPage = () => {
         ) : (
             <NoComboText>미선택</NoComboText>
         )}
-      </ComboWrapper>
+      </PageWrapper>
   );
 };
 
 export default ComboPage;
-
-const ComboWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 1rem;
-  padding: 1rem;
-`;
-
-export const MainMessage = styled.p`
-  margin-top: 4vh;
-  font: ${theme.font.subTitle};
-  align-self: center;
-  font-size: 4.0rem;
-  font-weight: 900;
-  line-height: 3rem;
-  margin-bottom: 4.5rem;
-  color: ${theme.color.primary};
-`;
-
 
 const ComboSection = styled.div`
   display: flex;
   align-items: center;
   max-width: 100rem;
   justify-content: space-between;
-  width: 75%;
+  width: 100%;
   gap: 2.0rem;
   padding: 1.0rem;
   border-radius: 0.5rem;
