@@ -1,6 +1,6 @@
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {useInfiniteQuery, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {
-  ComboCreateRequest,
+  ComboCreateRequest, ComboListResponse,
   createCombo,
   deleteComboById,
   findComboByGameDate,
@@ -54,14 +54,36 @@ export const useComboByGame = () => {
   return { data, error, isLoading, comboDate };
 };
 
-export const useComboList = (beforeGameDate?: string) => {
-  const { data, error, isLoading } = useQuery({
+
+export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) => {
+  const {
+    data,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["combo", beforeGameDate],
-    queryFn: () => findComboListByParam(beforeGameDate),
+    queryFn: ({ pageParam = beforeGameDate}) => findComboListByParam(pageSize, pageParam),
+    initialPageParam: beforeGameDate,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage || !lastPage.hasNext || lastPage.content.length === 0) return null;
+      return lastPage.content[lastPage.content.length - 1].gameStartDate;
+    },
     staleTime: 600000,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
+    select: ({ pages }) =>
+        (pages ?? [])
+        .filter(page => page !== null && page !== undefined)
+        .reduce((acc, page) => acc.concat(page.content ?? []), [] as ComboListResponse[]),
   });
 
-  return { data: data ?? [], error, isLoading };
+  return {
+    data: data ?? [],
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  };
 };

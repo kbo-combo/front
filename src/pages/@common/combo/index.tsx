@@ -1,7 +1,7 @@
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import {ComboStatusType, getStatusText} from "@constant/combo.ts";
 import styled from "styled-components";
-import {useComboList} from "@/hooks/combo/useCombo.ts";
+import {useInfiniteComboList} from "@/hooks/combo/useCombo.ts";
 import Loading from "@pages/@common/common/Loading.tsx";
 import ncLogo from "@assets/logos/nc-logo.svg";
 import kiaLogo from "@assets/logos/kia-logo.svg";
@@ -17,6 +17,7 @@ import theme from "@style/theme.style.ts";
 import {getComboStatusColor} from "@/function/combo/combo.ts";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
+import {useEffect, useRef} from "react";
 
 const teamLogos: { [key: string]: string } = {
   NC: ncLogo,
@@ -32,36 +33,50 @@ const teamLogos: { [key: string]: string } = {
 };
 
 const ComboPage = () => {
-  const {data, isLoading} = useComboList();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(10);
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
-  if (isLoading) return <Loading/>;
+  useEffect(() => {
+    if (!hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            fetchNextPage();
+          }
+        },
+        { threshold: 1 }
+    );
+
+    if (observerRef.current) observer.observe(observerRef.current);
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
+
+  if (isLoading) return <Loading />;
 
   return (
       <PageWrapper>
-        <ContentHeader title={'콤보 목록'}/>
-        {data?.length > 0 ? (
-            data.map((combo) => (
-                <ComboSection key={combo.comboId}>
-                  <GameInfoWrapper>
-                    <GameDate>{combo.gameStartDate}</GameDate>
-                    <TeamLogosWrapper>
-                      <TeamLogo src={teamLogos[combo.homeTeam]} alt={combo.homeTeam}/>
-                      <VSLabel>VS</VSLabel>
-                      <TeamLogo src={teamLogos[combo.awayTeam]} alt={combo.awayTeam}/>
-                    </TeamLogosWrapper>
-                  </GameInfoWrapper>
-                  <PlayerInfoWrapper>
-                    <PlayerImage url={combo.playerImageUrl}/>
-                    <PlayerName>{combo.playerName}</PlayerName>
-                  </PlayerInfoWrapper>
-                  <ComboStatus status={combo.comboStatus}>
-                    {getStatusText(combo.comboStatus)}
-                  </ComboStatus>
-                </ComboSection>
-            ))
-        ) : (
-            <NoComboText>미선택</NoComboText>
-        )}
+        <ContentHeader title={"콤보 목록"} />
+        {data?.map((combo, index) => (
+            <ComboSection key={combo.comboId} ref={index === data.length - 1 ? observerRef : null}>
+              <GameInfoWrapper>
+                <GameDate>{combo?.gameStartDate}</GameDate>
+                <TeamLogosWrapper>
+                  <TeamLogo src={teamLogos[combo?.homeTeam]} alt={combo?.homeTeam} />
+                  <VSLabel>VS</VSLabel>
+                  <TeamLogo src={teamLogos[combo?.awayTeam]} alt={combo?.awayTeam} />
+                </TeamLogosWrapper>
+              </GameInfoWrapper>
+              <PlayerInfoWrapper>
+                <PlayerImage url={combo?.playerImageUrl} />
+                <PlayerName>{combo?.playerName}</PlayerName>
+              </PlayerInfoWrapper>
+              <ComboStatus status={combo?.comboStatus}>
+                {getStatusText(combo?.comboStatus)}
+              </ComboStatus>
+            </ComboSection>
+        ))}
+        {!isLoading && !hasNextPage && <NoComboText>더 이상 데이터가 없습니다.</NoComboText>}
       </PageWrapper>
   );
 };
