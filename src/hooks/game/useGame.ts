@@ -21,7 +21,7 @@ export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],
     queryFn: () => findGameByDate(gameDate),
-    staleTime: 600,
+    staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -34,7 +34,7 @@ export const useGameListByYearAndMonth = (year: number, month: number) => {
   const { data, error, isLoading } = useQuery<GameDateResponse[], Error>({
     queryKey: ["gameDates", year, month],
     queryFn: () => findGameByYearAndMonth(year, month),
-    staleTime: 60000,
+    staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
