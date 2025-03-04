@@ -11,7 +11,7 @@ export const useMemberDetail = () => {
   const {data, error, isLoading} = useQuery<MemberDetailResponse, Error>({
     queryKey: ['member'],
     queryFn: () => getMemberDetail(),
-    staleTime: 6000,
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });

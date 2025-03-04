@@ -3,8 +3,8 @@ import {getLoginPage, getLoginResult, LoginRequest,} from "@apis/auth.ts";
 import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
-import {getSession, setSession} from "@/utils/LoginStorage.ts";
 import {toast} from "react-toastify";
+import {useMemberDetail} from "@/hooks/useMember.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -36,7 +36,6 @@ export const useLogin = (socialProvider: string, code: string) => {
     mutationFn: (loginRequest: LoginRequest) =>
         getLoginResult(socialProvider, loginRequest),
     onSuccess: () => {
-      setSession()
       navigate(URL_PATH.main);
     },
     onError: () => {
@@ -57,8 +56,8 @@ export const useLogin = (socialProvider: string, code: string) => {
 };
 
 export const useCheckLogin = () => {
-  const session = getSession();
-  return { isLoggedIn: session !== null };
+  const { data, isLoading } = useMemberDetail();
+  return { isLoggedIn: !!data && !isLoading };
 };
 
 function getRedirectUri(socialProvider: string) {
