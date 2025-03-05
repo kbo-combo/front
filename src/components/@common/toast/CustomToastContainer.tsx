@@ -9,6 +9,7 @@ const CustomToastContainer = styled(ToastContainer).attrs({
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: false,
+  limit: 2
 })`
   z-index: ${theme.zIndex.popover};
   bottom: 6rem;
