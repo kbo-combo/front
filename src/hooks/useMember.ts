@@ -29,7 +29,8 @@ export const useChangeNickname = () => {
       queryClient.invalidateQueries({ queryKey: ['member'] });
       toast.success("닉네임 변경 완료")
     },
-    onError: () => {
+    onError: (error: Error) => {
+      toast.error(error.message)
     },
   });
 
