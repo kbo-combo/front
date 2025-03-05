@@ -15,13 +15,19 @@ const MemberPage = () => {
 
   const [nickname, setNickname] = useState("");
 
+
   useEffect(() => {
     if (data?.nickname) {
       setNickname(data.nickname);
     }
   }, [data]);
 
+
+  const isChanged = nickname.trim() !== data?.nickname;
+
+
   const handleNicknameChange = () => {
+    if (!isChanged) return;
     changeNickname({ request: { nickname } }, {
       onSuccess: () => {
         navigate(URL_PATH.member);
@@ -41,7 +47,9 @@ const MemberPage = () => {
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
           />
-          <SaveButton onClick={handleNicknameChange}>닉네임 변경</SaveButton>
+          <SaveButton onClick={handleNicknameChange} disabled={!isChanged}>
+            닉네임 변경
+          </SaveButton>
         </ProfileWrapper>
       </PageWrapper>
   );

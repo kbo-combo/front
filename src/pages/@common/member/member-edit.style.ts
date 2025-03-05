@@ -8,20 +8,21 @@ export const NicknameInput = styled.input`
   border-radius: 1rem;
 `;
 
-export const SaveButton = styled.button`
+export const SaveButton = styled.button<{ disabled?: boolean }>`
   padding: 2.5rem 12.5rem;
   position: fixed;
   bottom: 10rem;
   font: 1.6rem "jua";
   color: white;
-  background: ${({ theme: { color } }) => color.primary};
+  background: ${({ theme, disabled }) => (disabled ? theme.color.gray : theme.color.primary)};
   border: none;
   border-radius: 2rem;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
   &:hover {
-    background: ${({ theme: { color } }) => color.water};
+    background: ${({ theme, disabled }) => (disabled ? theme.color.gray : theme.color.water)};
   }
 `;
-
 
