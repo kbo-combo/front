@@ -11,6 +11,7 @@ import {
   ProfileWrapper,
   Wrapper
 } from "@pages/@common/member/member.style.ts";
+import GoogleForm from "@components/member/GoogleForm.tsx";
 
 
 const MemberPage = () => {
@@ -29,6 +30,7 @@ const MemberPage = () => {
       </EditButton>
       </MemberEditLink>
     </ProfileWrapper>
+    <GoogleForm/>
   </Wrapper>
 
 }
