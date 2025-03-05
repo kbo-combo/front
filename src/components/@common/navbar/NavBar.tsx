@@ -13,9 +13,6 @@ const NavBar = () => {
         <Button as={Link} to={URL_PATH.main}>
           <NavItem isActive={true} iconId="home-line" label="메인"/>
         </Button>
-        <Button as={Link} to={URL_PATH.rule_book}>
-          <NavItem isActive={true} iconId="rulebook" label="규칙"/>
-        </Button>
         {isLoggedIn ? (
             <>
               <Button as={Link} to={URL_PATH.combo}>
@@ -30,6 +27,9 @@ const NavBar = () => {
               <NavItem isActive={true} iconId="account-circle-line" label="로그인"/>
             </Button>
         )}
+        <Button as={Link} to={URL_PATH.rule_book}>
+          <NavItem isActive={true} iconId="rulebook" label="규칙"/>
+        </Button>
       </Wrapper>
   );
 };
