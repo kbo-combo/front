@@ -3,7 +3,7 @@ import {URL_PATH} from "constant";
 import Home from "@pages/@common/home";
 import RootTemplate from "@pages/@common/root";
 import Login from "@pages/@common/auth";
-import MemberPage from "components/member";
+import MemberPage from "@components/member/MemberPage.tsx";
 import MemberEditPage from "@components/member/MemberEditPage.tsx";
 import CallbackPage from "@components/member/CallbackPage.tsx";
 import AuthRoute from "@/router/AuthRoute.tsx";
