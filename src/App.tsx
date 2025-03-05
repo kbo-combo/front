@@ -18,6 +18,7 @@ const GA_CODE = import.meta.env.VITE_GA_CODE;
 function App() {
 
   const isPrd = process.env.NODE_ENV === 'prd';
+  console.log("node env " + process.env.NODE_ENV)
   useEffect(() => {
     if (process.env.REACT_APP_GA_CODE != null) {
       ReactGA.initialize(GA_CODE);
