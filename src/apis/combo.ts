@@ -20,7 +20,7 @@ export const deleteComboById = async (comboId: number): Promise<void> => {
 
 export const findComboByGameDate = async (gameDate: string): Promise<ComboResponse | null> => {
   const response = await client.get<ComboResponse | null>(
-      'combos', {
+      'combos/detail', {
         params: {gameDate}
       }
   )
@@ -28,7 +28,7 @@ export const findComboByGameDate = async (gameDate: string): Promise<ComboRespon
 };
 
 export const findComboListByParam = async (pageSize: number, beforeGameDate?: string): Promise<InfinitePageResponse<ComboListResponse> | null> => {
-  const response = await client.get<InfinitePageResponse<ComboListResponse>>('combos/list', {
+  const response = await client.get<InfinitePageResponse<ComboListResponse>>('combos', {
         params: {beforeGameDate: beforeGameDate, pageSize: pageSize}
       }
   )
