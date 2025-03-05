@@ -15,3 +15,13 @@ export const Description = styled.div`
   margin-bottom: 1rem;
   color: ${theme.color.sub};
 `;
+
+export const HighlightDescription = styled.div`
+  font: ${theme.font.text};
+  font-size: 2rem;
+  margin-top: 4.5rem;
+  line-height: 2rem;
+  margin-bottom: 1.0em;
+  color: ${theme.color.sub};
+`;
+
