@@ -16,9 +16,9 @@ export const Wrapper = styled.main`
 `;
 
 export const Nickname = styled.span`
-  font: bold 1.8rem / 2.2rem "jua";
+  font: bold 1.5rem / 1.8rem "jua";
   color: ${({ theme: { color } }) => color.sub};
-  padding: 4px 8px;
+  padding: 5px 10px;
   white-space: nowrap;
 `;
 
