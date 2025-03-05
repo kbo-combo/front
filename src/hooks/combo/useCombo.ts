@@ -46,7 +46,7 @@ export const useComboByGame = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["combo", comboDate],
     queryFn: () => findComboByGameDate(comboDate),
-    staleTime: 600000,
+    staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -71,7 +71,7 @@ export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) 
       if (!lastPage || !lastPage.hasNext || lastPage.content.length === 0) return null;
       return lastPage.content[lastPage.content.length - 1].gameStartDate;
     },
-    staleTime: 600000,
+    staleTime: 0,
     select: ({ pages }) =>
         (pages ?? [])
         .filter(page => page !== null && page !== undefined)
