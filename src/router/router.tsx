@@ -3,14 +3,14 @@ import {URL_PATH} from "constant";
 import Home from "@pages/@common/home";
 import RootTemplate from "@pages/@common/root";
 import Login from "@pages/@common/auth";
-import MemberPage from "@components/member/MemberPage.tsx";
-import MemberEditPage from "@components/member/MemberEditPage.tsx";
 import CallbackPage from "@components/member/CallbackPage.tsx";
 import AuthRoute from "@/router/AuthRoute.tsx";
 import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 import HitterSelectPage from "@pages/@common/hitter-select";
 import RuleBook from "@pages/@common/rule-book";
 import ComboPage from "@pages/@common/combo/ComboListPage.tsx";
+import MemberPage from "@pages/@common/member/MemberPage.tsx";
+import MemberEditPage from "@pages/@common/member/MemberEditPage.tsx";
 
 const router = createBrowserRouter([
     {

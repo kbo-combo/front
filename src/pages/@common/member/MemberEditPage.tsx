@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useChangeNickname, useMemberDetail} from "@/hooks/useMember.ts";
-import {ProfileWrapper,} from "@components/member/member.style.ts";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {URL_PATH} from "@/constant";
 import Loading from "@pages/@common/common/Loading.tsx";
-import {NicknameInput, SaveButton} from "@components/member/member-edit.style.ts";
 import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
+import {ProfileWrapper} from "@pages/@common/member/member.style.ts";
+import {NicknameInput, SaveButton} from "@pages/@common/member/member-edit.style.ts";
 
 const MemberPage = () => {
   const { data, isLoading, error } = useMemberDetail();
