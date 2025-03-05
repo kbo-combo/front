@@ -9,8 +9,8 @@
     "dev-server": "NODE_ENV=development  vite --mode development",
     "build-dev": "NODE_ENV=development  vite build --mode development",
     "build-local": "NODE_ENV=local vite build --mode local-dev",
-    "build-prd": "NODE_ENV=prd  vite build --mode prd",
-    "prd": "NODE_ENV=prd  vite --mode prd",
+    "build-prd": "NODE_ENV=development  vite build --mode prd",
+    "prd": "NODE_ENV=development  vite --mode prd",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -26,6 +26,7 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.1",
     "react-toastify": "^11.0.3",
+    "recoil": "^0.7.7",
     "vite-plugin-mkcert": "^1.17.6",
     "vite-plugin-svgr": "^4.3.0"
   },

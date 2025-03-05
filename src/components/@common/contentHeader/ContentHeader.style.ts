@@ -1,17 +1,14 @@
 import styled from 'styled-components';
 
 export const HeaderBox = styled.header`
-  position: sticky;
-  z-index: ${({ theme: { zIndex } }) => zIndex.sticky};
   top: 0;
 
   display: flex;
   align-items: center;
-
-  height: 68px;
-
   background: ${(props) => props.theme.color.background};
-  border-bottom: solid 1px ${(props) => props.theme.color.primary};
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: solid 1px ${(props) => props.theme.color.grayDark};
 `;
 
 export const Title = styled.p`

@@ -14,9 +14,9 @@ import ComboHitterFilterList from "@components/hitter/ComboHitterFilterList.tsx"
 import {useHitterFilter} from "@/hooks/useHitterFilter.ts";
 import {HitterQueryResponse} from "@apis/player.ts";
 import {PlayerImage} from "@components/player/PlayerImage.tsx";
-import {useCreateCombo} from "@/hooks/useCombo.ts";
 import {useNavigate} from "react-router-dom";
 import {URL_PATH} from "@/constant";
+import {useCreateCombo} from "@/hooks/combo/useCombo.ts";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;

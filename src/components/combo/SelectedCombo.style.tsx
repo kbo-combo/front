@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "@style/theme.style.ts";
 import {ComboStatusType} from "@constant/combo.ts";
+import {getComboStatusColor} from "@/function/combo/combo.ts";
 
 export const ComboWrapper = styled.div`
   display: flex;
@@ -73,10 +74,5 @@ export const ComboStatus = styled.div<{ status: ComboStatusType }>`
   font-size: 2.0rem;
   margin-left: 2.5rem;
   margin-top: 1.5rem;
-  color: ${({ status, theme }) =>
-      status === "SUCCESS" ? `${theme.color.green}`
-          : status === "PENDING" ? `${theme.color.grayDark}`
-              : status === "FAIL" ? `${theme.color.accent}`
-              : status === "PASS" ? `${theme.color.grayDark}`
-                  : theme.color.grayDark};
+  color: ${({ status, theme }) => getComboStatusColor(status, theme)};
 `;

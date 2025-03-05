@@ -14,6 +14,14 @@ const SvgIcons = () => (
           <circle cx="7" cy="7" r="6.5"></circle>
         </g>
       </symbol>
+      <symbol viewBox="0 0 14 14" id="combo-icon">
+        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="4" cy="10" r="1.2"></circle>
+          <path d="M5 9 L10 3 Q11 2 12 3 L13 4 Q14 5 13 6 L8 11 Q7 12 6 11 Z"></path>
+          <path d="M2 6 L5 9"></path>
+          <path d="M3 4 L6 7"></path>
+        </g>
+      </symbol>
       <symbol viewBox="0 0 14 14" id="home-line">
         <path
             fill="none"

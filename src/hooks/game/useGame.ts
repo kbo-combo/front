@@ -1,5 +1,3 @@
-import {useContext} from "react";
-import {GameDateContext} from "@/contexts/GameDateContext.tsx";
 import {useQuery} from "@tanstack/react-query";
 import {
   findGameByDate,
@@ -7,26 +5,23 @@ import {
   GameDateResponse,
   GameResponse
 } from "@apis/game.ts";
+import {useRecoilState} from "recoil";
+import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 
 export const useGameDate = () => {
-  const context = useContext(GameDateContext);
-  if (!context) {
-    throw new Error("useGameDate must be used within a GameDateProvider");
-  }
-  const {selectedDate, ...rest} = context;
+  const [selectedDate, setSelectedDate] = useRecoilState(gameDateAtom);
 
   return {
     selectedDate,
     formattedDate: selectedDate.toLocaleDateString("sv-SE"),
-    ...rest,
+    setSelectedDate,
   };
 };
-
 export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],
     queryFn: () => findGameByDate(gameDate),
-    staleTime: 600,
+    staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -35,14 +30,30 @@ export const useGameList = (gameDate: string) => {
 };
 
 
-export const useGameListByYearAndMonth =  (year: number, month: number) => {
-  const {data, error, isLoading} = useQuery<GameDateResponse[], Error>({
-    queryKey: [year, month],
+export const useGameListByYearAndMonth = (year: number, month: number) => {
+  const { data, error, isLoading } = useQuery<GameDateResponse[], Error>({
+    queryKey: ["gameDates", year, month],
     queryFn: () => findGameByYearAndMonth(year, month),
-    staleTime: 60000,
+    staleTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
 
-  return { data, error, isLoading };
+  const gameDateSet = new Set(data?.map(({ gameDate }) => gameDate) ?? []);
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const gameDateList: GameDateList[] = Array.from({ length: daysInMonth }, (_, i) => {
+    const date = `${year}-${String(month).padStart(2, "0")}-${String(i + 1).padStart(2, "0")}`;
+    return {
+      date,
+      hasGame: gameDateSet.has(date),
+    };
+  });
+
+  return { gameDateList: gameDateList ?? [], error, isLoading };
+};
+
+export interface GameDateList {
+  date: string;
+  hasGame: boolean;
 }
+

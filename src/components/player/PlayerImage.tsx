@@ -24,8 +24,8 @@ export const PlayerImage = ({ url, alt = "선수 이미지", fallbackSrc = defau
 };
 
 const StyledPlayerImage = styled.img`
-  width: 6rem;
-  height: 8rem;
+  width: 5rem;
+  height: 7rem;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

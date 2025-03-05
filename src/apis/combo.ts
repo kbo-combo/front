@@ -1,5 +1,7 @@
 import {ComboStatusType} from "@constant/combo.ts";
 import {client} from "@apis/apiClient.ts";
+import {TeamName} from "@constant/player.ts";
+import {InfinitePageResponse} from "@/types/apis/response.ts";
 
 
 export const createCombo = async (request: ComboCreateRequest): Promise<void> => {
@@ -18,12 +20,33 @@ export const deleteComboById = async (comboId: number): Promise<void> => {
 
 export const findComboByGameDate = async (gameDate: string): Promise<ComboResponse | null> => {
   const response = await client.get<ComboResponse | null>(
-      'combos', {
-        params: { gameDate }
+      'combos/detail', {
+        params: {gameDate}
       }
   )
   return response.data
 };
+
+export const findComboListByParam = async (pageSize: number, beforeGameDate?: string): Promise<InfinitePageResponse<ComboListResponse> | null> => {
+  const response = await client.get<InfinitePageResponse<ComboListResponse>>('combos', {
+        params: {beforeGameDate: beforeGameDate, pageSize: pageSize}
+      }
+  )
+  return response.data
+}
+
+export interface ComboListResponse {
+  comboId: number;
+  playerId: number;
+  playerName: string;
+  playerImageUrl: string | null
+  comboStatus: ComboStatusType;
+  gameStartDate: string,
+  gameStartTime: string,
+  homeTeam: TeamName,
+  awayTeam: TeamName,
+  gameType: string
+}
 
 export interface ComboCreateRequest {
   gameId: number,
