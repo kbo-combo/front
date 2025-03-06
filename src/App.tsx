@@ -19,7 +19,7 @@ function App() {
 
   const isPrd = process.env.NODE_ENV === 'prd';
   useEffect(() => {
-    if (process.env.REACT_APP_GA_CODE != null) {
+    if (process.env.VITE_GA_CODE != null) {
       ReactGA.initialize(GA_CODE);
     }
   }, []);
