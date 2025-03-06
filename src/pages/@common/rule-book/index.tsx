@@ -1,4 +1,5 @@
 import {
+  ContentWrapper,
   Description,
   EmphasizedText,
   HighlightDescription
@@ -12,10 +13,11 @@ const RuleBook = () => {
       <>
         <PageWrapper>
           <ContentHeader title={'콤보 규칙'}/>
-          <HighlightDescription>콤보 계산은 시범경기, 정규시즌, 포스트시즌이 나뉘어서 계산이 됩니다.</HighlightDescription>
+          <ContentWrapper>
+          <HighlightDescription>콤보는 시범경기, 정규시즌, 포스트시즌이 나뉘어서 계산이 됩니다.</HighlightDescription>
           <EmphasizedText>성공</EmphasizedText>
           <Description>선택한 선수가 1안타 이상을 기록</Description>
-          <Description>강우 콜드등으로 경기가 종료되더라도 정식 경기로 성립된다면 성공</Description>
+          <Description>강우 콜드등으로 경기가 종료되더라도 정식 경기로 성립</Description>
 
           <EmphasizedText>실패</EmphasizedText>
           <Description>선택한 선수가 안타를 기록하지 못한 경우</Description>
@@ -25,6 +27,7 @@ const RuleBook = () => {
           <EmphasizedText>PASS</EmphasizedText>
           <Description>기상 악화등으로 경기가 취소</Description>
           <Description>서스펜디드 게임으로 경기가 중단</Description>
+          </ContentWrapper>
         </PageWrapper>
       </>
   );
