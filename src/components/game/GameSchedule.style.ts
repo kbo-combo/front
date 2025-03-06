@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: ${theme.color.background};
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 `;
 
@@ -34,6 +35,7 @@ export const NavButton = styled.button<{ disabled: boolean }>`
 export const CurrentMonth = styled.div`
   margin: 0 1rem;
   font: ${theme.font.text};
+  color: ${theme.color.sub};
   font-size: 3.2rem;
 `;
 
