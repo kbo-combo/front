@@ -13,8 +13,8 @@ export const useHandleStatusError = () => {
     if (status === 401) {
       toast.error("로그인이 만료됐습니다.");
       navigate(URL_PATH.login);
+    } else {
+      throw error;
     }
-
-    throw error;
   };
 };
