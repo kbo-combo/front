@@ -24,13 +24,14 @@ interface ComboHitterListProps {
   gameId: number;
 }
 
-const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) => {
+const ComboHitterList = ({gameId, homeTeam, awayTeam}: ComboHitterListProps) => {
   const [selectedPlayerId, setSelectedPlayerId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const handleSelectPlayer = (playerId: number) => {
     setSelectedPlayerId(playerId);
   };
+
 
   const { mutate: createCombo } = useCreateCombo();
 
@@ -60,16 +61,18 @@ const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) =
     }
   }, [filteredHitters, selectedPlayerId]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading/>;
 
   return (
       <Wrapper>
         <ComboHitterFilterList searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword}
-                               selectedTeamType={selectedTeamType} setSelectedTeamType={setSelectedTeamType}
-                               selectedHandType={selectedHandType} setSelectedHandType={setSelectedHandType}
+                               selectedTeamType={selectedTeamType}
+                               setSelectedTeamType={setSelectedTeamType}
+                               selectedHandType={selectedHandType}
+                               setSelectedHandType={setSelectedHandType}
                                teamOptions={teamOptions}/>
         <PlayerListWrapper>
-          {filteredHitters.map((hitter : HitterQueryResponse) => (
+          {filteredHitters.map((hitter: HitterQueryResponse) => (
               <PlayerCard
                   key={hitter.playerId}
                   selected={hitter.playerId === selectedPlayerId}
@@ -84,12 +87,12 @@ const ComboHitterList = ({ gameId, homeTeam, awayTeam }: ComboHitterListProps) =
               </PlayerCard>
           ))}
         </PlayerListWrapper>
-          <BottomButton
-              selected={selectedPlayerId !== null}
-              onClick={() => handleCreateCombo()}
-          >
-            타자 선택
-          </BottomButton>
+        <BottomButton
+            selected={selectedPlayerId !== null}
+            onClick={() => handleCreateCombo()}
+        >
+          타자 선택
+        </BottomButton>
       </Wrapper>
   );
 };

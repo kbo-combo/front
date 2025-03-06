@@ -9,28 +9,23 @@ import {
 } from "@apis/combo.ts";
 import {toast} from "react-toastify";
 import {useGameDate} from "@/hooks/game/useGame.ts";
-import {useHandleStatusError} from "@/hooks/@common/useHandleError.ts";
-
+import {useHandleError} from "@/hooks/@common/useHandleError.ts";
 
 export const useCreateCombo = () => {
-  const handleStatusError = useHandleStatusError();
   const { formattedDate : comboDate } = useGameDate();
+  const handleError = useHandleError();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (request: ComboCreateRequest) => createCombo(request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["combo", comboDate] });
-      toast.success("콤보가 생성되었습니다.")
     },
-    onError: (error: Error) => {
-      handleStatusError(error)
-      toast.error(error.message)
-    },
+    onError: handleError,
   });
 }
 
 export const useDeleteCombo = () => {
-  const handleStatusError = useHandleStatusError();
+  const handleError = useHandleError();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ comboId }: { comboId: number; comboDate: string }) =>
@@ -39,9 +34,7 @@ export const useDeleteCombo = () => {
       queryClient.invalidateQueries({ queryKey: ["combo", variables.comboDate] });
       toast.success("콤보 삭제 완료!")
     },
-    onError: (error) => {
-      handleStatusError(error)
-    },
+    onError: handleError,
   });
 };
 

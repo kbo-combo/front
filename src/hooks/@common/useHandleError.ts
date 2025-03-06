@@ -1,20 +1,25 @@
-import {AxiosError} from "axios";
-import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 import {URL_PATH} from "@/constant";
+import {ApiError} from "@/types/apis/response.ts";
 
-export const useHandleStatusError = () => {
+export const useHandleError = () => {
   const navigate = useNavigate();
+
   return (error: Error) => {
-    if (!(error instanceof AxiosError)) throw error;
-
-    const status = error.response?.status;
-
+    if (!(error instanceof ApiError)) throw error;
+    const status = error.status
     if (status === 401) {
-      toast.error("로그인이 만료됐습니다.");
+      toast.error("로그인이 필요합니다.");
       navigate(URL_PATH.login);
-    } else {
-      throw error;
+    }
+
+    if (status === 500) {
+      toast.error("서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    }
+
+    if (status === 400) {
+      toast.error(error.message)
     }
   };
 };
