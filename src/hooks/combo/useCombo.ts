@@ -1,6 +1,7 @@
 import {useInfiniteQuery, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {
-  ComboCreateRequest, ComboListResponse,
+  ComboCreateRequest,
+  ComboListResponse,
   createCombo,
   deleteComboById,
   findComboByGameDate,
@@ -8,9 +9,11 @@ import {
 } from "@apis/combo.ts";
 import {toast} from "react-toastify";
 import {useGameDate} from "@/hooks/game/useGame.ts";
+import {useHandleStatusError} from "@/hooks/@common/useHandleError.ts";
 
 
 export const useCreateCombo = () => {
+  const handleStatusError = useHandleStatusError();
   const { formattedDate : comboDate } = useGameDate();
   const queryClient = useQueryClient();
   return useMutation({
@@ -20,12 +23,14 @@ export const useCreateCombo = () => {
       toast.success("콤보가 생성되었습니다.")
     },
     onError: (error: Error) => {
+      handleStatusError(error)
       toast.error(error.message)
     },
   });
 }
 
 export const useDeleteCombo = () => {
+  const handleStatusError = useHandleStatusError();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ comboId }: { comboId: number; comboDate: string }) =>
@@ -35,7 +40,7 @@ export const useDeleteCombo = () => {
       toast.success("콤보 삭제 완료!")
     },
     onError: (error) => {
-      console.error("삭제 실패:", error);
+      handleStatusError(error)
     },
   });
 };

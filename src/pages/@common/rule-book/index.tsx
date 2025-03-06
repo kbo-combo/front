@@ -1,4 +1,8 @@
-import {Description, EmphasizedText} from "@pages/@common/rule-book/RuleBook.style.ts";
+import {
+  Description,
+  EmphasizedText,
+  HighlightDescription
+} from "@pages/@common/rule-book/RuleBook.style.ts";
 import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 
@@ -8,6 +12,7 @@ const RuleBook = () => {
       <>
         <PageWrapper>
           <ContentHeader title={'콤보 규칙'}/>
+          <HighlightDescription>콤보 계산은 시범경기, 정규시즌, 포스트시즌이 나뉘어서 계산이 됩니다.</HighlightDescription>
           <EmphasizedText>성공</EmphasizedText>
           <Description>선택한 선수가 1안타 이상을 기록</Description>
           <Description>강우 콜드등으로 경기가 종료되더라도 정식 경기로 성립된다면 성공</Description>

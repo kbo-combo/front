@@ -57,9 +57,13 @@ export const useLogin = (socialProvider: string, code: string) => {
 
 export const useCheckLogin = () => {
   const { data, isLoading } = useMemberDetail();
-  return { isLoggedIn: !!data && !isLoading };
-};
 
+  if (isLoading) {
+    return { isLoggedIn: false, isLoading: true };
+  }
+
+  return { isLoggedIn: !!data, isLoading: false };
+};
 function getRedirectUri(socialProvider: string) {
   return `${window.location.origin}${URL_PATH.login}/${socialProvider}`;
 }
