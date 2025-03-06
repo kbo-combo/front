@@ -1,6 +1,13 @@
 import {styled} from "styled-components";
 import theme from "@style/theme.style.ts";
 
+export const ContentWrapper = styled.div`
+  padding: 0 2rem; // 좌우 간격 추가
+  max-width: 800px; // 가독성을 위한 최대 너비 설정
+  margin: 0 auto; // 가운데 정렬
+`;
+
+
 export const EmphasizedText = styled.div`
   font: ${theme.font.text};
   font-size: 2rem;

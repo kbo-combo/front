@@ -6,6 +6,7 @@ import {
   NicknameChangeRequest
 } from "@apis/member.ts";
 import {toast} from "react-toastify";
+import {useHandleError} from "@/hooks/@common/useHandleError.ts";
 
 export const useMemberDetail = () => {
   const {data, error, isLoading} = useQuery<MemberDetailResponse, Error>({
@@ -21,6 +22,7 @@ export const useMemberDetail = () => {
 
 export const useChangeNickname = () => {
   const queryClient = useQueryClient();
+  const handleError = useHandleError();
 
   const mutation = useMutation({
     mutationFn: ({request}: { request: NicknameChangeRequest }) =>
@@ -29,9 +31,7 @@ export const useChangeNickname = () => {
       queryClient.invalidateQueries({ queryKey: ['member'] });
       toast.success("닉네임 변경 완료")
     },
-    onError: (error: Error) => {
-      toast.error(error.message)
-    },
+    onError: handleError,
   });
 
   return mutation

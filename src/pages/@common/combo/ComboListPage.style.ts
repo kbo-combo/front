@@ -13,6 +13,8 @@ export const ComboSection = styled.div`
   background: ${({theme}) => theme.color.background};
   flex-wrap: nowrap;
   padding-bottom: 4.0rem;
+  padding-left: 1.5rem;
+  padding-right: 2rem;
 `;
 
 export const GameInfoWrapper = styled.div`
@@ -22,21 +24,22 @@ export const GameInfoWrapper = styled.div`
 `;
 
 export const GameDate = styled.span`
+  font: ${theme.font.text};
   font-size: 2.0rem;
-  font-weight: bold;
   color: ${theme.color.sub};
 `;
 
 export const TeamLogosWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 1.0rem;
   justify-content: space-between;
   width: 12rem;
 `;
 
 export const VSLabel = styled.span`
+  font: ${theme.font.text};
   font-size: 1.4rem;
-  font-weight: bold;
   color: ${theme.color.subLight};
 `;
 
@@ -72,10 +75,11 @@ export const PlayerInfoWrapper = styled.div`
 `;
 
 export const PlayerName = styled.span`
-  font-size: 1.6rem;
+  font: ${theme.font.text};
+  color: ${theme.color.sub};
+  font-size: 2.0rem;
   margin-top: 1rem;
   font-weight: bold;
-  color: ${({theme}) => theme.color.sub};
 `;
 
 export const Message = styled.p`

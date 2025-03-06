@@ -24,7 +24,8 @@ export const TopSection = styled.div`
 `;
 
 export const SelectionText = styled.div`
-  font: ${theme.font.subTitle};
+  font: ${theme.font.text};
+  color: ${theme.color.sub};
   font-size: 2.0rem;
 `;
 
@@ -65,6 +66,7 @@ export const PlayerDetails = styled.div`
 
 export const PlayerName = styled.div`
   font: ${theme.font.text};
+  color: ${theme.color.sub};
   margin-left: 2.5rem;
   font-size: 2.4rem;
 `;
