@@ -17,6 +17,7 @@ import {PlayerImage} from "@components/player/PlayerImage.tsx";
 import {useNavigate} from "react-router-dom";
 import {URL_PATH} from "@/constant";
 import {useCreateCombo} from "@/hooks/combo/useCombo.ts";
+import {toast} from "react-toastify";
 
 interface ComboHitterListProps {
   homeTeam: TeamName;
@@ -38,7 +39,10 @@ const ComboHitterList = ({gameId, homeTeam, awayTeam}: ComboHitterListProps) => 
   const handleCreateCombo = () => {
     if (selectedPlayerId !== null) {
       createCombo({ gameId, playerId: selectedPlayerId }, {
-        onSuccess: () => navigate(URL_PATH.main)
+        onSuccess: () => {
+            navigate(URL_PATH.main);
+            toast.success("콤보 생성 완료")
+        }
       });
     }
   };
