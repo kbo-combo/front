@@ -12,7 +12,7 @@ import {
   SelectionText,
   TopSection
 } from "@components/combo/SelectedCombo.style.tsx";
-import {canNotCancelCombo, showCancelButton} from "@/function/combo/combo.ts";
+import {isAfterComboChangeTime, showCancelButton} from "@/function/combo/combo.ts";
 import {addDay, toDateFormat} from "@/function/utils.ts";
 import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";
 
@@ -46,7 +46,7 @@ const SelectedCombo = () => {
           <SelectionText>내 선택</SelectionText>
           {
             isShowCancelButton && (
-                  <CancelButton onClick={handleCancel} disabled={canNotCancelCombo(now, gameStartDateTime)}>취소</CancelButton>
+                  <CancelButton onClick={handleCancel} disabled={isAfterComboChangeTime(now, gameStartDateTime)}>취소</CancelButton>
               )
           }
         </TopSection>

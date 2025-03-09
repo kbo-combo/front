@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { URL_PATH } from "@/constant";
 import {toDateFormat} from "@/function/utils.ts";
-import {canNotChangeCombo} from "@/function/combo/combo.ts";
+import {isBeforeComboAddDeadline} from "@/function/combo/combo.ts";
 import theme from "@style/theme.style.ts";
 
 interface ComboHitterButtonProps {
@@ -36,7 +36,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime }:
 
 
   const getComboButtonText = (now: Date, gameStartDateTime: Date) => {
-    if (!canNotChangeCombo(now, gameStartDateTime)) return "타자 선택";
+    if (!isBeforeComboAddDeadline(now, gameStartDateTime)) return "타자 선택";
 
     const timeDiff = gameStartDateTime.getTime() - now.getTime();
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -44,7 +44,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime }:
     return `${daysLeft - 2}일 후 선택 가능`;
   };
   return (
-      <Button onClick={handleClick} disabled={canNotChangeCombo(now, gameStartDateTime)}>
+      <Button onClick={handleClick} disabled={isBeforeComboAddDeadline(now, gameStartDateTime)}>
         {getComboButtonText(now, gameStartDateTime)}
       </Button>
   );
