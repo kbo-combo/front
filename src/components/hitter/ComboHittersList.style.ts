@@ -15,7 +15,7 @@ export const PlayerListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-content: center;
+  justify-items: start;
   margin-top: 20rem;
 `;
 
@@ -29,6 +29,9 @@ export const PlayerCard = styled.div<{ selected: boolean }>`
       selected ? theme.color.primary : theme.color.background};
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   margin-bottom: 3rem;
+
+  width: 12rem; 
+  height: 14rem;
 
   &:hover {
     transform: scale(1.05);
