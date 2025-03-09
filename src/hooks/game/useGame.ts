@@ -17,6 +17,7 @@ export const useGameDate = () => {
     setSelectedDate,
   };
 };
+
 export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],

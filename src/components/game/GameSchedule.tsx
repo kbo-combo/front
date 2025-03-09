@@ -62,7 +62,7 @@ const GameSchedule = () => {
                   <DateItem
                       key={index}
                       ref={(el) => (dateRefs.current[dateObj.date] = el)}
-                      selected={selectedDate?.toISOString().split("T")[0] === dateObj.date}
+                      selected={selectedDate?.toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/. /g, "-").replace(".", "") === dateObj.date}
                       disabled={!dateObj.hasGame}
                       onClick={() => handleSelectDate(dateObj.date)}
                   >
