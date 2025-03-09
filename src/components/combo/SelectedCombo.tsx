@@ -15,49 +15,48 @@ import {
 import {isAfterComboChangeTime, showCancelButton} from "@/function/combo/combo.ts";
 import {addDay, toDateFormat} from "@/function/utils.ts";
 import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";
+import {useEffect} from "react";
 
-const SelectedCombo = () => {
-  const {data: combo, isLoading, error, comboDate} = useComboByGame();
-  const {mutate: deleteCombo} = useDeleteCombo();
-
-  if (isLoading) return <Loading/>;
+const SelectedCombo = ({ setHasCombo }: { setHasCombo: (hasCombo: boolean) => void }) => {
+  const { data: combo, isLoading, error, comboDate } = useComboByGame();
+  const { mutate: deleteCombo } = useDeleteCombo();
 
   const now = new Date();
+
   const comboDateObj = new Date(comboDate);
   const isComboDateTooEarly = comboDateObj > addDay(now, 2);
+  const hasCombo = !!combo && !isComboDateTooEarly && !error;
 
-  if (error || !combo || isComboDateTooEarly) {
-    return (
-      <div></div>
-    );
-  }
+  useEffect(() => {
+    setHasCombo(hasCombo);
+  }, [hasCombo, setHasCombo]);
+
+  if (isLoading) return <Loading />;
+  if (!hasCombo) return null;
 
   const handleCancel = () => {
-    deleteCombo({comboId: combo.comboId, comboDate: comboDate});
+    deleteCombo({ comboId: combo.comboId, comboDate });
   };
 
   const gameStartDateTime = toDateFormat(combo.gameStartDate, combo.gameStartTime);
   const isShowCancelButton = showCancelButton(now, gameStartDateTime);
 
-
   return (
       <ComboWrapper>
         <TopSection>
           <SelectionText>내 선택</SelectionText>
-          {
-            isShowCancelButton && (
-                  <CancelButton onClick={handleCancel} disabled={isAfterComboChangeTime(now, gameStartDateTime)}>취소</CancelButton>
-              )
-          }
+          {isShowCancelButton && (
+              <CancelButton onClick={handleCancel} disabled={isAfterComboChangeTime(now, gameStartDateTime)}>
+                취소
+              </CancelButton>
+          )}
         </TopSection>
         <PlayerSection>
           <PlayerInfo>
-            <PlayerImage url={combo.playerImageUrl}/>
+            <PlayerImage url={combo.playerImageUrl} />
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
-              <ComboStatus
-                  status={combo.comboStatus}>{getStatusText(combo.comboStatus)}
-              </ComboStatus>
+              <ComboStatus status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
             </PlayerDetails>
           </PlayerInfo>
         </PlayerSection>

@@ -15,7 +15,7 @@ import {
 } from "@components/game/GameList.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
 
-const GameList = () => {
+const GameList = ({ hasCombo }: { hasCombo: boolean }) => {
   const {formattedDate} = useGameDate();
   const {data: games, isLoading, error} = useGameList(formattedDate);
 
@@ -43,7 +43,9 @@ const GameList = () => {
                 <GameInfo>
                   <GameTime>{sliceSecond(game.startTime)}</GameTime>
                   <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
-                                     awayTeam={game.awayTeam} startDate={game.startDate} startTime={game.startTime}/>
+                                     awayTeam={game.awayTeam} startDate={game.startDate}
+                                     startTime={game.startTime}
+                                     hasCombo={hasCombo}/>
                 </GameInfo>
               </PlayerCard>
           ))}
