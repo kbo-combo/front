@@ -3,10 +3,15 @@ import {Button, Wrapper} from "./Navbar.style.ts";
 import {URL_PATH} from "../../../constant";
 import NavItem from "./NavItem.tsx";
 import {useCheckLogin} from "@/hooks/login.ts";
+import Loading from "@pages/@common/common/Loading.tsx";
 
 const NavBar = () => {
 
-  const {isLoggedIn} = useCheckLogin();
+  const {isLoggedIn, isLoading} = useCheckLogin();
+
+  if (isLoading) {
+    return <Loading/>
+  }
 
   return (
       <Wrapper>
