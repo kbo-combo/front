@@ -8,7 +8,8 @@ export const Wrapper = styled.main`
   width: 100%;
   height: 100%;
   color: ${({theme: {color}}) => color.primary};
-  background-color: ${({theme: {color}}) => color.background}; 
+  background-color: ${({theme: {color}}) => color.background};
+  margin-bottom: 4rem;
 `;
 
 export const GameListWrapper = styled.div`
