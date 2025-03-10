@@ -29,9 +29,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, h
   const handleClick = () => {
     if (!isGameStarted()) {
       updateHitterCombo(gameId, homeTeam, awayTeam);
-      navigate(URL_PATH.hitter_select, {
-        state: { gameId, homeTeam, awayTeam },
-      });
+      navigate(URL_PATH.hitter_select);
     }
   };
 

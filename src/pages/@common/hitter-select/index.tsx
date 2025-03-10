@@ -5,8 +5,7 @@ import {useHitterComboState} from "@/hooks/combo/useCombo.ts";
 const HitterSelectPage = () => {
 
   const { hitterComboState } = useHitterComboState();
-
-  if (hitterComboState === null) {
+  if (hitterComboState == null) {
     throw new Error()
   }
 
