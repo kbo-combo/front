@@ -4,10 +4,12 @@ import {URL_PATH} from "@/constant";
 import {toDateFormat} from "@/function/utils.ts";
 import {isAfterComboChangeTime, isBeforeComboAddDeadline} from "@/function/combo/combo.ts";
 import theme from "@style/theme.style.ts";
+import {useHitterComboState} from "@/hooks/combo/useCombo.ts";
+import {TeamName} from "@constant/player.ts";
 
 interface ComboHitterButtonProps {
-  homeTeam: string;
-  awayTeam: string;
+  homeTeam: TeamName;
+  awayTeam: TeamName;
   gameId: number;
   startDate: string;
   startTime: string;
@@ -16,6 +18,7 @@ interface ComboHitterButtonProps {
 
 const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, hasCombo}: ComboHitterButtonProps) => {
   const navigate = useNavigate();
+  const { updateHitterCombo } = useHitterComboState();
 
   const now = new Date()
   const gameStartDateTime = toDateFormat(startDate, startTime);
@@ -25,6 +28,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, h
 
   const handleClick = () => {
     if (!isGameStarted()) {
+      updateHitterCombo(gameId, homeTeam, awayTeam);
       navigate(URL_PATH.hitter_select, {
         state: { gameId, homeTeam, awayTeam },
       });

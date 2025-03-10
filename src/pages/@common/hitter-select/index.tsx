@@ -1,21 +1,17 @@
 import ComboHittersPage from "@components/hitter/ComboHittersList.tsx";
-import {useLocation} from "react-router-dom";
-import {TeamName} from "@constant/player.ts";
+import {useHitterComboState} from "@/hooks/combo/useCombo.ts";
 
-
-interface HitterSelectPageState {
-  homeTeam: string;
-  awayTeam: string;
-  gameId: number;
-}
 
 const HitterSelectPage = () => {
 
-  const location = useLocation();
-  const { gameId, homeTeam, awayTeam } = location.state as HitterSelectPageState;
+  const { hitterComboState } = useHitterComboState();
+
+  if (hitterComboState === null) {
+    throw new Error()
+  }
 
   return (
-     <ComboHittersPage gameId={gameId} homeTeam={homeTeam as TeamName} awayTeam={awayTeam as TeamName}/>
+     <ComboHittersPage gameId={hitterComboState.gameId} homeTeam={hitterComboState.homeTeam} awayTeam={hitterComboState.awayTeam}/>
   );
 };
 
