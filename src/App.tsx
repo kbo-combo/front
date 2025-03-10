@@ -11,7 +11,7 @@ import CustomToastContainer from "@components/@common/toast/CustomToastContainer
 import {useEffect} from "react";
 import ReactGA from 'react-ga4';
 import {queryClient} from "@/hooks/client/queryClient.ts";
-import {Provider} from "jotai/react/Provider";
+import {Provider} from "jotai";
 
 const GA_CODE = import.meta.env.VITE_GA_CODE;
 

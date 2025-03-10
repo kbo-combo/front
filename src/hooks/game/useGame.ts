@@ -6,7 +6,7 @@ import {
   GameResponse
 } from "@apis/game.ts";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
-import {useAtom} from "jotai/react/useAtom";
+import {useAtom} from "jotai";
 
 export const useGameDate = () => {
   const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
