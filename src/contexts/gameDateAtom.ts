@@ -1,6 +1,4 @@
-import { atom } from "recoil";
+import {atom} from "jotai";
 
-export const gameDateAtom = atom<Date>({
-  key: "gameDate",
-  default: new Date(),
-});
+
+export const gameDateAtom = atom<Date>(new Date());

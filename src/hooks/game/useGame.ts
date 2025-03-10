@@ -5,11 +5,11 @@ import {
   GameDateResponse,
   GameResponse
 } from "@apis/game.ts";
-import {useRecoilState} from "recoil";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
+import {useAtom} from "jotai/react/useAtom";
 
 export const useGameDate = () => {
-  const [selectedDate, setSelectedDate] = useRecoilState(gameDateAtom);
+  const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
 
   return {
     selectedDate,
