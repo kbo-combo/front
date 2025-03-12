@@ -1,6 +1,4 @@
 import {client} from "@apis/apiClient.ts";
-import {TeamName} from "@constant/player.ts";
-import {StartingPitcherResponse} from "@apis/game.ts";
 import {GameType} from "@/types/game/game.ts";
 
 export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankDetail> => {
@@ -20,18 +18,23 @@ export const findAllComboRankByParam = async (size: number, year: number, gameTy
 }
 
 export interface ComboRankListResponse {
-  topRanks: ComboRankResponse[]
+  gameType: GameType
+  comboRankResponse: ComboRankResponse[]
 }
 
 export interface ComboRankResponse {
+  rank: number,
   id: number,
-  homeTeam: TeamName,
-  awayTeam: TeamName,
-  startDate: string,
-  startTime: string,
-  gameState: string,
-  homeStartingPitcher: StartingPitcherResponse | null,
-  awayStartingPitcher: StartingPitcherResponse | null
+  year: number,
+  memberId: number,
+  nickname: string,
+  currentRecord: number,
+  successCount: number,
+  failCount: number,
+  passCount: number,
+  totalCount: number,
+  firstSuccessDate: string,
+  lastSuccessDate: string,
 }
 
 export interface MemberComboRankDetail {
