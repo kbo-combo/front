@@ -10,7 +10,6 @@ import {useAtom} from "jotai";
 
 export const useGameDate = () => {
   const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
-
   return {
     selectedDate,
     formattedDate: selectedDate.toLocaleDateString("sv-SE"),

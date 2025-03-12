@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {useGameListByYearAndMonth} from "@/hooks/game/useGame.ts";
 
 export const useInitializeSelectedDate = (
-    selectedDate: Date | null,
+    selectedDate: Date,
     setSelectedDate: (date: Date) => void
 ) => {
   const today = new Date();
@@ -27,19 +27,40 @@ export const useInitializeSelectedDate = (
     .filter((d) => d.hasGame)
     .map((d) => d.date);
 
-    if (availableDays.length === 0) return;
+    if (availableDays.length === 0) {
+      setSelectedDate(currentMonth)
+      return;
+    }
 
     const newSelectedDate = (() => {
+      if (selectedDate.getMonth() !== currentMonth.getMonth()) {
+        if (selectedDate < currentMonth) {
+          return new Date(availableDays[0]);
+        }
+
+        if (selectedDate >  currentMonth) {
+          return new Date(availableDays[availableDays.length -1])
+        }
+      }
+
       if (selectedDate && availableDays.includes(selectedDate.toISOString().split("T")[0])) {
         return selectedDate;
       }
-      return new Date(availableDays[0]);
+      const today = new Date().toISOString().split("T")[0];
+      const futureDates = availableDays.filter(date => date >= today);
+
+      if (futureDates.length > 0) {
+        return new Date(futureDates[0]);
+      }
+
+      return new Date(availableDays[availableDays.length - 1]);
     })();
 
     if (!lastSelectedDate.current || lastSelectedDate.current.getTime() !== newSelectedDate.getTime()) {
       lastSelectedDate.current = newSelectedDate;
       setSelectedDate(newSelectedDate);
     }
+
   }, [currentMonth, gameDateList, selectedDate, setSelectedDate]);
 
   return { currentMonth, setCurrentMonth, gameDateList };

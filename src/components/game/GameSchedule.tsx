@@ -18,6 +18,7 @@ const MAX_MONTH = 10;
 
 const GameSchedule = () => {
   const { selectedDate, setSelectedDate } = useGameDate();
+  console.log("seelec date =" + selectedDate)
   const { currentMonth, setCurrentMonth, gameDateList } = useInitializeSelectedDate(selectedDate, setSelectedDate);
   const { scrollContainerRef, dateRefs } = useScrollToSelectedDate(selectedDate);
 
