@@ -13,12 +13,11 @@ import SvgStroke from "@components/@common/icons";
 import {useGameDate} from "@/hooks/game/useGame.ts";
 import {useInitializeSelectedDate, useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
 
-const MIN_MONTH = 1;
+const MIN_MONTH = 2;
 const MAX_MONTH = 10;
 
 const GameSchedule = () => {
   const { selectedDate, setSelectedDate } = useGameDate();
-  console.log("seelec date =" + selectedDate)
   const { currentMonth, setCurrentMonth, gameDateList } = useInitializeSelectedDate(selectedDate, setSelectedDate);
   const { scrollContainerRef, dateRefs } = useScrollToSelectedDate(selectedDate);
 
