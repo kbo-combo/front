@@ -1,6 +1,7 @@
 import {client} from "@apis/apiClient.ts";
 import {TeamName} from "@constant/player.ts";
 import {StartingPitcherResponse} from "@apis/game.ts";
+import {GameType} from "@/types/game/game.ts";
 
 export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankDetail> => {
   const response = await client.get<MemberComboRankDetail>('combo-rank/detail', {
@@ -10,9 +11,9 @@ export const findMemberComboRankDetail = async (targetMemberId: number): Promise
   return response.data
 }
 
-export const findAllComboRankByParam = async (size: number, year: number): Promise<ComboRankListResponse> => {
+export const findAllComboRankByParam = async (size: number, year: number, gameType: GameType): Promise<ComboRankListResponse> => {
   const response = await client.get<ComboRankListResponse>('combo-rank/statistic', {
-        params: {size: size, year: year}
+        params: {size: size, year: year, gameType: gameType}
       }
   )
   return response.data
