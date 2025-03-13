@@ -92,7 +92,7 @@ export const useCheckLogin = () => {
     };
 
     checkLogin();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, setIsLoggedInAtom]);
 
   if (isLoggedIn) {
     return {isLoggedIn: isLoggedIn, isLoading: false};
