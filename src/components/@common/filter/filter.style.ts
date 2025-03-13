@@ -33,7 +33,7 @@ export const FilterButton = styled.button<{ selected: boolean}>`
   color: ${({ selected, theme }) =>
     selected ? theme.color.sub : theme.color.grayDark};
   border: ${({ selected, theme }) =>
-      selected ? `1px solid ${theme.color.primary}` : "none"}; 
+    selected ? `1px solid ${theme.color.primary}` : "none"}; 
   cursor: pointer;
 
 

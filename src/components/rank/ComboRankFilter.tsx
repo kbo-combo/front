@@ -1,5 +1,5 @@
 import {GameType} from "@/types/game/game.ts";
-import {FilterButton, FilterWrapper} from "@components/hitter/ComboHittersFilter.style.ts";
+import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 
 type ComboRankFilterProps = {
   selectedGameType: GameType;
