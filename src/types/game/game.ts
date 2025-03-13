@@ -1,7 +1,8 @@
-export const GameType = {
+export const GameTypes = {
   PRE_SEASON: "시범경기",
   REGULAR_SEASON: "정규시즌",
   POST_SEASON: "포스트시즌",
 } as const;
 
-export type GameType = keyof typeof GameType;
+export type GameType = (typeof GameTypes)[keyof typeof GameTypes];
+
