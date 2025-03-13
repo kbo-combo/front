@@ -43,6 +43,7 @@ export const MemberName = styled.span`
 
   @media (max-width: 500px) {
     font-size: 1.6rem;  
+    margin-top: 1.5rem;
     line-height: 1.8rem;
 `;
 
