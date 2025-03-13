@@ -12,6 +12,14 @@ export const RankItem = styled.div`
   margin-bottom: 1.8rem;
 `;
 
+export const RankInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  padding-left: 1rem;
+`;
+
 export const RankNumber = styled.span`
   font: ${theme.font.text};
   font-size: 2.2rem;
@@ -25,18 +33,11 @@ export const MedalEmoji = styled.span`
   margin-right: 0.5rem;
 `;
 
-export const RankInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex: 1;
-  padding-left: 1rem;
-`;
-
 export const MemberName = styled.span`
   font: ${theme.font.text};
   color: ${theme.color.sub};
   max-width: 75%;
+  margin-top: 1.0rem;
   font-size: 2.8rem;
   line-height: 2.6rem;
 
@@ -45,14 +46,39 @@ export const MemberName = styled.span`
     line-height: 1.8rem;
 `;
 
-export const RecordInfo = styled.span`
+
+export const CurrentRecordWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  align-items: flex-end;
+  font-size: 2.0rem;
+`;
+
+export const CurrentRecord = styled.span`
   font: ${theme.font.text};
-  color: ${theme.color.fontGreen};
+  color: ${theme.color.primary};
+  text-align: right;
   font-size: 2.3rem;
   white-space: nowrap;
 
   @media (max-width: 500px) {
     font-size: 1.6rem;
+`;
+
+export const RecordStats = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+`;
+
+
+export const ResultCount = styled.span<{ success?: boolean }>`
+  font: ${theme.font.text};
+  white-space: nowrap;
+  font-size: 1.4rem;
+  color: ${(props) => (props.success ? theme.color.fontGreen : theme.color.fontRed)};
 `;
 
 export const EmptyMessage = styled.p`

@@ -12,6 +12,7 @@ const color = {
   water: '#75AEDC',
   green: '#15b737',
   fontGreen: '#0cb664',
+  fontRed: '#de675e',
   gold: '#FFD700',
   silver: '#C0C0C0',
   bronze: '#CD7F32',

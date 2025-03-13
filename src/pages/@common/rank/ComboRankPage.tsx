@@ -4,13 +4,14 @@ import {PageWrapper} from "@components/@common/wrapper/pageWrapper.style.ts";
 import ContentHeader from "@components/@common/contentHeader/ContentHeader.tsx";
 import {ComboRankResponse} from "@apis/combo-rank.ts";
 import {
+  CurrentRecord,
+  CurrentRecordWrapper,
   EmptyMessage,
   MedalEmoji,
   MemberName,
   RankInfo,
   RankItem,
-  RankNumber,
-  RecordInfo
+  RankNumber, RecordStats, ResultCount
 } from "@pages/@common/rank/ComboRankPage.style.ts";
 import {GameType} from "@/types/game/game.ts";
 import {useState} from "react";
@@ -52,7 +53,13 @@ const ComboRankPage =() => {
                   )}
                   <RankInfo>
                     <MemberName>{rankInfo.nickname}</MemberName>
-                    <RecordInfo>{rankInfo.currentRecord} 콤보!</RecordInfo>
+                    <CurrentRecordWrapper>
+                      <CurrentRecord>{rankInfo.currentRecord} 콤보</CurrentRecord>
+                      <RecordStats>
+                        <ResultCount success={true}>성공 {rankInfo.successCount}</ResultCount>
+                        <ResultCount success={false}>실패 {rankInfo.failCount}</ResultCount>
+                      </RecordStats>
+                    </CurrentRecordWrapper>
                   </RankInfo>
                 </RankItem>
             ))
