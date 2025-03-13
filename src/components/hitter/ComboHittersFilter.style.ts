@@ -3,15 +3,15 @@ import theme from "@style/theme.style.ts";
 
 export const FilterWrapper = styled.div`
   flex-direction: column;
-  gap: 1rem; 
-  margin-bottom: 1rem; 
+  gap: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
-  justify-content: flex-start; 
-  align-items: flex-start; 
+  justify-content: flex-start;
+  align-items: flex-start;
 
   & > div {
     display: flex;
-    gap: 0.5rem; 
+    gap: 0.5rem;
     align-items: center;
   }
 `;
@@ -26,10 +26,10 @@ export const FilterTitle = styled.span`
   margin-right: 0.5rem; 
 `;
 
-export const FilterButton = styled.button<{ selected: boolean }>`
+export const FilterButton = styled.button<{ selected: boolean}>`
   padding: 0.5rem 0.75rem;
   font: ${theme.font.text};
-  font-size: 1.4rem;
+  font-size: 1.6rem;  
   color: ${({ selected, theme }) =>
     selected ? theme.color.sub : theme.color.grayDark};
   border: ${({ selected, theme }) =>
