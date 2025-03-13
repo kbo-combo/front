@@ -11,6 +11,7 @@ import RuleBook from "@pages/@common/rule-book";
 import ComboPage from "@pages/@common/combo/ComboListPage.tsx";
 import MemberPage from "@pages/@common/member/MemberPage.tsx";
 import MemberEditPage from "@pages/@common/member/MemberEditPage.tsx";
+import ComboRankPage from "@pages/@common/rank/ComboRankPage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path: URL_PATH.rule_book,
           element: <RuleBook />,
+        },
+        {
+          path: URL_PATH.rank,
+          element: <ComboRankPage />,
         },
         {
           path: URL_PATH.combo,

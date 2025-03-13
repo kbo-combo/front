@@ -18,6 +18,9 @@ const NavBar = () => {
         <Button as={Link} to={URL_PATH.main}>
           <NavItem isActive={true} iconId="home-line" label="메인"/>
         </Button>
+        <Button as={Link} to={URL_PATH.rank}>
+          <NavItem isActive={true} iconId="combo-rank" label="랭킹"/>
+        </Button>
         {isLoggedIn ? (
             <>
               <Button as={Link} to={URL_PATH.combo}>

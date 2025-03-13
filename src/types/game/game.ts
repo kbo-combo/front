@@ -1,8 +1,13 @@
-export const GameTypes = {
-  PRE_SEASON: "시범경기",
-  REGULAR_SEASON: "정규시즌",
-  POST_SEASON: "포스트시즌",
+export const GameType = {
+  PRE_SEASON: "PRE_SEASON",
+  REGULAR_SEASON: "REGULAR_SEASON",
+  POST_SEASON: "POST_SEASON",
 } as const;
 
-export type GameType = (typeof GameTypes)[keyof typeof GameTypes];
+export type GameType = typeof GameType[keyof typeof GameType];
 
+export const GameTypeLabels: Record<GameType, string> = {
+  [GameType.PRE_SEASON]: "시범경기",
+  [GameType.REGULAR_SEASON]: "정규시즌",
+  [GameType.POST_SEASON]: "포스트시즌",
+};
