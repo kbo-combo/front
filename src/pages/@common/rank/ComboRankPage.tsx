@@ -36,15 +36,14 @@ const ComboRankPage =() => {
   };
 
 
-
   if (isLoading) return <Loading />;
 
   return (
       <PageWrapper>
         <ContentHeader title={"랭킹"}/>
         <ComboRankFilter selectedGameType={selectedGameType} onSelectGameType={handleGameTypeChange} />
-        {data?.comboRankResponse && data.comboRankResponse.length > 0 ? (
-            data?.comboRankResponse.map((rankInfo: ComboRankResponse) => (
+        {data.length > 0 ? (
+            data.map((rankInfo: ComboRankResponse) => (
                 <RankItem>
                   {rankInfo.rank <= 3 ? (
                       <MedalEmoji>{medalIcons[rankInfo.rank as 1 | 2 | 3]}</MedalEmoji>

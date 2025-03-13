@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {findAllComboRankByParam} from "@apis/combo-rank.ts";
+import {ComboRankResponse, findAllComboRankByParam} from "@apis/combo-rank.ts";
 import {GameType} from "@/types/game/game.ts";
 
 export const useComboRankList = (size: number, year: number, gameType: GameType) => {
@@ -11,5 +11,7 @@ export const useComboRankList = (size: number, year: number, gameType: GameType)
     refetchOnReconnect: false,
   });
 
-  return {data, error, isLoading};
+  const filteredData = data?.comboRankResponse.filter((item: ComboRankResponse) => item.currentRecord !== 0) ?? [];
+
+  return { data: filteredData, error, isLoading };
 };
