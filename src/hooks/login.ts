@@ -1,5 +1,5 @@
 import {useMutation} from '@tanstack/react-query';
-import {getLoginPage, getLoginResult, LoginRequest,} from "@apis/auth.ts";
+import {getLoginPage, getLoginResult, LoginRequest, LoginResponse,} from "@apis/auth.ts";
 import {URL_PATH} from "@/constant";
 import {useNavigate} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import {useAtom} from "jotai";
 import {isLoggedInAtom} from "@/contexts/auth/isLoggedInAtom.ts";
 import {getMemberDetail} from "@apis/member.ts";
+import {memberIdAtom} from "@/contexts/auth/memberIdAtom.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -33,14 +34,15 @@ export const useAuthLoginPage = () => {
 export const useLogin = (socialProvider: string, code: string) => {
   const redirectUri = getRedirectUri(socialProvider);
   const navigate = useNavigate();
-  const {setIsLoggedInAtom} = useLoginContext()
+  const {setIsLoggedInAtom, setMemberId} = useLoginContext()
 
   const {mutateAsync: mutation} = useMutation({
     mutationFn: (loginRequest: LoginRequest) =>
         getLoginResult(socialProvider, loginRequest),
-    onSuccess: () => {
+    onSuccess: (response: LoginResponse) => {
       navigate(URL_PATH.main);
       setIsLoggedInAtom(true)
+      setMemberId(response.id)
     },
     onError: () => {
       navigate(URL_PATH.login);
@@ -62,10 +64,13 @@ export const useLogin = (socialProvider: string, code: string) => {
 
 export const useLoginContext = () => {
   const [isLoggedIn, setIsLoggedInAtom] = useAtom(isLoggedInAtom);
+  const [memberId, setMemberId] = useAtom(memberIdAtom);
 
   return {
     isLoggedIn,
-    setIsLoggedInAtom
+    setIsLoggedInAtom,
+    memberId,
+    setMemberId
   }
 }
 

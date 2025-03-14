@@ -5,11 +5,17 @@ import {
   GameDateResponse,
   GameResponse
 } from "@apis/game.ts";
-import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 import {useAtom} from "jotai";
+import {useEffect} from "react";
+import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 
 export const useGameDate = () => {
   const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
+
+  useEffect(() => {
+    setSelectedDate(new Date())
+  }, []);
+
   return {
     selectedDate,
     formattedDate: selectedDate.toLocaleDateString("sv-SE"),

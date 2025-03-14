@@ -1,8 +1,4 @@
-import {
-  FilterButton,
-  FilterTitle,
-  FilterWrapper
-} from "@components/hitter/ComboHittersFilter.style.ts";
+import {FilterButton, FilterTitle, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 
 type FilterOption = {
   key: string;
