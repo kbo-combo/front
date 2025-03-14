@@ -58,7 +58,7 @@ export const CurrentRecordWrapper = styled.div`
 
 export const CurrentRecord = styled.span`
   font: ${theme.font.text};
-  color: ${theme.color.primary};
+  color: ${theme.color.fontGreen};
   text-align: right;
   font-size: 2.3rem;
   white-space: nowrap;
@@ -79,7 +79,7 @@ export const ResultCount = styled.span<{ success?: boolean }>`
   font: ${theme.font.text};
   white-space: nowrap;
   font-size: 1.4rem;
-  color: ${(props) => (props.success ? theme.color.fontGreen : theme.color.fontRed)};
+  color: ${(props) => (props.success ? theme.color.primary : theme.color.fontRed)};
 `;
 
 export const EmptyMessage = styled.p`
