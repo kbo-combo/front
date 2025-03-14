@@ -15,3 +15,4 @@ export const useComboRankList = (size: number, year: number, gameType: GameType)
 
   return { data: filteredData, error, isLoading };
 };
+

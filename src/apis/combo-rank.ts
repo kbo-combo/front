@@ -1,8 +1,8 @@
 import {client} from "@apis/apiClient.ts";
 import {GameType} from "@/types/game/game.ts";
 
-export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankDetail> => {
-  const response = await client.get<MemberComboRankDetail>('combo-rank/detail', {
+export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankByYear[]> => {
+  const response = await client.get<MemberComboRankByYear[]>('combo-rank/detail', {
         params: {targetMemberId: targetMemberId}
       }
   )
@@ -36,6 +36,12 @@ export interface ComboRankResponse {
   firstSuccessDate: string,
   lastSuccessDate: string,
 }
+
+export interface MemberComboRankByYear {
+  year: number,
+  comboRanks: MemberComboRankDetail
+}
+
 
 export interface MemberComboRankDetail {
   id: number,
