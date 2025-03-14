@@ -26,9 +26,10 @@ const medalIcons = {
 
 const SIZE = 20;
 const YEAR = 2025;
+const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
 
 const ComboRankPage =() => {
-  const [selectedGameType, setSelectedGameType] = useState<GameType>(GameType.REGULAR_SEASON);
+  const [selectedGameType, setSelectedGameType] = useState<GameType>(DEFAULT_GAME_TYPE);
   const {data, isLoading} = useComboRankList(SIZE, YEAR, selectedGameType)
 
   const handleGameTypeChange = (gameType: GameType) => {
