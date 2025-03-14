@@ -4,5 +4,6 @@ export const URL_PATH = {
   member: '/member',
   hitter_select: '/hitter-select',
   rule_book: '/rule',
-  combo: '/combo'
+  combo: '/combo',
+  rank: `/rank`
 } as const;

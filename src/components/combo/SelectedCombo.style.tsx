@@ -10,6 +10,7 @@ export const ComboWrapper = styled.div`
   width: 97.5%;
   background: ${theme.color.background};
   padding: 1.5rem;
+  margin-left: 1rem;
   border-radius: 1rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;

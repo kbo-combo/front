@@ -10,6 +10,9 @@ import {
 import {toast} from "react-toastify";
 import {useGameDate} from "@/hooks/game/useGame.ts";
 import {useHandleError} from "@/hooks/@common/useHandleError.ts";
+import {useAtom} from "jotai";
+import {comboHitterAtom} from "@/contexts/combo/ComboHitterAtom.ts";
+import {TeamName} from "@constant/player.ts";
 
 export const useCreateCombo = () => {
   const { formattedDate : comboDate } = useGameDate();
@@ -84,4 +87,14 @@ export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) 
     hasNextPage,
     isFetchingNextPage,
   };
+};
+
+
+export const useHitterComboState = () => {
+  const [hitterComboState, setHitterComboState] = useAtom(comboHitterAtom);
+
+  const updateHitterCombo = (gameId: number, homeTeam: TeamName, awayTeam: TeamName) => {
+    setHitterComboState({gameId, homeTeam, awayTeam,});};
+
+  return {hitterComboState, updateHitterCombo,};
 };

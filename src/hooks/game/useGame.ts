@@ -5,11 +5,16 @@ import {
   GameDateResponse,
   GameResponse
 } from "@apis/game.ts";
-import {useRecoilState} from "recoil";
+import {useAtom} from "jotai";
+import {useEffect} from "react";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 
 export const useGameDate = () => {
-  const [selectedDate, setSelectedDate] = useRecoilState(gameDateAtom);
+  const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
+
+  useEffect(() => {
+    setSelectedDate(new Date())
+  }, []);
 
   return {
     selectedDate,
@@ -17,6 +22,7 @@ export const useGameDate = () => {
     setSelectedDate,
   };
 };
+
 export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],

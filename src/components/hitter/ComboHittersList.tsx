@@ -33,19 +33,7 @@ const ComboHitterList = ({gameId, homeTeam, awayTeam}: ComboHitterListProps) => 
     setSelectedPlayerId(playerId);
   };
 
-
   const { mutate: createCombo } = useCreateCombo();
-
-  const handleCreateCombo = () => {
-    if (selectedPlayerId !== null) {
-      createCombo({ gameId, playerId: selectedPlayerId }, {
-        onSuccess: () => {
-            navigate(URL_PATH.main);
-            toast.success("콤보 생성 완료")
-        }
-      });
-    }
-  };
 
   const {
     filteredHitters,
@@ -64,6 +52,17 @@ const ComboHitterList = ({gameId, homeTeam, awayTeam}: ComboHitterListProps) => 
       setSelectedPlayerId(null);
     }
   }, [filteredHitters, selectedPlayerId]);
+
+  const handleCreateCombo = () => {
+    if (selectedPlayerId !== null) {
+      createCombo({ gameId, playerId: selectedPlayerId }, {
+        onSuccess: () => {
+          navigate(URL_PATH.main);
+          toast.success("콤보 생성 완료")
+        }
+      });
+    }
+  };
 
   if (isLoading) return <Loading/>;
 

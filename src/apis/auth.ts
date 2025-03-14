@@ -1,7 +1,7 @@
 import {client} from "@apis/apiClient.ts";
 
 export interface LoginPageRequest {
-  socialProvider: string;
+  socialProvider: string
 }
 
 export const getLoginPage = async (
@@ -33,12 +33,14 @@ export const getLoginResult = async (
 };
 
 export interface LoginRequest {
-  code: string;
-  redirectUri: string;
+  code: string
+  redirectUri: string
 }
 
 
 export interface LoginResponse {
   socialId: number
+  id: number
+  nickname: string
 }
 

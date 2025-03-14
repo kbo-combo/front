@@ -10,7 +10,12 @@ const color = {
   grayLight: '#ECECEC',
   grayDark: '#A5A5A5',
   water: '#75AEDC',
-  green: '#15b737'
+  green: '#15b737',
+  fontGreen: '#0cb664',
+  fontRed: '#de675e',
+  gold: '#FFD700',
+  silver: '#C0C0C0',
+  bronze: '#CD7F32',
 } as const;
 
 const font = {
