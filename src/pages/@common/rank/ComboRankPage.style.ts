@@ -5,11 +5,11 @@ export const RankItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem;
   border-radius: 0.8rem;
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 1.8rem;
+  padding-bottom: 5.0rem;
 `;
 
 export const RankInfo = styled.div`
