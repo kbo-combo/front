@@ -35,6 +35,8 @@ const SelectedCombo = ({ setComboGameDateTime }: SelectedComboProps) => {
     if (combo) {
       const date = createDateFromString(combo.gameStartDate, combo.gameStartTime);
       setComboGameDateTime(date);
+    } else {
+      setComboGameDateTime(null)
     }
   }, [combo, setComboGameDateTime]);
 
