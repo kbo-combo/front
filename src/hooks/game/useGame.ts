@@ -14,9 +14,11 @@ export const useGameDate = () => {
 
   useEffect(() => {
     if (!selectedDate) {
+      console.log("useEffect" + selectedDate)
       setSelectedDate(new Date());
     }
   }, [selectedDate, setSelectedDate]);
+
 
   return {
     selectedDate: selectedDate ?? new Date(),

@@ -5,23 +5,18 @@ export const useInitializeSelectedDate = (
     selectedDate: Date,
     setSelectedDate: (date: Date) => void
 ) => {
-  const today = new Date();
+  const [currentMonth, setCurrentMonth] = useState(selectedDate);
 
-  const initialMonth = selectedDate
-      ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
-      : new Date(today.getFullYear(), today.getMonth(), 1);
-
-  const [currentMonth, setCurrentMonth] = useState(initialMonth);
-
-  const { gameDateList } = useGameListByYearAndMonth(
+  const { gameDateList} = useGameListByYearAndMonth(
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1
   );
 
+
   const lastSelectedDate = useRef<Date | null>(null);
 
   useEffect(() => {
-    if (!gameDateList?.length) return;
+    if (!gameDateList || gameDateList.length === 0) return;
 
     const availableDays = gameDateList
     .filter((d) => d.hasGame)
