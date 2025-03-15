@@ -45,7 +45,7 @@ const GameList = ({ hasCombo }: { hasCombo: boolean }) => {
                   <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
                                      awayTeam={game.awayTeam} startDate={game.startDate}
                                      startTime={game.startTime}
-                                     hasCombo={hasCombo}/>
+                                     hasCombo={hasCombo} gameState={game.gameState}/>
                 </GameInfo>
               </PlayerCard>
           ))}
