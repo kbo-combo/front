@@ -8,7 +8,6 @@ import {useAtom} from "jotai";
 import {isLoggedInAtom} from "@/contexts/auth/isLoggedInAtom.ts";
 import {getMemberDetail} from "@apis/member.ts";
 import {memberIdAtom} from "@/contexts/auth/memberIdAtom.ts";
-import {useLoginRedirect} from "@/hooks/@common/useLoginRedirect.ts";
 
 export const useAuthLoginPage = () => {
   const loginMutation = useMutation({
@@ -36,7 +35,6 @@ export const useLogin = (socialProvider: string, code: string) => {
   const redirectUri = getRedirectUri(socialProvider);
   const navigate = useNavigate();
   const {setIsLoggedInAtom, setMemberId} = useLoginContext()
-  const {redirectAfterLogin} = useLoginRedirect()
 
   const {mutateAsync: mutation} = useMutation({
     mutationFn: (loginRequest: LoginRequest) =>
@@ -44,7 +42,6 @@ export const useLogin = (socialProvider: string, code: string) => {
     onSuccess: (response: LoginResponse) => {
       setIsLoggedInAtom(true)
       setMemberId(response.id)
-      redirectAfterLogin()
     },
     onError: () => {
       navigate(URL_PATH.login);
