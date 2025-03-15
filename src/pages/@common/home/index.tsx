@@ -10,14 +10,14 @@ import {useState} from "react";
 const Home = () => {
 
   const {isLoggedIn} = useCheckLogin()
-  const [hasCombo, setHasCombo] = useState(false);
+  const [comboGameDateTime, setComboGameDateTime] = useState<Date | null>(null);
 
   return (
       <PageWrapper>
         <ContentHeader title={"하루, 한타"} />
         <GameSchedule />
-        {isLoggedIn && <SelectedCombo setHasCombo={setHasCombo} />}
-        <GameList hasCombo={hasCombo} />
+        {isLoggedIn && <SelectedCombo setComboGameDateTime={setComboGameDateTime} />}
+        <GameList comboGameDateTime={comboGameDateTime} />
       </PageWrapper>
   );
 };

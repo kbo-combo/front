@@ -11,3 +11,6 @@ export const GameTypeLabels: Record<GameType, string> = {
   [GameType.REGULAR_SEASON]: "정규시즌",
   [GameType.POST_SEASON]: "포스트시즌",
 };
+
+export type GameState = 'PENDING' | 'RUNNING' | 'COMPLETED' | 'CANCEL';
+
