@@ -92,6 +92,7 @@ export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) 
 
 export const useHitterComboState = () => {
   const [hitterComboState, setHitterComboState] = useAtom(comboHitterAtom);
+  console.log("hitteromboState " + hitterComboState)
 
   const updateHitterCombo = (gameId: number, homeTeam: TeamName, awayTeam: TeamName) => {
     setHitterComboState({gameId, homeTeam, awayTeam,});};
