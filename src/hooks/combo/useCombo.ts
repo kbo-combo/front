@@ -12,7 +12,6 @@ import {useGameDate} from "@/hooks/game/useGame.ts";
 import {useHandleError} from "@/hooks/@common/useHandleError.ts";
 import {useAtom} from "jotai";
 import {comboHitterAtom} from "@/contexts/combo/ComboHitterAtom.ts";
-import {TeamName} from "@constant/player.ts";
 
 export const useCreateCombo = () => {
   const { formattedDate : comboDate } = useGameDate();
@@ -22,6 +21,7 @@ export const useCreateCombo = () => {
     mutationFn: (request: ComboCreateRequest) => createCombo(request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["combo", comboDate] });
+
     },
     onError: handleError,
   });
@@ -43,17 +43,18 @@ export const useDeleteCombo = () => {
 
 export const useComboByGame = () => {
   const { formattedDate : comboDate } = useGameDate();
-
   const { data, error, isLoading } = useQuery({
     queryKey: ["combo", comboDate],
     queryFn: () => findComboByGameDate(comboDate),
-    staleTime: 1000 * 60,
+    staleTime: 0,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
 
   return { data, error, isLoading, comboDate };
 };
+
+import {TeamName} from "@constant/player.ts";
 
 
 export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) => {

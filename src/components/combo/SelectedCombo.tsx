@@ -28,7 +28,7 @@ const SelectedCombo = ({ setComboGameDateTime }: SelectedComboProps) => {
   const now = new Date();
 
   const comboDateObj = new Date(comboDate);
-  const isComboDateTooEarly = comboDateObj > addDay(now, 2);
+  const isComboDateTooEarly = comboDateObj > addDay(now, 3);
   const hasCombo = !!combo && !isComboDateTooEarly && !error;
 
   useEffect(() => {

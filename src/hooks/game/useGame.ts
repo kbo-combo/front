@@ -6,23 +6,24 @@ import {
   GameResponse
 } from "@apis/game.ts";
 import {useAtom} from "jotai";
-import {useEffect} from "react";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
+import {useEffect} from "react";
 
 export const useGameDate = () => {
   const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
 
   useEffect(() => {
-    setSelectedDate(new Date())
-  }, []);
+    if (!selectedDate) {
+      setSelectedDate(new Date());
+    }
+  }, [selectedDate, setSelectedDate]);
 
   return {
-    selectedDate,
-    formattedDate: selectedDate.toLocaleDateString("sv-SE"),
+    selectedDate: selectedDate ?? new Date(),
+    formattedDate: (selectedDate ?? new Date()).toLocaleDateString("sv-SE"),
     setSelectedDate,
   };
 };
-
 export const useGameList = (gameDate: string) => {
   const { data, error, isLoading } = useQuery<GameResponse[], Error>({
     queryKey: [gameDate],

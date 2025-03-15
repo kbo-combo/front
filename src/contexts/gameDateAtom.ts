@@ -1,3 +1,3 @@
 import {atom} from "jotai";
 
-export const gameDateAtom = atom<Date>(new Date());
+export const gameDateAtom = atom<Date | null>(null);
