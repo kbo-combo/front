@@ -14,8 +14,17 @@ export const isAfterComboChangeTime = (now: Date, gameStartDateTime: Date) => {
   return now >= minusMin(gameStartDateTime, 10);
 };
 
-export const catNotSelectCombo = (now: Date, gameStartDateTime: Date, gameState: GameState) => {
-  return isAfterComboChangeTime(now, gameStartDateTime) || gameState == 'CANCEL' || gameState == 'COMPLETED'
+export const catNotSelectCombo = (
+    now: Date,
+    gameStartDateTime: Date,
+    gameState: GameState,
+    comboGameDate: Date | null
+) => {
+  if (comboGameDate && isAfterComboChangeTime(now, comboGameDate)) {
+    return true;
+  }
+
+  return isAfterComboChangeTime(now, gameStartDateTime) || gameState == 'CANCEL' || gameState == 'COMPLETED';
 };
 
 export const showCancelButton = (now: Date, gameStartDateTime: Date) => {

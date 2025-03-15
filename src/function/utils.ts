@@ -30,3 +30,11 @@ export const addMin = (date: Date, minutes: number): Date => {
 export const minusMin = (date: Date, minutes: number): Date => {
   return new Date(date.getTime() - minutes * 60 * 1000);
 };
+
+
+export const createDateFromString = (date: string, time: string): Date => {
+  const [year, month, day] = date.split("-").map(Number);
+  const [hours, minutes] = time.split(":").map(Number);
+
+  return new Date(year, month - 1, day, hours, minutes);
+};

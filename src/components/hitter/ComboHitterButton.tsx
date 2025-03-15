@@ -14,11 +14,11 @@ interface ComboHitterButtonProps {
   gameId: number;
   startDate: string;
   startTime: string;
-  hasCombo: boolean;
+  comboGameDateTime: Date | null;
   gameState: GameState
 }
 
-const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, hasCombo, gameState}: ComboHitterButtonProps) => {
+const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, comboGameDateTime, gameState}: ComboHitterButtonProps) => {
   const navigate = useNavigate();
   const { updateHitterCombo } = useHitterComboState();
 
@@ -45,7 +45,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, h
     }
 
     if (!isBeforeComboAddDeadline(now, gameStartDateTime)) {
-      if (hasCombo) {
+      if (comboGameDateTime) {
         return "타자 변경"
       }
       return "타자 선택";
@@ -57,7 +57,7 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, h
     return `${daysLeft - 2}일 후 선택 가능`;
   };
   return (
-      <Button onClick={handleClick} disabled={isBeforeComboAddDeadline(now, gameStartDateTime) || catNotSelectCombo(now, gameStartDateTime, gameState)}>
+      <Button onClick={handleClick} disabled={isBeforeComboAddDeadline(now, gameStartDateTime) || catNotSelectCombo(now, gameStartDateTime, gameState, comboGameDateTime)}>
         {getComboButtonText(now, gameStartDateTime, gameState)}
       </Button>
   );
