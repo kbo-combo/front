@@ -23,10 +23,6 @@ const AuthRoute = ({ element, isPrivate }: AuthRouteProps) => {
 
   }
 
-  if (!isPrivate && isLoggedIn) {
-    return <Navigate to={`${URL_PATH.main}`} replace />;
-  }
-
   return <>{element}</>;
 };
 
