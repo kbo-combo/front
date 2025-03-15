@@ -15,6 +15,9 @@ import {
 } from "@components/game/GameList.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
 
+
+const TBD_PITCHER_TEXT = '선발 미정'
+
 interface GameListProps {
   comboGameDateTime: Date | null
 }
@@ -37,11 +40,15 @@ const GameList = ({ comboGameDateTime }: GameListProps) => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
-                    <PlayerName>{game.homeStartingPitcher?.name ?? ""}</PlayerName>
+                    <PlayerName isTbd={!game.homeStartingPitcher?.name}>
+                      {game.homeStartingPitcher?.name ?? TBD_PITCHER_TEXT}
+                    </PlayerName>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
-                    <PlayerName>{game.awayStartingPitcher?.name ?? ""}</PlayerName>
+                    <PlayerName isTbd={!game.awayStartingPitcher?.name}>
+                      {game.awayStartingPitcher?.name ?? TBD_PITCHER_TEXT}
+                    </PlayerName>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
