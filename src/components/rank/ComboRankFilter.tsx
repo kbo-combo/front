@@ -1,4 +1,4 @@
-import {GameType} from "@/types/game/game.ts";
+import {GameType, GameTypeLabels} from "@/types/game/game.ts";
 import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 
 type ComboRankFilterProps = {
@@ -14,14 +14,14 @@ const ComboRankFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilter
             onClick={() => onSelectGameType(GameType.PRE_SEASON)}
             style={{fontSize: '2.2rem'}}
         >
-          시범경기
+          {GameTypeLabels[GameType.PRE_SEASON]}
         </FilterButton>
         <FilterButton
             selected={selectedGameType === GameType.REGULAR_SEASON}
             onClick={() => onSelectGameType(GameType.REGULAR_SEASON)}
             style={{fontSize: '2.2rem'}}
         >
-          정규시즌
+          {GameTypeLabels[GameType.REGULAR_SEASON]}
         </FilterButton>
       </FilterWrapper>
   );
