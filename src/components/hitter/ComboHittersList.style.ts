@@ -15,7 +15,8 @@ export const PlayerListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-items: start;
+  padding-left: 1rem;
+  justify-items: right;
   margin-top: 20rem;
 `;
 
