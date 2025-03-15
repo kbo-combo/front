@@ -57,10 +57,10 @@ export const TeamLogo = styled.img`
   object-fit: contain;
 `;
 
-export const PlayerName = styled.span<{ isTbd: boolean }>`
+export const PlayerName = styled.span<{ $isTbd: boolean }>`
   font: ${theme.font.text};
   font-size: 1.6rem;
-  color: ${({ isTbd, theme }) => (isTbd ? theme.color.grayDark : theme.color.sub)};
+  color: ${({ $isTbd, theme }) => ($isTbd ? theme.color.grayDark : theme.color.sub)};
   text-align: left;
   white-space: nowrap;
 `;

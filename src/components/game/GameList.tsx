@@ -40,13 +40,13 @@ const GameList = ({ comboGameDateTime }: GameListProps) => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
-                    <PlayerName isTbd={!game.homeStartingPitcher?.name}>
+                    <PlayerName $isTbd={!game.homeStartingPitcher?.name}>
                       {game.homeStartingPitcher?.name ?? TBD_PITCHER_TEXT}
                     </PlayerName>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
-                    <PlayerName isTbd={!game.awayStartingPitcher?.name}>
+                    <PlayerName $isTbd={!game.awayStartingPitcher?.name}>
                       {game.awayStartingPitcher?.name ?? TBD_PITCHER_TEXT}
                     </PlayerName>
                   </TeamRow>
