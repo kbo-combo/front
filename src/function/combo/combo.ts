@@ -4,8 +4,12 @@ import {DefaultTheme} from "styled-components";
 import {GameState} from "@/types/game/game.ts";
 
 export const isBeforeComboAddDeadline = (now: Date, gameStartDateTime: Date) => {
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+
   const twoDaysBefore = new Date(gameStartDateTime);
   twoDaysBefore.setDate(gameStartDateTime.getDate() - 2);
+  twoDaysBefore.setHours(0, 0, 0, 0);
 
   return now <= twoDaysBefore;
 };
