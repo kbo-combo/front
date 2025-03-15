@@ -1,6 +1,7 @@
 import {addDay, minusMin} from "@/function/utils.ts";
 import {ComboStatusType} from "@constant/combo.ts";
 import {DefaultTheme} from "styled-components";
+import {GameState} from "@/types/game/game.ts";
 
 export const isBeforeComboAddDeadline = (now: Date, gameStartDateTime: Date) => {
   const twoDaysBefore = new Date(gameStartDateTime);
@@ -11,6 +12,19 @@ export const isBeforeComboAddDeadline = (now: Date, gameStartDateTime: Date) => 
 
 export const isAfterComboChangeTime = (now: Date, gameStartDateTime: Date) => {
   return now >= minusMin(gameStartDateTime, 10);
+};
+
+export const catNotSelectCombo = (
+    now: Date,
+    gameStartDateTime: Date,
+    gameState: GameState,
+    comboGameDate: Date | null
+) => {
+  if (comboGameDate && isAfterComboChangeTime(now, comboGameDate)) {
+    return true;
+  }
+
+  return isAfterComboChangeTime(now, gameStartDateTime) || gameState == 'CANCEL' || gameState == 'COMPLETED';
 };
 
 export const showCancelButton = (now: Date, gameStartDateTime: Date) => {

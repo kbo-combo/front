@@ -1,5 +1,6 @@
 import {TeamName} from "@constant/player.ts";
 import {client} from "@apis/apiClient.ts";
+import {GameState} from "@/types/game/game.ts";
 
 
 export const findGameByDate = async (gameDate: string): Promise<GameResponse[]> => {
@@ -28,7 +29,7 @@ export interface GameResponse {
   awayTeam: TeamName,
   startDate: string,
   startTime: string,
-  gameState: string,
+  gameState: GameState,
   homeStartingPitcher: StartingPitcherResponse | null,
   awayStartingPitcher: StartingPitcherResponse | null
 }

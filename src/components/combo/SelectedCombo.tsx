@@ -13,11 +13,15 @@ import {
   TopSection
 } from "@components/combo/SelectedCombo.style.tsx";
 import {isAfterComboChangeTime, showCancelButton} from "@/function/combo/combo.ts";
-import {addDay, toDateFormat} from "@/function/utils.ts";
+import {addDay, createDateFromString, toDateFormat} from "@/function/utils.ts";
 import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";
 import {useEffect} from "react";
 
-const SelectedCombo = ({ setHasCombo }: { setHasCombo: (hasCombo: boolean) => void }) => {
+interface SelectedComboProps {
+  setComboGameDateTime: (date: Date | null) => void;
+}
+
+const SelectedCombo = ({ setComboGameDateTime }: SelectedComboProps) => {
   const { data: combo, isLoading, error, comboDate } = useComboByGame();
   const { mutate: deleteCombo } = useDeleteCombo();
 
@@ -28,8 +32,11 @@ const SelectedCombo = ({ setHasCombo }: { setHasCombo: (hasCombo: boolean) => vo
   const hasCombo = !!combo && !isComboDateTooEarly && !error;
 
   useEffect(() => {
-    setHasCombo(hasCombo);
-  }, [hasCombo, setHasCombo]);
+    if (combo) {
+      const date = createDateFromString(combo.gameStartDate, combo.gameStartTime);
+      setComboGameDateTime(date);
+    }
+  }, [combo, setComboGameDateTime]);
 
   if (isLoading) return <Loading />;
   if (!hasCombo) return null;
