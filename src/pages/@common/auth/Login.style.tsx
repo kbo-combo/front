@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from "@style/theme.style.ts";
 
 export const Wrapper = styled.main`
   position: relative;
@@ -47,16 +48,15 @@ export const KakaoLogin = styled.img`
 `;
 
 export const SubMessage = styled.p`
-  font: 4.4rem "jiugae";
-  font-weight: 900;
+  font: ${theme.font.text};
+  font-size: 4rem;
   color: ${(props) => props.theme.color.sub};
 `;
 
 export const MainMessage = styled.p`
   margin-top: 4vh;
-  font: 7.4rem "jiugae";
-  font-weight: 900;
-  line-height: 3rem;
+  font: ${theme.font.text};
+  font-size: 4rem;
   margin-bottom: 12.5rem;
   color: ${(props) => props.theme.color.primary};
 `;

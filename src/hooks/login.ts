@@ -40,7 +40,6 @@ export const useLogin = (socialProvider: string, code: string) => {
     mutationFn: (loginRequest: LoginRequest) =>
         getLoginResult(socialProvider, loginRequest),
     onSuccess: (response: LoginResponse) => {
-      navigate(URL_PATH.main);
       setIsLoggedInAtom(true)
       setMemberId(response.id)
     },
