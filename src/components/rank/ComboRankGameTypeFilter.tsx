@@ -4,25 +4,28 @@ import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.sty
 type ComboRankFilterProps = {
   selectedGameType: GameType;
   onSelectGameType: (gameType: GameType) => void;
+  marginLeft: string,
+  fontSize: string,
 };
 
-const ComboRankGameTypeFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilterProps) => {
+const gameTypes = [
+  { key: GameType.PRE_SEASON, label: GameTypeLabels[GameType.PRE_SEASON] },
+  { key: GameType.REGULAR_SEASON, label: GameTypeLabels[GameType.REGULAR_SEASON] },
+];
+
+const ComboRankGameTypeFilter = ({ selectedGameType, onSelectGameType, marginLeft, fontSize}: ComboRankFilterProps) => {
   return (
-      <FilterWrapper style={{ marginLeft: '0rem'}}>
-        <FilterButton
-            selected={selectedGameType === GameType.PRE_SEASON}
-            onClick={() => onSelectGameType(GameType.PRE_SEASON)}
-            style={{fontSize: '2.2rem'}}
-        >
-          {GameTypeLabels[GameType.PRE_SEASON]}
-        </FilterButton>
-        <FilterButton
-            selected={selectedGameType === GameType.REGULAR_SEASON}
-            onClick={() => onSelectGameType(GameType.REGULAR_SEASON)}
-            style={{fontSize: '2.2rem'}}
-        >
-          {GameTypeLabels[GameType.REGULAR_SEASON]}
-        </FilterButton>
+      <FilterWrapper style={{ marginLeft: marginLeft}}>
+        {gameTypes.map(({ key, label }) => (
+            <FilterButton
+                key={key}
+                selected={selectedGameType === key}
+                onClick={() => onSelectGameType(key)}
+                style={{ fontSize: fontSize }}
+            >
+              {label}
+            </FilterButton>
+        ))}
       </FilterWrapper>
   );
 };

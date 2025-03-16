@@ -5,6 +5,9 @@ import ComboRankGameTypeFilter from "@components/rank/ComboRankGameTypeFilter.ts
 import ComboRankSortFilter from "@components/rank/ComboRankSortFilter.tsx";
 
 
+const marginLeft = "0rem"
+const fontSize = "2.0rem"
+
 type ComboRankFilterListProps = {
   selectedGameType: GameType;
   onSelectGameType: (gameType: GameType) => void;
@@ -15,8 +18,8 @@ type ComboRankFilterListProps = {
 const ComboRankFilterList = ({selectedGameType, onSelectGameType ,selectedSortType, onSelectSortType }: ComboRankFilterListProps) => {
   return <>
     <Wrapper>
-      <ComboRankGameTypeFilter selectedGameType={selectedGameType} onSelectGameType={onSelectGameType}/>
-      <ComboRankSortFilter selectedSortType={selectedSortType} onSelectSortType={onSelectSortType}/>
+      <ComboRankGameTypeFilter selectedGameType={selectedGameType} onSelectGameType={onSelectGameType} marginLeft={marginLeft} fontSize={fontSize}/>
+      <ComboRankSortFilter selectedSortType={selectedSortType} onSelectSortType={onSelectSortType} marginLeft={marginLeft} fontSize={fontSize}/>
     </Wrapper>
   </>
 }
