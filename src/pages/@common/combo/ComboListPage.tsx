@@ -18,11 +18,16 @@ import {
   VSLabel
 } from "@pages/@common/combo/ComboListPage.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
+import {GameType} from "@/types/game/game.ts";
+import ComboListFilter from "@components/combo/list/ComboListFilter.tsx";
+import {useState} from "react";
 
 const SIZE = 20;
+const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
 
 const ComboPage = () => {
-  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(SIZE);
+  const [selectedGameType, setSelectedGameType] = useState<GameType>(DEFAULT_GAME_TYPE);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(SIZE, selectedGameType);
   const { observerRef } = useInfiniteScroll({ hasNextPage, fetchNextPage });
 
   if (isLoading) return <Loading />;
@@ -30,6 +35,7 @@ const ComboPage = () => {
   return (
       <PageWrapper>
         <ContentHeader title={"콤보 목록"} />
+        <ComboListFilter selectedGameType={selectedGameType} onSelectGameType={setSelectedGameType}/>
         {data?.length === 0 ? (
             <Message>등록된 콤보가 없습니다.</Message>
         ) : (
