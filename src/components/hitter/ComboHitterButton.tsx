@@ -44,6 +44,10 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, c
       return "게임 종료"
     }
 
+    if (gameState == "RUNNING") {
+      return "진행중"
+    }
+
     if (!isBeforeComboAddDeadline(now, gameStartDateTime)) {
       if (comboGameDateTime) {
         return "타자 변경"
