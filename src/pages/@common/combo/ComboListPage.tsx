@@ -19,8 +19,10 @@ import {
 } from "@pages/@common/combo/ComboListPage.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
 
+const SIZE = 20;
+
 const ComboPage = () => {
-  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(10);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(SIZE);
   const { observerRef } = useInfiniteScroll({ hasNextPage, fetchNextPage });
 
   if (isLoading) return <Loading />;
