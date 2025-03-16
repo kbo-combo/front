@@ -32,12 +32,16 @@ export const PlayerCard = styled.div<{ selected: boolean }>`
   margin-bottom: 3rem;
 
   width: 12rem; 
-  height: 16rem;
+  height: 13rem;
 
   @media (max-width: 500px) {
-    width: 8rem;
-    height: 10rem;
+    width: 8rem;  
   }
+
+  @media (max-width: 500px) and (min-width: 380px){
+    margin-left: 0.7rem;
+  }
+  
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px ${theme.color.sub};
