@@ -2,8 +2,8 @@ import {client} from "@apis/apiClient.ts";
 import {GameType} from "@/types/game/game.ts";
 import {ComboSortType} from "@/types/combo/combo.ts";
 
-export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankByYear> => {
-  const response = await client.get<MemberComboRankByYear>('combo-rank/detail', {
+export const findMemberComboRankDetail = async (targetMemberId: number): Promise<MemberComboRankByYear[]> => {
+  const response = await client.get<MemberComboRankByYear[]>('combo-rank/detail', {
         params: {targetMemberId: targetMemberId}
       }
   )
