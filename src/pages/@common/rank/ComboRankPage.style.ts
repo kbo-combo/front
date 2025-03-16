@@ -29,7 +29,7 @@ export const RankNumber = styled.span`
 `;
 
 export const MedalEmoji = styled.span`
-  font-size: 3.4rem; 
+  font-size: 3.4rem;
   margin-right: 0.5rem;
 `;
 
@@ -42,7 +42,7 @@ export const MemberName = styled.span`
   line-height: 2.6rem;
 
   @media (max-width: 500px) {
-    font-size: 1.6rem;  
+    font-size: 1.6rem;
     margin-top: 1.5rem;
     line-height: 1.8rem;
 `;
@@ -70,16 +70,16 @@ export const CurrentRecord = styled.span`
 export const RecordStats = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1.2rem;
+  gap: 0.6rem;
   margin-top: 0.5rem;
 `;
 
 
-export const ResultCount = styled.span<{ success?: boolean }>`
-  font: ${theme.font.text};
+export const ResultCount = styled.span<{ $color: string }>`
+  font: ${({theme}) => theme.font.text};
   white-space: nowrap;
   font-size: 1.4rem;
-  color: ${(props) => (props.success ? theme.color.primary : theme.color.fontRed)};
+  color: ${({$color}) => $color};
 `;
 
 export const EmptyMessage = styled.p`

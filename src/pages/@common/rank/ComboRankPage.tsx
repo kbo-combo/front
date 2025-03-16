@@ -19,6 +19,7 @@ import {GameType} from "@/types/game/game.ts";
 import {useState} from "react";
 import {ComboSortType} from "@/types/combo/combo.ts";
 import ComboRankFilterList from "@components/rank/filter/ComboRankFilterList.tsx";
+import theme from "@style/theme.style.ts";
 
 
 const fieldMap: Record<ComboSortType, keyof ComboRankResponse> = {
@@ -72,8 +73,9 @@ const ComboRankPage =() => {
                     <CurrentRecordWrapper>
                       <CurrentRecord>{rankInfo[fieldMap[selectSortType]]} 콤보</CurrentRecord>
                       <RecordStats>
-                        <ResultCount success={true}>성공 {rankInfo.successCount}</ResultCount>
-                        <ResultCount success={false}>실패 {rankInfo.failCount}</ResultCount>
+                        <ResultCount $color={theme.color.primary}>성공 {rankInfo.successCount}</ResultCount>
+                        <ResultCount $color={theme.color.fontRed}>실패 {rankInfo.failCount}</ResultCount>
+                        <ResultCount $color={theme.color.subLight}>{Math.round(rankInfo.successCount / (rankInfo.successCount + rankInfo.failCount) * 100)}%</ResultCount>
                       </RecordStats>
                     </CurrentRecordWrapper>
                   </RankInfo>
