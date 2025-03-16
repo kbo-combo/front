@@ -8,7 +8,7 @@ type ComboRankFilterProps = {
 
 const ComboRankSortFilter = ({ selectedSortType, onSelectSortType }: ComboRankFilterProps) => {
   return (
-      <FilterWrapper style={{ marginLeft: '2.2rem'}}>
+      <FilterWrapper style={{ marginLeft: '0rem'}}>
         <FilterButton
             selected={selectedSortType === 'CURRENT_RECORD'}
             onClick={() => onSelectSortType('CURRENT_RECORD')}

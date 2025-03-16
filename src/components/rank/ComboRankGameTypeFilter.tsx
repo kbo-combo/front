@@ -8,7 +8,7 @@ type ComboRankFilterProps = {
 
 const ComboRankGameTypeFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilterProps) => {
   return (
-      <FilterWrapper style={{ marginLeft: '2.2rem'}}>
+      <FilterWrapper style={{ marginLeft: '0rem'}}>
         <FilterButton
             selected={selectedGameType === GameType.PRE_SEASON}
             onClick={() => onSelectGameType(GameType.PRE_SEASON)}
