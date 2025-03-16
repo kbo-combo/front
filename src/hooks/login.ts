@@ -75,7 +75,7 @@ export const useLoginContext = () => {
 
 
 export const useCheckLogin = () => {
-  const {isLoggedIn, setIsLoggedInAtom} = useLoginContext();
+  const {isLoggedIn, setIsLoggedInAtom, setMemberId} = useLoginContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -86,6 +86,7 @@ export const useCheckLogin = () => {
         if (isLoggedIn === undefined) {
           const data = await getMemberDetail();
           setIsLoggedInAtom(!!data);
+          setMemberId(data.memberId)
         }
       } catch (error) {
         console.error("Failed to fetch member details:", error);

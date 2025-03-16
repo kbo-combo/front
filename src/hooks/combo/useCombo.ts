@@ -55,9 +55,10 @@ export const useComboByGame = () => {
 };
 
 import {TeamName} from "@constant/player.ts";
+import {GameType} from "@/types/game/game.ts";
 
 
-export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) => {
+export const useInfiniteComboList = (pageSize: number, gameType: GameType, beforeGameDate?: string) => {
   const {
     data,
     error,
@@ -66,8 +67,8 @@ export const useInfiniteComboList = (pageSize: number, beforeGameDate?: string) 
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["combo", beforeGameDate],
-    queryFn: ({ pageParam = beforeGameDate}) => findComboListByParam(pageSize, pageParam),
+    queryKey: ["combo-list", gameType, beforeGameDate],
+    queryFn: ({ pageParam = beforeGameDate}) => findComboListByParam(pageSize, gameType, pageParam),
     initialPageParam: beforeGameDate,
     getNextPageParam: (lastPage) => {
       if (!lastPage || !lastPage.hasNext || lastPage.content.length === 0) return null;

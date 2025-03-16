@@ -11,12 +11,20 @@ import {
   MemberName,
   RankInfo,
   RankItem,
-  RankNumber, RecordStats, ResultCount
+  RankNumber,
+  RecordStats,
+  ResultCount
 } from "@pages/@common/rank/ComboRankPage.style.ts";
 import {GameType} from "@/types/game/game.ts";
 import {useState} from "react";
-import ComboRankFilter from "@components/rank/ComboRankFilter.tsx";
+import {ComboSortType} from "@/types/combo/combo.ts";
+import ComboRankFilterList from "@components/rank/ComboRankFilterList.tsx";
 
+
+const fieldMap: Record<ComboSortType, keyof ComboRankResponse> = {
+  CURRENT_RECORD: 'currentRecord',
+  MAX_RECORD: 'maxRecord',
+};
 
 const medalIcons = {
   1: "🥇",
@@ -27,22 +35,30 @@ const medalIcons = {
 const SIZE = 20;
 const YEAR = 2025;
 const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
+const DEFAULT_SORT_TYPE: ComboSortType = "CURRENT_RECORD";
 
 const ComboRankPage =() => {
   const [selectedGameType, setSelectedGameType] = useState<GameType>(DEFAULT_GAME_TYPE);
-  const {data, isLoading} = useComboRankList(SIZE, YEAR, selectedGameType)
+  const [selectSortType, setSelectSortType] = useState<ComboSortType>(DEFAULT_SORT_TYPE);
+  const {data, isLoading} = useComboRankList(SIZE, YEAR, selectedGameType, selectSortType)
 
   const handleGameTypeChange = (gameType: GameType) => {
     setSelectedGameType(gameType);
   };
 
+  const handleSortTypeChange = (sortType: ComboSortType) => {
+    setSelectSortType(sortType);
+  };
 
   if (isLoading) return <Loading />;
 
   return (
       <PageWrapper>
         <ContentHeader title={"랭킹"}/>
-        <ComboRankFilter selectedGameType={selectedGameType} onSelectGameType={handleGameTypeChange} />
+        <ComboRankFilterList
+            selectedGameType={selectedGameType} onSelectGameType={handleGameTypeChange}
+            selectedSortType={selectSortType} onSelectSortType={handleSortTypeChange}
+        />
         {data.length > 0 ? (
             data.map((rankInfo: ComboRankResponse) => (
                 <RankItem>
@@ -54,7 +70,7 @@ const ComboRankPage =() => {
                   <RankInfo>
                     <MemberName>{rankInfo.nickname}</MemberName>
                     <CurrentRecordWrapper>
-                      <CurrentRecord>{rankInfo.currentRecord} 콤보</CurrentRecord>
+                      <CurrentRecord>{rankInfo[fieldMap[selectSortType]]} 콤보</CurrentRecord>
                       <RecordStats>
                         <ResultCount success={true}>성공 {rankInfo.successCount}</ResultCount>
                         <ResultCount success={false}>실패 {rankInfo.failCount}</ResultCount>

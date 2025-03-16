@@ -18,31 +18,41 @@ import {
   VSLabel
 } from "@pages/@common/combo/ComboListPage.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
+import {GameType} from "@/types/game/game.ts";
+import ComboListFilter from "@components/combo/list/ComboListFilter.tsx";
+import {useState} from "react";
+
+const SIZE = 20;
+const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
 
 const ComboPage = () => {
-  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(10);
+  const [selectedGameType, setSelectedGameType] = useState<GameType>(DEFAULT_GAME_TYPE);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(SIZE, selectedGameType);
   const { observerRef } = useInfiniteScroll({ hasNextPage, fetchNextPage });
 
   if (isLoading) return <Loading />;
 
   return (
       <PageWrapper>
-        <ContentHeader title={"콤보 목록"} />
+        <ContentHeader title={"콤보 목록"}/>
+        <ComboListFilter selectedGameType={selectedGameType}
+                         onSelectGameType={setSelectedGameType}/>
         {data?.length === 0 ? (
             <Message>등록된 콤보가 없습니다.</Message>
         ) : (
             data?.map((combo, index) => (
-                <ComboSection key={combo.comboId} ref={index === data.length - 1 ? observerRef : null}>
+                <ComboSection key={combo.comboId}
+                              ref={index === data.length - 1 ? observerRef : null}>
                   <GameInfoWrapper>
                     <GameDate>{combo?.gameStartDate}</GameDate>
                     <TeamLogosWrapper>
-                      <TeamLogo src={teamLogos[combo?.homeTeam]} alt={combo?.homeTeam} />
+                      <TeamLogo src={teamLogos[combo?.homeTeam]} alt={combo?.homeTeam}/>
                       <VSLabel>VS</VSLabel>
-                      <TeamLogo src={teamLogos[combo?.awayTeam]} alt={combo?.awayTeam} />
+                      <TeamLogo src={teamLogos[combo?.awayTeam]} alt={combo?.awayTeam}/>
                     </TeamLogosWrapper>
                   </GameInfoWrapper>
                   <PlayerInfoWrapper>
-                    <PlayerImage url={combo?.playerImageUrl} />
+                    <PlayerImage url={combo?.playerImageUrl}/>
                     <PlayerName>{combo?.playerName}</PlayerName>
                   </PlayerInfoWrapper>
                   <ComboStatus status={combo?.comboStatus}>
