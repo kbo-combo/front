@@ -11,7 +11,7 @@ const color = {
   grayDark: '#A5A5A5',
   water: '#75AEDC',
   green: '#15b737',
-  fontGreen: '#0cb664',
+  fontGreen: '#33ad73',
   fontRed: '#de675e',
   gold: '#FFD700',
   silver: '#C0C0C0',
