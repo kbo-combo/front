@@ -6,23 +6,24 @@ type ComboListFilterProps = {
   onSelectGameType: (gameType: GameType) => void;
 };
 
+const gameTypes = [
+  { key: GameType.PRE_SEASON, label: GameTypeLabels[GameType.PRE_SEASON] },
+  { key: GameType.REGULAR_SEASON, label: GameTypeLabels[GameType.REGULAR_SEASON] },
+];
+
 const ComboListFilter = ({ selectedGameType, onSelectGameType }: ComboListFilterProps) => {
   return (
       <FilterWrapper style={{ marginLeft: '0rem'}}>
-        <FilterButton
-            selected={selectedGameType === GameType.PRE_SEASON}
-            onClick={() => onSelectGameType(GameType.PRE_SEASON)}
-            style={{fontSize: '2.2rem'}}
-        >
-          {GameTypeLabels[GameType.PRE_SEASON]}
-        </FilterButton>
-        <FilterButton
-            selected={selectedGameType === GameType.REGULAR_SEASON}
-            onClick={() => onSelectGameType(GameType.REGULAR_SEASON)}
-            style={{fontSize: '2.2rem'}}
-        >
-          {GameTypeLabels[GameType.REGULAR_SEASON]}
-        </FilterButton>
+        {gameTypes.map(({ key, label }) => (
+            <FilterButton
+                key={key}
+                selected={selectedGameType === key}
+                onClick={() => onSelectGameType(key)}
+                style={{ fontSize: '2.2rem' }}
+            >
+              {label}
+            </FilterButton>
+        ))}
       </FilterWrapper>
   );
 };
