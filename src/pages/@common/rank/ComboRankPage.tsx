@@ -18,7 +18,7 @@ import {
 import {GameType} from "@/types/game/game.ts";
 import {useState} from "react";
 import {ComboSortType} from "@/types/combo/combo.ts";
-import ComboRankFilterList from "@components/rank/ComboRankFilterList.tsx";
+import ComboRankFilterList from "@components/rank/filter/ComboRankFilterList.tsx";
 
 
 const fieldMap: Record<ComboSortType, keyof ComboRankResponse> = {
