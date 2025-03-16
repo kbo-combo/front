@@ -21,23 +21,19 @@ import {teamLogos} from "@/types/team/team.ts";
 import {GameType} from "@/types/game/game.ts";
 import ComboListFilter from "@components/combo/list/ComboListFilter.tsx";
 import {useState} from "react";
-import {useMyComboDetail} from "@/hooks/combo-rank/useComboRank.ts";
 
 const SIZE = 20;
-const DEFAULT_YEAR = 2025;
 const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
 
 const ComboPage = () => {
   const [selectedGameType, setSelectedGameType] = useState<GameType>(DEFAULT_GAME_TYPE);
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteComboList(SIZE, selectedGameType);
   const { observerRef } = useInfiniteScroll({ hasNextPage, fetchNextPage });
-  const {myCombo} = useMyComboDetail(DEFAULT_YEAR, selectedGameType);
 
   if (isLoading) return <Loading />;
 
   return (
       <PageWrapper>
-        <div>Score: {myCombo?.year ?? 'No score available'}</div>
         <ContentHeader title={"콤보 목록"}/>
         <ComboListFilter selectedGameType={selectedGameType}
                          onSelectGameType={setSelectedGameType}/>

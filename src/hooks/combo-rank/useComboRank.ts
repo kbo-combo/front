@@ -33,16 +33,16 @@ export const useMyComboDetail = (year: number, gameType: GameType) => {
   }
 
   const { data, error, isLoading } = useMemberComboDetail(memberId);
-
+  const comboRankForYear = data?.find(item => item.year === year);
   let myCombo = null;
-  if (gameType === 'PRE_SEASON') {
-    console.log("pre");
-    myCombo = data?.comboRanks?.preSeason;
-  } else if (gameType === 'REGULAR_SEASON') {
-    console.log("regualr");
-    myCombo = data?.comboRanks?.regularSeason;
-  } else if (gameType === 'POST_SEASON') {
-    myCombo = data?.comboRanks?.postSeason;
+  if (comboRankForYear) {
+    if (gameType === GameType.PRE_SEASON) {
+      myCombo = comboRankForYear.comboRanks.preSeason;
+    } else if (gameType === GameType.REGULAR_SEASON) {
+      myCombo = comboRankForYear.comboRanks.regularSeason;
+    } else if (gameType === GameType.POST_SEASON) {
+      myCombo = comboRankForYear.comboRanks.postSeason;
+    }
   }
 
   return { myCombo, error, isLoading };
