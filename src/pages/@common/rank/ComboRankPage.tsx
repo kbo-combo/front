@@ -21,6 +21,11 @@ import {ComboSortType} from "@/types/combo/combo.ts";
 import ComboRankFilterList from "@components/rank/ComboRankFilterList.tsx";
 
 
+const fieldMap: Record<ComboSortType, keyof ComboRankResponse> = {
+  CURRENT_RECORD: 'currentRecord',
+  MAX_RECORD: 'maxRecord',
+};
+
 const medalIcons = {
   1: "🥇",
   2: "🥈",
@@ -65,7 +70,7 @@ const ComboRankPage =() => {
                   <RankInfo>
                     <MemberName>{rankInfo.nickname}</MemberName>
                     <CurrentRecordWrapper>
-                      <CurrentRecord>{rankInfo.currentRecord} 콤보</CurrentRecord>
+                      <CurrentRecord>{rankInfo[fieldMap[selectSortType]]} 콤보</CurrentRecord>
                       <RecordStats>
                         <ResultCount success={true}>성공 {rankInfo.successCount}</ResultCount>
                         <ResultCount success={false}>실패 {rankInfo.failCount}</ResultCount>

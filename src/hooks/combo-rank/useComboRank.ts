@@ -8,6 +8,11 @@ import {GameType} from "@/types/game/game.ts";
 import {ComboSortType} from "@/types/combo/combo.ts";
 import {useLoginContext} from "@/hooks/login.ts";
 
+const filterConditions: Record<ComboSortType, (item: ComboRankResponse) => boolean> = {
+  CURRENT_RECORD: (item) => item.currentRecord !== 0,
+  MAX_RECORD: (item) => item.maxRecord !== 0,
+};
+
 export const useComboRankList = (size: number, year: number, gameType: GameType, comboSortType: ComboSortType) => {
   const {data, error, isLoading} = useQuery({
     queryKey: [`combo-rank/${year}/${gameType}`, year, gameType, comboSortType],
@@ -17,7 +22,8 @@ export const useComboRankList = (size: number, year: number, gameType: GameType,
     refetchOnReconnect: false,
   });
 
-  const filteredData = data?.comboRankResponse.filter((item: ComboRankResponse) => item.currentRecord !== 0) ?? [];
+  const filteredData =
+      data?.comboRankResponse.filter(filterConditions[comboSortType]) ?? [];
 
   return {data: filteredData, error, isLoading};
 };
