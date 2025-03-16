@@ -62,7 +62,7 @@ const ComboRankPage =() => {
         />
         {data.length > 0 ? (
             data.map((rankInfo: ComboRankResponse) => (
-                <RankItem>
+                <RankItem key={rankInfo.id}>
                   {rankInfo.rank <= 3 ? (
                       <MedalEmoji>{medalIcons[rankInfo.rank as 1 | 2 | 3]}</MedalEmoji>
                   ) : (
