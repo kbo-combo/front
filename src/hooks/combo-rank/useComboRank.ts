@@ -1,11 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
 import {ComboRankResponse, findAllComboRankByParam} from "@apis/combo-rank.ts";
 import {GameType} from "@/types/game/game.ts";
+import {ComboSortType} from "@/types/combo/combo.ts";
 
-export const useComboRankList = (size: number, year: number, gameType: GameType) => {
+export const useComboRankList = (size: number, year: number, gameType: GameType, comboSortType: ComboSortType) => {
   const {data, error, isLoading} = useQuery({
-    queryKey: [`combo-rank/${year}/${gameType}`, year, gameType],
-    queryFn: () => findAllComboRankByParam(size, year, gameType),
+    queryKey: [`combo-rank/${year}/${gameType}`, year, gameType, comboSortType],
+    queryFn: () => findAllComboRankByParam(size, year, gameType, comboSortType),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

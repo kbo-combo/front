@@ -6,7 +6,7 @@ type ComboRankFilterProps = {
   onSelectGameType: (gameType: GameType) => void;
 };
 
-const ComboRankFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilterProps) => {
+const ComboRankGameTypeFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilterProps) => {
   return (
       <FilterWrapper style={{ marginLeft: '2.2rem'}}>
         <FilterButton
@@ -27,4 +27,4 @@ const ComboRankFilter = ({ selectedGameType, onSelectGameType }: ComboRankFilter
   );
 };
 
-export default ComboRankFilter;
+export default ComboRankGameTypeFilter;
