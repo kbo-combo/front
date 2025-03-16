@@ -7,7 +7,7 @@ export const useComboRankList = (size: number, year: number, gameType: GameType,
   const {data, error, isLoading} = useQuery({
     queryKey: [`combo-rank/${year}/${gameType}`, year, gameType, comboSortType],
     queryFn: () => findAllComboRankByParam(size, year, gameType, comboSortType),
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
