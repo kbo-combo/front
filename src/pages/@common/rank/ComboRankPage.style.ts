@@ -64,7 +64,7 @@ export const CurrentRecord = styled.span`
   white-space: nowrap;
 
   @media (max-width: 500px) {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 `;
 
 export const RecordStats = styled.div`
