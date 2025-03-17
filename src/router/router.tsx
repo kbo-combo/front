@@ -4,6 +4,7 @@ import {lazy, Suspense} from "react";
 import RootTemplate from "@pages/@common/root";
 import AuthRoute from "@/router/AuthRoute.tsx";
 import Loading from "@pages/@common/common/Loading.tsx";
+import NotFoundPage from "@pages/@common/common/NotFound.tsx";
 
 const Home = lazy(() => import('@pages/@common/home'));
 const Login = lazy(() => import('@pages/@common/auth'));
@@ -14,7 +15,6 @@ const ComboPage = lazy(() => import('@pages/@common/combo/ComboListPage.tsx'));
 const MemberPage = lazy(() => import('@pages/@common/member/MemberPage.tsx'));
 const MemberEditPage = lazy(() => import('@pages/@common/member/MemberEditPage.tsx'));
 const ComboRankPage = lazy(() => import('@pages/@common/rank/ComboRankPage.tsx'));
-const NotFoundPage = lazy(() => import('@pages/@common/common/NotFound.tsx'));
 
 
 const withSuspense = (component: React.ReactNode) => (
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   {
     path: URL_PATH.main,
     element: <RootTemplate/>,
-    errorElement: withSuspense(<NotFoundPage/>),
+    errorElement: <NotFoundPage/>,
     children: [
       {
         index: true,
