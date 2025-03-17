@@ -12,7 +12,7 @@ import {
   TeamRow,
   TeamWrapper,
   Wrapper
-} from "@components/game/GameList.style.ts";
+} from "@components/game/list/GameList.style.ts";
 import {teamLogos} from "@/types/team/team.ts";
 
 

@@ -11,7 +11,7 @@ import {
   PlayerSection,
   SelectionText,
   TopSection
-} from "@components/combo/SelectedCombo.style.tsx";
+} from "@components/combo/selected/SelectedCombo.style.tsx";
 import {isAfterComboChangeTime, showCancelButton} from "@/function/combo/combo.ts";
 import {addDay, createDateFromString, toDateFormat} from "@/function/utils.ts";
 import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";

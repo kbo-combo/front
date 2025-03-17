@@ -8,7 +8,7 @@ import {
   ScrollContainer,
   WeekDay,
   Wrapper
-} from "@components/game/GameSchedule.style.ts";
+} from "@components/game/schedule/GameSchedule.style.ts";
 import SvgStroke from "@components/@common/icons";
 import {useGameDate} from "@/hooks/game/useGame.ts";
 import {useInitializeSelectedDate, useScrollToSelectedDate} from "@/hooks/game/useGameSchedule.ts";
