@@ -53,6 +53,7 @@ export const CurrentRecordWrapper = styled.div`
   flex-direction: column;
   margin-top: 1.5rem;
   align-items: flex-end;
+  margin-right: 0.75rem;
   font-size: 2.0rem;
 `;
 
