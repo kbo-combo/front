@@ -9,7 +9,7 @@ import {
   ComboSection,
   ComboStatus,
   GameDate,
-  GameInfoWrapper,
+  GameInfoWrapper, HitterInfoWrapper, HitterRecord, LeftGroup,
   Message,
   PlayerInfoWrapper,
   PlayerName,
@@ -43,6 +43,7 @@ const ComboPage = () => {
             data?.map((combo, index) => (
                 <ComboSection key={combo.comboId}
                               ref={index === data.length - 1 ? observerRef : null}>
+                  <LeftGroup>
                   <GameInfoWrapper>
                     <GameDate>{combo?.gameStartDate}</GameDate>
                     <TeamLogosWrapper>
@@ -55,9 +56,15 @@ const ComboPage = () => {
                     <PlayerImage url={combo?.playerImageUrl}/>
                     <PlayerName>{combo?.playerName}</PlayerName>
                   </PlayerInfoWrapper>
-                  <ComboStatus status={combo?.comboStatus}>
-                    {getStatusText(combo?.comboStatus)}
-                  </ComboStatus>
+                  </LeftGroup>
+                  <HitterInfoWrapper>
+                    {combo?.hitterGameRecord && (
+                        <HitterRecord>{combo.hitterGameRecord.atBats}타수 {combo.hitterGameRecord.hits}안타</HitterRecord>
+                    )}
+                    <ComboStatus status={combo?.comboStatus}>
+                      {getStatusText(combo?.comboStatus)}
+                    </ComboStatus>
+                  </HitterInfoWrapper>
                 </ComboSection>
             ))
         )}
