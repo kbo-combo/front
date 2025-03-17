@@ -57,6 +57,7 @@ export interface MemberComboRankDetail {
   memberId: number,
   nickname: string,
   currentRecord: number,
+  maxRecord: number,
   successCount: number,
   failCount: number,
   passCount: number,

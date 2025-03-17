@@ -21,8 +21,10 @@ import {teamLogos} from "@/types/team/team.ts";
 import {GameType} from "@/types/game/game.ts";
 import ComboListFilter from "@components/combo/list/ComboListFilter.tsx";
 import {useState} from "react";
+import MyCombo from "@components/combo/list/MyCombo.tsx";
 
 const SIZE = 20;
+const DEFAULT_YEAR = 2025;
 const DEFAULT_GAME_TYPE = GameType.REGULAR_SEASON;
 
 const ComboPage = () => {
@@ -37,6 +39,7 @@ const ComboPage = () => {
         <ContentHeader title={"콤보 목록"}/>
         <ComboListFilter selectedGameType={selectedGameType}
                          onSelectGameType={setSelectedGameType}/>
+        <MyCombo year={DEFAULT_YEAR} gameType={selectedGameType}/>
         {data?.length === 0 ? (
             <Message>등록된 콤보가 없습니다.</Message>
         ) : (
