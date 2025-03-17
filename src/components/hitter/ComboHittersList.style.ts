@@ -9,6 +9,7 @@ export const Wrapper = styled.main`
   height: 100%;
   background: ${({ theme: { color } }) => color.background};
   color: ${({ theme: { color } }) => color.primary};
+  margin-bottom: 6rem;
 `;
 
 export const PlayerListWrapper = styled.div`
