@@ -16,14 +16,6 @@ export const MyComboWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const Title = styled.div`
-  font: ${theme.font.text};
-  font-size: 2.5rem;
-  color: ${theme.color.sub};
-  margin-bottom: 1rem;
-  line-height: 2.4rem;
-`;
-
 export const ComboStatRow = styled.div`
   display: flex;
   margin-left: 0.75rem;
