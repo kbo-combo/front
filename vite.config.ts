@@ -17,4 +17,16 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: path.resolve('src') }],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: id => {
+          if (id.includes('node_modules')) {
+            const module = id.split('node_modules/').pop()?.split('/')[0];
+            return `vendor/${module}`;
+          }
+        },
+      },
+    },
+  }
 });
