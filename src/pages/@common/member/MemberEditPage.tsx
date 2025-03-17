@@ -9,7 +9,7 @@ import {ProfileWrapper} from "@pages/@common/member/member.style.ts";
 import {CharCount, NicknameInput, SaveButton} from "@pages/@common/member/member-edit.style.ts";
 
 
-const MAX_NICKNAME_LENGTH = 30;
+const MAX_NICKNAME_LENGTH = 25;
 
 const MemberPage = () => {
   const { data, isLoading, error } = useMemberDetail();
