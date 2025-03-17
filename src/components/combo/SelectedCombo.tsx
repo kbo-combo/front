@@ -4,7 +4,7 @@ import Loading from "@pages/@common/common/Loading.tsx";
 import {
   CancelButton,
   ComboStatus,
-  ComboWrapper,
+  ComboWrapper, HitterRecord,
   PlayerDetails,
   PlayerInfo,
   PlayerName,
@@ -65,6 +65,9 @@ const SelectedCombo = ({ setComboGameDateTime }: SelectedComboProps) => {
             <PlayerImage url={combo.playerImageUrl} />
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
+              {combo?.hitterGameRecord && (
+                  <HitterRecord>{combo.hitterGameRecord.atBats}타수 {combo.hitterGameRecord.hits}안타</HitterRecord>
+              )}
               <ComboStatus status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
             </PlayerDetails>
           </PlayerInfo>

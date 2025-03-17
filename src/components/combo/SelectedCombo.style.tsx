@@ -72,6 +72,14 @@ export const PlayerName = styled.div`
   font-size: 2.4rem;
 `;
 
+export const HitterRecord = styled.div`
+  font: ${theme.font.text};
+  color: ${theme.color.sub};
+  margin-top: 1rem;
+  margin-left: 2.5rem;
+  font-size: 1.35rem;
+`;
+
 export const ComboStatus = styled.div<{ status: ComboStatusType }>`
   font: ${theme.font.text};
   font-size: 2.0rem;
