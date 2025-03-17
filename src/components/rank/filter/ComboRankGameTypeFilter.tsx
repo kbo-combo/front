@@ -1,5 +1,5 @@
 import {GameType, GameTypeLabels} from "@/types/game/game.ts";
-import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.style.ts";
+import {FilterButton, FilterTitle, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 
 type ComboRankFilterProps = {
   selectedGameType: GameType;
@@ -16,6 +16,7 @@ const gameTypes = [
 const ComboRankGameTypeFilter = ({ selectedGameType, onSelectGameType, marginLeft, fontSize}: ComboRankFilterProps) => {
   return (
       <FilterWrapper style={{ marginLeft: marginLeft}}>
+        <FilterTitle>게임 종류</FilterTitle>
         {gameTypes.map(({ key, label }) => (
             <FilterButton
                 key={key}
