@@ -26,7 +26,6 @@ const GameListTeamRow = ({
   const isWinner =
       score !== undefined &&
       opponentScore !== undefined &&
-      gameState === "COMPLETED" &&
       score > opponentScore;
 
   return (
@@ -37,7 +36,7 @@ const GameListTeamRow = ({
             {startingPitcherName ?? TBD_PITCHER_TEXT}
           </PlayerName>
           {(gameState === "COMPLETED" || gameState === 'RUNNING')  && score !== undefined && (
-              <GameScore $isWinner={isWinner}>{score}</GameScore>
+              <GameScore $isWinner={isWinner} $gameState={gameState}>{score}</GameScore>
           )}
         </PlayerInfoWrapper>
       </TeamRow>

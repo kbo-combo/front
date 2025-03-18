@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "@style/theme.style.ts";
+import {GameState} from "@/types/game/game.ts";
 
 export const Wrapper = styled.main`
   position: relative;
@@ -74,13 +75,13 @@ export const PlayerName = styled.span<{ $isTbd: boolean }>`
   white-space: nowrap;
 `;
 
-export const GameScore = styled.span<{ $isWinner?: boolean }>`
+export const GameScore = styled.span<{ $isWinner: boolean, $gameState: GameState }>`
   font: ${theme.font.text};
   font-size: 2.0rem;
   min-width: 4rem;
   text-align: right;
-  color: ${({ $isWinner, theme }) =>
-      $isWinner ? theme.color.sub : theme.color.grayDark};
+  color: ${({ $isWinner, $gameState, theme }) =>
+      ($gameState === 'COMPLETED' && !$isWinner) ? theme.color.grayDark : theme.color.sub};
 `;
 export const GameInfo = styled.div`
   display: flex;
