@@ -74,12 +74,13 @@ export const PlayerName = styled.span<{ $isTbd: boolean }>`
   white-space: nowrap;
 `;
 
-export const GameScore = styled.span`
+export const GameScore = styled.span<{ $isWinner?: boolean }>`
   font: ${theme.font.text};
-  color: ${theme.color.sub};
   font-size: 2.0rem;
   min-width: 4rem;
   text-align: right;
+  color: ${({ $isWinner, theme }) =>
+      $isWinner ? theme.color.sub : theme.color.grayDark};
 `;
 export const GameInfo = styled.div`
   display: flex;
