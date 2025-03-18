@@ -41,7 +41,7 @@ export const MemberName = styled.span`
   line-height: 2.6rem;
 
   @media (max-width: 500px) {
-    font-size: 1.2rem;
+    font-size: 1.65rem;
     margin-top: 1.5rem;
     line-height: 1.8rem;
 `;
