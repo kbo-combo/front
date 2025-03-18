@@ -1,19 +1,18 @@
 import {atomWithStorage} from "jotai/utils";
 
-export const gameDateAtom = atomWithStorage<Date | null>(
+export const gameDateAtom = atomWithStorage<string>(
     "gameDate",
-    null,
+    new Date().toLocaleDateString("sv-SE"),
     {
       getItem: (key) => {
-        const storedValue = sessionStorage.getItem(key);
-        return storedValue ? new Date(storedValue) : null;
+        return sessionStorage.getItem(key) ?? new Date().toLocaleDateString("sv-SE");
       },
       setItem: (key, value) => {
-        sessionStorage.setItem(key, value ? value.toISOString() : "");
+        sessionStorage.setItem(key, value);
       },
       removeItem: (key) => {
         sessionStorage.removeItem(key);
-      }
+      },
     },
     { getOnInit: true }
 );

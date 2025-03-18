@@ -9,11 +9,18 @@ import {useAtom} from "jotai";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
 
 export const useGameDate = () => {
-  const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
+  const [dateStr, setDateStr] = useAtom(gameDateAtom);
+
+  const dateObj = new Date(dateStr);
+
+  const setSelectedDate = (date: Date) => {
+    const formatted = date.toLocaleDateString("sv-SE");
+    setDateStr(formatted);
+  };
 
   return {
-    selectedDate,
-    formattedDate: selectedDate?.toLocaleDateString("sv-SE") ?? "",
+    selectedDate: dateObj,
+    formattedDate: dateStr,
     setSelectedDate,
   };
 };
