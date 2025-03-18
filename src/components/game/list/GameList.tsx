@@ -5,8 +5,10 @@ import {useGameDate, useGameList} from "@/hooks/game/useGame.ts";
 import {
   GameInfo,
   GameListWrapper,
+  GameScore,
   GameTime,
   PlayerCard,
+  PlayerInfoWrapper,
   PlayerName,
   TeamLogo,
   TeamRow,
@@ -40,19 +42,29 @@ const GameList = ({ comboGameDateTime }: GameListProps) => {
                 <TeamWrapper>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.homeTeam]} alt={game.homeTeam}/>
-                    <PlayerName $isTbd={!game.homeStartingPitcher?.name}>
-                      {game.homeStartingPitcher?.name ?? TBD_PITCHER_TEXT}
-                    </PlayerName>
+                    <PlayerInfoWrapper>
+                      <PlayerName $isTbd={!game.homeStartingPitcher?.name}>
+                        {game.homeStartingPitcher?.name ?? TBD_PITCHER_TEXT}
+                      </PlayerName>
+                      <GameScore>
+                        {game.gameScore?.homeTeamScore}
+                      </GameScore>
+                    </PlayerInfoWrapper>
                   </TeamRow>
                   <TeamRow>
                     <TeamLogo src={teamLogos[game.awayTeam]} alt={game.awayTeam}/>
-                    <PlayerName $isTbd={!game.awayStartingPitcher?.name}>
-                      {game.awayStartingPitcher?.name ?? TBD_PITCHER_TEXT}
-                    </PlayerName>
+                    <PlayerInfoWrapper>
+                      <PlayerName $isTbd={!game.awayStartingPitcher?.name}>
+                        {game.awayStartingPitcher?.name ?? TBD_PITCHER_TEXT}
+                      </PlayerName>
+                      <GameScore>
+                        {game.gameScore?.awayTeamScore}
+                      </GameScore>
+                    </PlayerInfoWrapper>
                   </TeamRow>
                 </TeamWrapper>
                 <GameInfo>
-                  <GameTime>{sliceSecond(game.startTime)}</GameTime>
+                      <GameTime>{sliceSecond(game.startTime)}</GameTime>
                   <ComboHitterButton gameId={game.id} homeTeam={game.homeTeam}
                                      awayTeam={game.awayTeam} startDate={game.startDate}
                                      startTime={game.startTime}

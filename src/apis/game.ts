@@ -32,6 +32,12 @@ export interface GameResponse {
   gameState: GameState,
   homeStartingPitcher: StartingPitcherResponse | null,
   awayStartingPitcher: StartingPitcherResponse | null
+  gameScore: GameScoreResponse | null,
+}
+
+export interface GameScoreResponse {
+  homeTeamScore : number,
+  awayTeamScore : number,
 }
 
 export interface StartingPitcherResponse {
