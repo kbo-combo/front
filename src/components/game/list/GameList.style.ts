@@ -69,7 +69,8 @@ export const PlayerName = styled.span<{ $isTbd: boolean }>`
   font: ${theme.font.text};
   font-size: 1.6rem;
   color: ${({ $isTbd, theme }) => ($isTbd ? theme.color.grayDark : theme.color.sub)};
-  text-align: center;
+  text-align: left;
+  margin-left: 0.2rem;
   width: 5rem;
   flex: none;
   white-space: nowrap;
