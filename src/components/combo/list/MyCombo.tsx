@@ -40,7 +40,7 @@ const MyCombo = ({year, gameType}: MyComboProps) => {
     </ComboStatRow>
     {myCombo.lastSuccessDate && (
         <LastSuccessDate>
-          마지막 성공일 {myCombo.lastSuccessDate}
+          최근 성공일 {myCombo.lastSuccessDate}
         </LastSuccessDate>
     )}
     <div style={{display: 'flex', alignItems: 'center'}}>

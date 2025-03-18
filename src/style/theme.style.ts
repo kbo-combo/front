@@ -5,6 +5,7 @@ const color = {
   fontAccentForBackground: '#d73a2e',
   sub: '#333333',
   subLight: '#444444',
+  lightBlack: '#555555',
   accent: '#EB4D3D',
   gray: '#C8C8C8',
   grayLight: '#ECECEC',

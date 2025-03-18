@@ -31,7 +31,8 @@ export const ComboStat = styled.span<{ $color: string  }>`
 
 export const LastSuccessDate = styled.div`
   font: ${theme.font.text};
-  color: ${theme.color.subLight};
+  color: ${theme.color.lightBlack};
+  margin-left: 0.75rem;
   font-size: 1.5rem;
 `;
 
@@ -40,6 +41,7 @@ export const ComboBarContainer = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.color.backgroundDark};
   margin-top: 1rem;
+  margin-left: 0.75rem;
   border-radius: 1rem;
   overflow: hidden;
   width: 20rem;
