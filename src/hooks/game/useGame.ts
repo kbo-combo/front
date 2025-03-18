@@ -7,21 +7,13 @@ import {
 } from "@apis/game.ts";
 import {useAtom} from "jotai";
 import {gameDateAtom} from "@/contexts/gameDateAtom.ts";
-import {useEffect} from "react";
 
 export const useGameDate = () => {
   const [selectedDate, setSelectedDate] = useAtom(gameDateAtom);
 
-  useEffect(() => {
-    if (!selectedDate) {
-      setSelectedDate(new Date());
-    }
-  }, [selectedDate, setSelectedDate]);
-
-
   return {
-    selectedDate: selectedDate ?? new Date(),
-    formattedDate: (selectedDate ?? new Date()).toLocaleDateString("sv-SE"),
+    selectedDate,
+    formattedDate: selectedDate?.toLocaleDateString("sv-SE") ?? "",
     setSelectedDate,
   };
 };
@@ -47,8 +39,9 @@ export const useGameListByYearAndMonth = (year: number, month: number) => {
     refetchOnReconnect: false,
   });
 
-  const gameDateSet = new Set(data?.map(({ gameDate }) => gameDate) ?? []);
-  const daysInMonth = new Date(year, month, 0).getDate();
+  const gameDateSet = new Set((data ?? []).map(d => d.gameDate));
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
   const gameDateList: GameDateList[] = Array.from({ length: daysInMonth }, (_, i) => {
     const date = `${year}-${String(month).padStart(2, "0")}-${String(i + 1).padStart(2, "0")}`;
     return {
