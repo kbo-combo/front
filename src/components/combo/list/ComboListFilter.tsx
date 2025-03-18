@@ -1,5 +1,5 @@
 import {GameType, GameTypeLabels} from "@/types/game/game.ts";
-import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.style.ts";
+import {FilterButton, FilterTitle, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 
 type ComboListFilterProps = {
   selectedGameType: GameType;
@@ -13,13 +13,14 @@ const gameTypes = [
 
 const ComboListFilter = ({ selectedGameType, onSelectGameType }: ComboListFilterProps) => {
   return (
-      <FilterWrapper style={{ marginLeft: '0rem'}}>
+      <FilterWrapper style={{ marginLeft: '1.4rem'}}>
+        <FilterTitle>게임 종류</FilterTitle>
         {gameTypes.map(({ key, label }) => (
             <FilterButton
                 key={key}
                 selected={selectedGameType === key}
                 onClick={() => onSelectGameType(key)}
-                style={{ fontSize: '2.2rem' }}
+                style={{ fontSize: '1.8rem' }}
             >
               {label}
             </FilterButton>

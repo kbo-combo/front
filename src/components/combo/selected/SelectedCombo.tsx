@@ -4,14 +4,14 @@ import Loading from "@pages/@common/common/Loading.tsx";
 import {
   CancelButton,
   ComboStatus,
-  ComboWrapper,
+  ComboWrapper, HitterRecord,
   PlayerDetails,
   PlayerInfo,
   PlayerName,
   PlayerSection,
   SelectionText,
   TopSection
-} from "@components/combo/SelectedCombo.style.tsx";
+} from "@components/combo/selected/SelectedCombo.style.tsx";
 import {isAfterComboChangeTime, showCancelButton} from "@/function/combo/combo.ts";
 import {addDay, createDateFromString, toDateFormat} from "@/function/utils.ts";
 import {useComboByGame, useDeleteCombo} from "@/hooks/combo/useCombo.ts";
@@ -65,6 +65,9 @@ const SelectedCombo = ({ setComboGameDateTime }: SelectedComboProps) => {
             <PlayerImage url={combo.playerImageUrl} />
             <PlayerDetails>
               <PlayerName>{combo.playerName}</PlayerName>
+              {combo?.hitterGameRecord && (
+                  <HitterRecord>{combo.hitterGameRecord.atBats}타수 {combo.hitterGameRecord.hits}안타</HitterRecord>
+              )}
               <ComboStatus status={combo.comboStatus}>{getStatusText(combo.comboStatus)}</ComboStatus>
             </PlayerDetails>
           </PlayerInfo>

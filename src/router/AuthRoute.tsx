@@ -13,23 +13,23 @@ interface AuthRouteProps {
 
 const AuthRoute = ({element, isPrivate}: AuthRouteProps) => {
   const {isLoggedIn, isLoading} = useCheckLogin();
-  const {redirectUrl, redirectAfterLogin} = useLoginRedirect()
+  const {redirectUrl, redirectAfterLogin} = useLoginRedirect();
 
   if (isLoading) {
-    return <Loading/>
+    return <Loading />;
   }
 
   if (isPrivate && !isLoggedIn) {
-    toast.error("로그인이 필요합니다.")
-    return <Navigate to={`${URL_PATH.login}`} replace/>;
-
+    toast.error("로그인이 필요합니다.");
+    return <Navigate to={URL_PATH.login} replace />;
   }
 
   if (!isPrivate && isLoggedIn) {
     if (redirectUrl) {
-      return redirectAfterLogin()
+      redirectAfterLogin();
+      return <>{element}</>;
     } else {
-      return <Navigate to={`${URL_PATH.main}`} replace/>;
+      return <Navigate to={URL_PATH.main} replace />;
     }
   }
 

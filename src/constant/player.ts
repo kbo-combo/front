@@ -15,6 +15,14 @@ export type Team = (typeof Team)[number];
 
 export type TeamName = Team["name"];
 
+export const getDisplayNameByTeamName = (teamName: TeamName): string => {
+  const team = Team.find(t => t.name === teamName);
+  if (!team) {
+    throw new Error(`Invalid team name: ${teamName}`);
+  }
+  return team.displayName;
+};
+
 export const HittingHandType = {
   LEFT: "좌타",
   RIGHT: "우타",

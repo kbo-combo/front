@@ -30,13 +30,7 @@ function App() {
           <HelmetProvider>
             <GlobalStyle/>
             <Helmet>
-              <>
-                {isPrd ? (
-                    <title>하루한타</title>
-                ) : (
-                    <meta name="robots" content="noindex, nofollow" />
-                )}
-              </>
+                {!isPrd && <meta name="robots" content="noindex, nofollow" />}
             </Helmet>
             <ThemeProvider theme={theme}>
                 <CustomToastContainer/>

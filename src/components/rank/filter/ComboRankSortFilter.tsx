@@ -1,4 +1,4 @@
-import {FilterButton, FilterWrapper} from "@components/@common/filter/filter.style.ts";
+import {FilterButton, FilterTitle, FilterWrapper} from "@components/@common/filter/filter.style.ts";
 import {ComboSortType} from "@/types/combo/combo.ts";
 
 const sortTypes: { key: ComboSortType; label: string }[] = [
@@ -16,6 +16,7 @@ type ComboRankFilterProps = {
 const ComboRankSortFilter = ({ selectedSortType, onSelectSortType, marginLeft, fontSize }: ComboRankFilterProps) => {
   return (
       <FilterWrapper style={{ marginLeft: marginLeft}}>
+        <FilterTitle>랭킹 기준</FilterTitle>
         {sortTypes.map(({ key, label }) => (
             <FilterButton
                 key={key}

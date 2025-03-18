@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {GameType} from "@/types/game/game.ts";
 import {ComboSortType} from "@/types/combo/combo.ts";
-import ComboRankGameTypeFilter from "@components/rank/ComboRankGameTypeFilter.tsx";
-import ComboRankSortFilter from "@components/rank/ComboRankSortFilter.tsx";
+import ComboRankGameTypeFilter from "@components/rank/filter/ComboRankGameTypeFilter.tsx";
+import ComboRankSortFilter from "@components/rank/filter/ComboRankSortFilter.tsx";
 
 
-const marginLeft = "0rem"
-const fontSize = "2.0rem"
+const marginLeft = "1.4rem"
+const fontSize = "1.8rem"
 
 type ComboRankFilterListProps = {
   selectedGameType: GameType;

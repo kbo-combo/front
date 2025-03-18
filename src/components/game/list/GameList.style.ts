@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "@style/theme.style.ts";
+import {GameState} from "@/types/game/game.ts";
 
 export const Wrapper = styled.main`
   position: relative;
@@ -41,7 +42,6 @@ export const TeamWrapper = styled.div`
 
 export const TeamRow = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 1rem;
 `;
@@ -55,6 +55,14 @@ export const TeamLogo = styled.img`
   }
   border-radius: 50%;
   object-fit: contain;
+  flex-shrink: 0;
+`;
+
+export const PlayerInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 `;
 
 export const PlayerName = styled.span<{ $isTbd: boolean }>`
@@ -62,7 +70,19 @@ export const PlayerName = styled.span<{ $isTbd: boolean }>`
   font-size: 1.6rem;
   color: ${({ $isTbd, theme }) => ($isTbd ? theme.color.grayDark : theme.color.sub)};
   text-align: left;
+  margin-left: 0.2rem;
+  width: 5rem;
+  flex: none;
   white-space: nowrap;
+`;
+
+export const GameScore = styled.span<{ $isWinner: boolean, $gameState: GameState }>`
+  font: ${theme.font.text};
+  font-size: 2.0rem;
+  min-width: 4rem;
+  text-align: right;
+  color: ${({ $isWinner, $gameState, theme }) =>
+      ($gameState === 'COMPLETED' && !$isWinner) ? theme.color.grayDark : theme.color.sub};
 `;
 export const GameInfo = styled.div`
   display: flex;
@@ -82,6 +102,6 @@ export const GameTime = styled.span`
   font: ${theme.font.text};
   color: ${theme.color.sub};
   margin-bottom: auto;
-  font-size: 2rem;
+  font-size: 1.8rem;
 `;
 

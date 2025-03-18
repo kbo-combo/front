@@ -37,11 +37,11 @@ const ComboHitterButton = ({ gameId, homeTeam, awayTeam, startDate, startTime, c
 
   const getComboButtonText = (now: Date, gameStartDateTime: Date, gameState: GameState) => {
     if (gameState == "CANCEL") {
-      return "게임 취소"
+      return "경기 취소"
     }
 
     if (gameState == "COMPLETED") {
-      return "게임 종료"
+      return "경기 종료"
     }
 
     if (gameState == "RUNNING") {

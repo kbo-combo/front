@@ -5,16 +5,19 @@ import {getComboStatusColor} from "@/function/combo/combo.ts";
 
 export const ComboSection = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   max-width: 100rem;
-  justify-content: space-between;
   width: 100%;
   gap: 2.0rem;
   background: ${({theme}) => theme.color.background};
-  flex-wrap: nowrap;
-  padding-bottom: 4.0rem;
-  padding-left: 1.5rem;
-  padding-right: 2rem;
+  padding: 4.0rem 2rem 4.0rem 1.5rem;
+`;
+
+export const LeftGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2.0rem;
 `;
 
 export const GameInfoWrapper = styled.div`
@@ -33,7 +36,6 @@ export const TeamLogosWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-top: 1.0rem;
-  justify-content: space-between;
   width: 12rem;
 `;
 
@@ -41,6 +43,23 @@ export const VSLabel = styled.span`
   font: ${theme.font.text};
   font-size: 1.4rem;
   color: ${theme.color.subLight};
+`;
+
+
+export const HitterInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 2.5rem;
+`;
+
+export const HitterRecord = styled.div`
+  font: ${theme.font.text};
+  color: ${theme.color.sub};
+  margin-top: 1rem;
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  text-align: center;
 `;
 
 export const ComboStatus = styled.div<{ status: ComboStatusType }>`
@@ -67,9 +86,9 @@ export const TeamLogo = styled.img`
 export const PlayerInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  margin-left: 1rem;
   margin-top: 1.2rem;
-  margin-left: 3rem; 
   max-width: 10rem; 
   flex-shrink: 0; 
 `;

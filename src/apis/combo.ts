@@ -47,6 +47,7 @@ export interface ComboListResponse {
   homeTeam: TeamName,
   awayTeam: TeamName,
   gameType: string
+  hitterGameRecord: HitterGameRecord | null
 }
 
 export interface ComboCreateRequest {
@@ -62,4 +63,10 @@ export interface ComboResponse {
   comboStatus: ComboStatusType;
   gameStartDate: string,
   gameStartTime: string,
+  hitterGameRecord: HitterGameRecord | null
+}
+
+export interface HitterGameRecord {
+  atBats: number;
+  hits: number;
 }

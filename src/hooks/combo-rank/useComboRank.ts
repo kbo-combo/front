@@ -31,11 +31,8 @@ export const useComboRankList = (size: number, year: number, gameType: GameType,
 export const useMyComboDetail = (year: number, gameType: GameType) => {
   const { memberId } = useLoginContext();
 
-  console.log("hello")
-
   if (memberId == null) {
-    console.log("error")
-    throw new Error("memberId is null. Are you logged in?");
+    throw new Error("memberId is null");
   }
 
   const { data, error, isLoading } = useMemberComboDetail(memberId);

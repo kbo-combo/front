@@ -4,7 +4,7 @@ import theme from "@style/theme.style.ts";
 export const FilterWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
