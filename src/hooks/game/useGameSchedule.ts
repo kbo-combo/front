@@ -38,10 +38,10 @@ export const useInitializeSelectedDate = (
         }
       }
 
-      if (selectedDate && availableDays.includes(selectedDate.toISOString().split("T")[0])) {
+      if (selectedDate && availableDays.includes(selectedDate.toLocaleDateString("sv-SE").split("T")[0])) {
         return selectedDate;
       }
-      const today = new Date().toISOString().split("T")[0];
+      const today = new Date().toLocaleDateString("sv-SE").split("T")[0];
       const futureDates = availableDays.filter(date => date >= today);
 
       if (futureDates.length > 0) {
